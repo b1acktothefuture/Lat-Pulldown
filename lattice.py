@@ -8,14 +8,15 @@ def svp():
     pass
 
 
-def lll_reduce(B: IntegerMatrix, delta: float = 0.99) -> IntegerMatrix:
+def lll_reduce(B: list, delta: float = 0.99) -> IntegerMatrix:
     B_t = IntegerMatrix.from_matrix(B)
     LLL.reduction(B_t, delta)
     assert LLL.is_reduced(B_t, delta)
     return B_t
 
 
-def bkz_reduce(B: IntegerMatrix, block_size: int, prune: bool = False) -> IntegerMatrix:
+def bkz_reduce(A: list, block_size: int, prune: bool = False) -> IntegerMatrix:
+    B = IntegerMatrix.from_matrix(A)
     if(prune):
         param = BKZ.Param(block_size=block_size,
                           strategies=BKZ.DEFAULT_STRATEGY)

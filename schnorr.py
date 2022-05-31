@@ -16,9 +16,19 @@ def primesfrom2to(n):
     return np.r_[2, 3, ((3*np.nonzero(sieve)[0]+1) | 1)]
 
 
+'''
+list of all primes from 2 to floor(N^alpha)
+'''
+
+
 def prime_base(N, alpha):
     n = int(math.log(N)**alpha)
     return primesfrom2to(n)
+
+
+'''
+Checks if a given number is pt-smooth
+'''
 
 
 def is_smooth(x, P):
@@ -27,6 +37,11 @@ def is_smooth(x, P):
         while p.divides(y):
             y /= p
     return abs(y) == 1
+
+
+'''
+returns empty array if not pt-smooth
+'''
 
 
 def factorize_smooth(n, primes):
@@ -44,62 +59,54 @@ def factorize_smooth(n, primes):
     return []
 
 
-def generate_basis(prime_base: list, multiplier: int, c: float, prec: int) -> IntegerMatrix:
-    def sr(x):
-        return round(x * (10 ** prec))
+'''
+rounding funtion
+'''
+
+
+def sr(x, prec):
+    return round(x * (10 ** prec))
+
+
+def generate_basis(prime_base: list, multiplier: int, prec: int) -> IntegerMatrix:
+
     n = len(prime_base)
 
     B = [[0]*(n+1) for _ in range(n)]
     for i in range(n):
-        B[i][n] = sr(multiplier*math.log(prime_base[i]))
-        B[i][i] = sr(math.log(prime_base[i]))
+        B[i][n] = sr(multiplier*math.log(prime_base[i]), prec)
+        B[i][i] = sr(math.log(prime_base[i]), prec)
 
-    B = IntegerMatrix.from_matrix(B)
+    # B = IntegerMatrix.from_matrix(B)
     return B
 
 
-def fac_relation(N, P, c, prec=1000):
-    n = len(P)
-    multiplier = N**c
+def relation(e: list, prime_base: list, N: int) -> list:
+    assert len(e) == len(prime_base)
+    print(e)
+    [u, v] = [1, 1]
+    T = [0]*len(prime_base)
+    # print("Solution: {}".format(e))
+    for i in range(len(e)):
+        if(e[i] < 0):
+            exp = -1*e[i]
+            v *= prime_base[i]**(exp)
+        else:
+            u *= prime_base[i]**e[i]
+            T[i] = e[i]
 
-    B = generate_basis(P, multiplier, c, prec)
+    s = u - v*N
 
-    s = list(lll_reduce(B)[0])
-    # Use approximate svp, stronger basis reduction, babai's nearest plane
+    S = [int(s < 0)] + factorize_smooth(s, prime_base)
+    T = [0] + T
 
-    print(s)
-    assert abs(s[0]) == 1
-
-    if(s[0] == 1):
-        for i in range(len(s)):
-            s[i] = -1*s[i]
-
-    e = [s[i+1] / (round((math.log(P[i])) * (10 ** prec))) for i in range(n)]
-
-    u = 1
-    v = 1
-    a = [0]*(len(P)+1)
-
-    for i in range(n):
-        # assert e[i] in ZZ
-        if e[i] > 0:
-            a[i+1] = e[i]
-            u *= P[i]**e[i]
-        if e[i] < 0:
-            v *= P[i]**(-1*e[i])
-
-    b = [0] + factorize_smooth(u - v*N, P)
-    if(len(b) == 1):
+    if(len(S) == 1):
         return []
 
-    if(u < v*N):
-        b[0] = 1
-
-    print("Success: ", u, u-v*N)
-    return [a, b]
+    return [tuple(T), tuple(S)]
 
 
-def factor(N, alpha, c, prec=1000):
+def schnorr(N, alpha, c, prec=10, independent=False, save=False):
     P = prime_base(N, alpha)
     n = len(P)
 
@@ -109,12 +116,51 @@ def factor(N, alpha, c, prec=1000):
 
     print("Dimension: {}".format(n))
 
-    return fac_relation(N, P, c, 3)
+    if(independent):
+        bit_length = N.bit_length()
+        multiplier = 2**(bit_length*c)
+    else:
+        multiplier = N**c
+
+    # Basis matrix for the prime number lattice
+    Basis = generate_basis(P, multiplier, prec)
+    refs = [Basis[i][i] for i in range(len(P))]
+
+    # Target vector for CVP [0,..., N^c*log(N)]
+    target = [0]*(len(P)+1)
+    target[-1] = sr(multiplier*math.log(N), prec)
+
+    print("Target: {}".format(target))
+    relations = set()
+    # Solve CVP here
+
+    while(len(relations) < n+2):
+        # assuming the probablity of getting same permuation more then once is very low
+        np.random.shuffle(Basis)
+        B_reduced = bkz_reduce(Basis, 20)  # try tuning the block size
+        e_reduced = cvp_babai(B_reduced, target)
+        w = B_reduced.multiply_left(e_reduced)
+
+        e = []
+        for i in range(len(w)-1):
+            assert w[i] % refs[i] == 0
+            e.append(w[i]//refs[i])
+
+        # implement a checker function without actually comuting u and v to reject longer vectors, similar to SVP one in Ritter's paper.
+
+        rel = relation(e, P, N)
+
+        if(len(rel) == 0):
+            continue
+
+        if rel not in relations:
+            relations.add(tuple(rel))
+            print(rel)
 
 
 def main():
-    alpha = 1.8
-    c = 1.6
+    alpha = 1.7
+    c = 1.4
 
     bits = 40
     p = number.getPrime(bits//2)
@@ -122,7 +168,7 @@ def main():
     N = p*q
 
     print("N: {} = {}*{}".format(N, p, q))
-    success = factor(N, alpha, c, 3)
+    schnorr(N, alpha, c, 5)
 
 
 def test():
@@ -137,8 +183,8 @@ def test():
     P = prime_base(N, alpha)
     multiplier = N**c
 
-    print(generate_basis(P, multiplier, c, 5))
+    print(generate_basis(P, multiplier, 5))
 
 
 if __name__ == "__main__":
-    test()
+    main()
