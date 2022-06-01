@@ -3,6 +3,7 @@ import math
 import numpy as np
 from Crypto.Util import number
 import pickle
+from progress.bar import Bar
 from lattice import *
 
 
@@ -69,6 +70,11 @@ def sr(x, prec):
     return round(x * (10 ** prec))
 
 
+'''
+generates basis matrix as per schnorr's original algorithm
+'''
+
+
 def generate_basis(prime_base: list, multiplier: int, prec: int) -> IntegerMatrix:
 
     n = len(prime_base)
@@ -80,6 +86,11 @@ def generate_basis(prime_base: list, multiplier: int, prec: int) -> IntegerMatri
 
     # B = IntegerMatrix.from_matrix(B)
     return B
+
+
+'''
+given e vector, checks if s = u - v*N is pt-smooth, returns their factorization if true
+'''
 
 
 def relation(e: list, prime_base: list, N: int) -> list:
@@ -113,8 +124,6 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
         if(N % i == 0):
             return [i, N/i]
 
-    print("Dimension: {}".format(n))
-
     if(independent):
         bit_length = N.bit_length()
         multiplier = 2**(bit_length*c)
@@ -129,14 +138,14 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
     target = [0]*(len(P)+1)
     target[-1] = sr(multiplier*math.log(N), prec)
 
-    print("Target: {}".format(target))
     relations = {}
     # Solve CVP here
+    bar = Bar('Finding relations', max=n+2)
     while(len(relations) < n+2):
         # assuming the probablity of getting same permuation more then once is very low
         np.random.shuffle(Basis)
 
-        B_reduced = bkz_reduce(Basis, 20)  # try tuning the block size
+        B_reduced = bkz_reduce(Basis, 6)  # try tuning the block size
         e_reduced = cvp_babai(B_reduced, target)
         w = B_reduced.multiply_left(e_reduced)
 
@@ -154,40 +163,83 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
         key = rel[0]
         if key not in relations:
             relations[key] = rel[1:]
-            print("Relation: ", key)
+            bar.next()
+
+    bar.finish()
 
     if(save):
-        with open(N + '.pkl', 'wb') as f:
+        with open(str(N) + '.pkl', 'wb') as f:
             pickle.dump(relations, f)
+
+    return relations
+
+
+'''
+transforms matrix into reduced row echelon form
+source: https://rosettacode.org/wiki/Reduced_row_echelon_form#Python
+'''
+
+
+def ToReducedRowEchelonForm(M):
+    if not M:
+        return
+    lead = 0
+    rowCount = len(M)
+    columnCount = len(M[0])
+    for r in range(rowCount):
+        if lead >= columnCount:
+            return
+        i = r
+        while M[i][lead] == 0:
+            i ^= 1
+            if i == rowCount:
+                i = r
+                lead ^= 1
+                if columnCount == lead:
+                    return
+        M[i], M[r] = M[r], M[i]
+        lv = M[r][lead]
+        M[r] = [mrx * lv for mrx in M[r]]
+        for i in range(rowCount):
+            if i != r:
+                lv = M[i][lead]
+                M[i] = [iv - lv*rv for rv, iv in zip(M[r], M[i])]
+        lead += 1
+
+
+'''
+solves set of equations mod 2
+'''
+
+
+def solve_f2(equations):
+    # reduce to row echelon form
+    # find if solutions exit
+    # if infinite, use back tracking to find a solution
+    ToReducedRowEchelonForm(equations)
+    pass
 
 
 def main():
     alpha = 1.6
     c = 1.1  # C should be really small
 
-    bits = 40
+    bits = 20
     p = number.getPrime(bits//2)
     q = number.getPrime(bits//2)
     N = p*q
 
     print("N: {} = {}*{}".format(N, p, q))
-    schnorr(N, alpha, c, 5)
+    schnorr(N, alpha, c, 5, False, True)
 
 
 def test():
-    alpha = 1.8
-    c = 1.6
-
-    bits = 40
-    p = number.getPrime(bits//2)
-    q = number.getPrime(bits//2)
-    N = p*q
-
-    P = prime_base(N, alpha)
-    multiplier = N**c
-
-    print(generate_basis(P, multiplier, 5))
+    M = [[0, 1, 0], [1, 1, 1], [0, 0, 1]]
+    ToReducedRowEchelonForm(M)
+    print(M)
+    pass
 
 
 if __name__ == "__main__":
+    # test()
     main()
