@@ -1,3 +1,4 @@
+from re import A
 from fpylll import IntegerMatrix, SVP
 import math
 import numpy as np
@@ -18,22 +19,18 @@ def primesfrom2to(n):
     return np.r_[2, 3, ((3*np.nonzero(sieve)[0]+1) | 1)]
 
 
-'''
-list of all primes from 2 to floor(N^alpha)
-'''
-
-
 def prime_base(N, alpha):
+    '''
+    list of all primes from 2 to floor(N^alpha)
+    '''
     n = int(math.log(N)**alpha)
     return primesfrom2to(n)
 
 
-'''
-Checks if a given number is pt-smooth
-'''
-
-
 def is_smooth(x, P):
+    '''
+    Checks if a given number is pt-smooth
+    '''
     y = x
     for p in P:
         while p.divides(y):
@@ -41,12 +38,10 @@ def is_smooth(x, P):
     return abs(y) == 1
 
 
-'''
-returns empty array if not pt-smooth
-'''
-
-
 def factorize_smooth(n, primes):
+    '''
+    returns empty array if not pt-smooth
+    '''
     if(n < 0):
         n = -n
     exponents = [0]*len(primes)
@@ -61,21 +56,17 @@ def factorize_smooth(n, primes):
     return []
 
 
-'''
-rounding funtion
-'''
-
-
 def sr(x, prec):
+    '''
+    rounding funtion
+    '''
     return round(x * (10 ** prec))
 
 
-'''
-generates basis matrix as per schnorr's original algorithm
-'''
-
-
 def generate_basis(prime_base: list, multiplier: int, prec: int) -> IntegerMatrix:
+    '''
+    generates basis matrix as per schnorr's original algorithm
+    '''
 
     n = len(prime_base)
 
@@ -88,12 +79,10 @@ def generate_basis(prime_base: list, multiplier: int, prec: int) -> IntegerMatri
     return B
 
 
-'''
-given e vector, checks if s = u - v*N is pt-smooth, returns their factorization if true
-'''
-
-
-def relation(e: list, prime_base: list, N: int) -> list:
+def fac_relation(e: list, prime_base: list, N: int) -> list:
+    '''
+    given e vector, checks if s = u - v*N is pt-smooth, returns their factorization if true
+    '''
     assert len(e) == len(prime_base)
     [u, v] = [1, 1]
     T = [0]*len(prime_base)
@@ -155,7 +144,7 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
             e.append(w[i]//refs[i])
 
         # implement a checker function without actually computing u and v to reject longer vectors, similar to SVP one in Ritter's paper.
-        rel = relation(e, P, N)
+        rel = fac_relation(e, P, N)
 
         if(len(rel) == 0):
             continue
@@ -174,27 +163,27 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
     return relations
 
 
-'''
-transforms matrix into reduced row echelon form
-source: https://rosettacode.org/wiki/Reduced_row_echelon_form#Python
-'''
-
-
 def ToReducedRowEchelonForm(M):
+    '''
+    transforms matrix into reduced row echelon form
+    source: https://rosettacode.org/wiki/Reduced_row_echelon_form#Python
+    '''
     if not M:
         return
     lead = 0
     rowCount = len(M)
     columnCount = len(M[0])
+
     for r in range(rowCount):
+        print(r)
         if lead >= columnCount:
             return
         i = r
         while M[i][lead] == 0:
-            i ^= 1
+            i += 1
             if i == rowCount:
                 i = r
-                lead ^= 1
+                lead += 1
                 if columnCount == lead:
                     return
         M[i], M[r] = M[r], M[i]
@@ -207,30 +196,42 @@ def ToReducedRowEchelonForm(M):
         lead += 1
 
 
-'''
-solves set of equations mod 2
-'''
-
-
 def solve_f2(equations):
+    '''
+    solves set of equations mod 2
+    '''
     # reduce to row echelon form
     # find if solutions exit
     # if infinite, use back tracking to find a solution
     ToReducedRowEchelonForm(equations)
+    print(equations)
     pass
 
 
 def main():
-    alpha = 1.6
-    c = 1.1  # C should be really small
+    # alpha = 1.6
+    # c = 1.1  # C should be really small
 
-    bits = 20
-    p = number.getPrime(bits//2)
-    q = number.getPrime(bits//2)
-    N = p*q
+    # bits = 20
+    # p = number.getPrime(bits//2)
+    # q = number.getPrime(bits//2)
+    # N = p*q
 
-    print("N: {} = {}*{}".format(N, p, q))
-    schnorr(N, alpha, c, 5, False, True)
+    # print("N: {} = {}*{}".format(N, p, q))
+    # relations = schnorr(N, alpha, c, 5, False, True)
+
+    with open('944759.pkl', 'rb') as f:
+        relations = pickle.load(f)
+    a_b = list(relations.values())
+    a_plus_b_mod2 = []
+    for i in range(len(a_b)):
+        temp = []
+        for j in range(len(a_b[i][0])):
+            temp.append((a_b[i][0][j] + a_b[i][1][j]) % 2)
+        a_plus_b_mod2.append(temp)
+
+    print(a_plus_b_mod2)
+    solve_f2(a_plus_b_mod2)
 
 
 def test():
