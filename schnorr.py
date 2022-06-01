@@ -2,6 +2,7 @@ from fpylll import IntegerMatrix, SVP
 import math
 import numpy as np
 from Crypto.Util import number
+import pickle
 from lattice import *
 
 
@@ -83,7 +84,6 @@ def generate_basis(prime_base: list, multiplier: int, prec: int) -> IntegerMatri
 
 def relation(e: list, prime_base: list, N: int) -> list:
     assert len(e) == len(prime_base)
-    print(e)
     [u, v] = [1, 1]
     T = [0]*len(prime_base)
     # print("Solution: {}".format(e))
@@ -102,8 +102,7 @@ def relation(e: list, prime_base: list, N: int) -> list:
 
     if(len(S) == 1):
         return []
-
-    return [tuple(T), tuple(S)]
+    return [tuple([u, s]), tuple(T), tuple(S)]
 
 
 def schnorr(N, alpha, c, prec=10, independent=False, save=False):
@@ -131,12 +130,12 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
     target[-1] = sr(multiplier*math.log(N), prec)
 
     print("Target: {}".format(target))
-    relations = set()
+    relations = {}
     # Solve CVP here
-
     while(len(relations) < n+2):
         # assuming the probablity of getting same permuation more then once is very low
         np.random.shuffle(Basis)
+
         B_reduced = bkz_reduce(Basis, 20)  # try tuning the block size
         e_reduced = cvp_babai(B_reduced, target)
         w = B_reduced.multiply_left(e_reduced)
@@ -146,21 +145,25 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
             assert w[i] % refs[i] == 0
             e.append(w[i]//refs[i])
 
-        # implement a checker function without actually comuting u and v to reject longer vectors, similar to SVP one in Ritter's paper.
-
+        # implement a checker function without actually computing u and v to reject longer vectors, similar to SVP one in Ritter's paper.
         rel = relation(e, P, N)
 
         if(len(rel) == 0):
             continue
 
-        if rel not in relations:
-            relations.add(tuple(rel))
-            print(rel)
+        key = rel[0]
+        if key not in relations:
+            relations[key] = rel[1:]
+            print("Relation: ", key)
+
+    if(save):
+        with open(N + '.pkl', 'wb') as f:
+            pickle.dump(relations, f)
 
 
 def main():
-    alpha = 1.7
-    c = 1.4
+    alpha = 1.6
+    c = 1.1  # C should be really small
 
     bits = 40
     p = number.getPrime(bits//2)
@@ -175,7 +178,7 @@ def test():
     alpha = 1.8
     c = 1.6
 
-    bits = 20
+    bits = 40
     p = number.getPrime(bits//2)
     q = number.getPrime(bits//2)
     N = p*q
