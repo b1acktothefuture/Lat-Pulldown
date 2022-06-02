@@ -1,10 +1,9 @@
-from re import A
-from fpylll import IntegerMatrix, SVP
+import pickle
+from progress.bar import Bar
 import math
 import numpy as np
 from Crypto.Util import number
-import pickle
-from progress.bar import Bar
+import galois
 from lattice import *
 
 
@@ -16,7 +15,7 @@ def primesfrom2to(n):
             k = 3*i+1 | 1
             sieve[((k*k)//3)::2*k] = False
             sieve[(k*k+4*k-2*k*(i & 1))//3::2*k] = False
-    return np.r_[2, 3, ((3*np.nonzero(sieve)[0]+1) | 1)]
+    return np.r_[2, 3, ((3*np.nonzero(sieve)[0]+1) | 1)].tolist()
 
 
 def prime_base(N, alpha):
@@ -97,8 +96,9 @@ def fac_relation(e: list, prime_base: list, N: int) -> list:
 
     s = u - v*N
 
-    S = [int(s < 0)] + factorize_smooth(s, prime_base)
-    T = [0] + T
+    S = factorize_smooth(s, prime_base)
+    S.insert(0, int(s < 0))
+    T.insert(0, 1)
 
     if(len(S) == 1):
         return []
@@ -134,7 +134,7 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
         # assuming the probablity of getting same permuation more then once is very low
         np.random.shuffle(Basis)
 
-        B_reduced = bkz_reduce(Basis, 6)  # try tuning the block size
+        B_reduced = bkz_reduce(Basis, 4)  # try tuning the block size
         e_reduced = cvp_babai(B_reduced, target)
         w = B_reduced.multiply_left(e_reduced)
 
@@ -147,6 +147,7 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
         rel = fac_relation(e, P, N)
 
         if(len(rel) == 0):
+            # amend it, do not continue reduce it strongly
             continue
 
         key = rel[0]
@@ -156,56 +157,31 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
 
     bar.finish()
 
+    P.insert(0, -1)
     if(save):
         with open(str(N) + '.pkl', 'wb') as f:
             pickle.dump(relations, f)
+        with open(str(N) + '_primes.pkl', 'wb') as f:
+            pickle.dump(P, f)
 
-    return relations
+    return [relations,  P]
 
 
-def ToReducedRowEchelonForm(M):
+def solve_linear_mod2(a_b):
     '''
-    transforms matrix into reduced row echelon form
-    source: https://rosettacode.org/wiki/Reduced_row_echelon_form#Python
+    solves set of homogeneous equations mod 2
+    As of now it returns only one solution
     '''
-    if not M:
-        return
-    lead = 0
-    rowCount = len(M)
-    columnCount = len(M[0])
-
-    for r in range(rowCount):
-        print(r)
-        if lead >= columnCount:
-            return
-        i = r
-        while M[i][lead] == 0:
-            i += 1
-            if i == rowCount:
-                i = r
-                lead += 1
-                if columnCount == lead:
-                    return
-        M[i], M[r] = M[r], M[i]
-        lv = M[r][lead]
-        M[r] = [mrx * lv for mrx in M[r]]
-        for i in range(rowCount):
-            if i != r:
-                lv = M[i][lead]
-                M[i] = [iv - lv*rv for rv, iv in zip(M[r], M[i])]
-        lead += 1
-
-
-def solve_f2(equations):
-    '''
-    solves set of equations mod 2
-    '''
-    # reduce to row echelon form
-    # find if solutions exit
-    # if infinite, use back tracking to find a solution
-    ToReducedRowEchelonForm(equations)
-    print(equations)
-    pass
+    a_plus_b_mod2 = []
+    for i in range(len(a_b)):
+        temp = []
+        for j in range(len(a_b[i][0])):
+            temp.append((a_b[i][0][j] + a_b[i][1][j]) % 2)
+        a_plus_b_mod2.append(temp)
+    F2 = galois.GF(2)
+    A = F2(a_plus_b_mod2)
+    t = A.left_null_space()
+    return t[0]+t[1]
 
 
 def main():
@@ -218,25 +194,45 @@ def main():
     # N = p*q
 
     # print("N: {} = {}*{}".format(N, p, q))
-    # relations = schnorr(N, alpha, c, 5, False, True)
+    # [relations, primes] = schnorr(N, alpha, c, 5, False, True)
 
-    with open('944759.pkl', 'rb') as f:
+    N = 505423
+
+    with open('505423.pkl', 'rb') as f:
         relations = pickle.load(f)
-    a_b = list(relations.values())
-    a_plus_b_mod2 = []
-    for i in range(len(a_b)):
-        temp = []
-        for j in range(len(a_b[i][0])):
-            temp.append((a_b[i][0][j] + a_b[i][1][j]) % 2)
-        a_plus_b_mod2.append(temp)
 
-    print(a_plus_b_mod2)
-    solve_f2(a_plus_b_mod2)
+    with open('505423_primes.pkl', 'rb') as f:
+        primes = pickle.load(f)
+
+    a_b = list(relations.values())
+
+    sol = solve_linear_mod2(a_b)
+
+    A = np.array([0]*len(a_b[0][0]))
+    B = np.array([0]*len(a_b[0][1]))
+    for i in range(len(sol)):
+        if(sol[i] == 1):
+            A += np.array(a_b[i][0])
+            B += np.array(a_b[i][1])
+
+    A += B
+    A = A//2
+    print(A, B)
+    a = 1
+    b = 1
+
+    print(len(primes))
+    for i in range(len(A)):
+        a *= primes[i]**A[i]
+        b *= primes[i]**B[i]
+    print(a, b)
+    print((a**2 - b**2) % N)
+    print(math.gcd(N, a-b))
+    print(math.gcd(N, a+b))
 
 
 def test():
     M = [[0, 1, 0], [1, 1, 1], [0, 0, 1]]
-    ToReducedRowEchelonForm(M)
     print(M)
     pass
 
