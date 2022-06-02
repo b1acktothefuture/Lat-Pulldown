@@ -212,12 +212,6 @@ def main():
             A += np.array(a_b[i][0])
             B += np.array(a_b[i][1])
 
-    a = 1
-    b = 1
-    for i in range(len(A)):
-        a *= primes[i]**int(A[i])  # Fuckin hate numpy
-        b *= primes[i]**int(B[i])
-
     A += B
     A = A//2
 
