@@ -50,7 +50,7 @@ def factorize_smooth(n, primes):
         if(n < primes[i]):
             return []
         while(n % primes[i] == 0):
-            n /= primes[i]
+            n = n//primes[i]
             exponents[i] += 1
     return []
 
@@ -98,7 +98,7 @@ def fac_relation(e: list, prime_base: list, N: int) -> list:
 
     S = factorize_smooth(s, prime_base)
     S.insert(0, int(s < 0))
-    T.insert(0, 1)
+    T.insert(0, 0)
 
     if(len(S) == 1):
         return []
@@ -151,6 +151,9 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
             continue
 
         key = rel[0]
+
+        assert (key[0] - key[1]) % N == 0
+
         if key not in relations:
             relations[key] = rel[1:]
             bar.next()
@@ -181,31 +184,25 @@ def solve_linear_mod2(a_b):
     F2 = galois.GF(2)
     A = F2(a_plus_b_mod2)
     t = A.left_null_space()
-    return t[0]+t[1]
+    return t[0]
 
 
 def main():
-    # alpha = 1.6
-    # c = 1.1  # C should be really small
 
-    # bits = 20
-    # p = number.getPrime(bits//2)
-    # q = number.getPrime(bits//2)
-    # N = p*q
+    bits = 30
+    p = number.getPrime(bits//2)
+    q = number.getPrime(bits//2)
+    N = p*q
 
-    # print("N: {} = {}*{}".format(N, p, q))
-    # [relations, primes] = schnorr(N, alpha, c, 5, False, True)
+    print("N: {} = {}*{}".format(N, p, q))
 
-    N = 505423
+# ========================================================================
 
-    with open('505423.pkl', 'rb') as f:
-        relations = pickle.load(f)
-
-    with open('505423_primes.pkl', 'rb') as f:
-        primes = pickle.load(f)
+    alpha = 1.5
+    c = 1.1  # C should be really small
+    [relations, primes] = schnorr(N, alpha, c, 5, False, True)
 
     a_b = list(relations.values())
-
     sol = solve_linear_mod2(a_b)
 
     A = np.array([0]*len(a_b[0][0]))
@@ -215,26 +212,68 @@ def main():
             A += np.array(a_b[i][0])
             B += np.array(a_b[i][1])
 
+    a = 1
+    b = 1
+    for i in range(len(A)):
+        a *= primes[i]**int(A[i])  # Fuckin hate numpy
+        b *= primes[i]**int(B[i])
+
     A += B
     A = A//2
-    print(A, B)
+
+    a = 1
+    b = 1
+    for i in range(len(A)):
+        a *= primes[i]**int(A[i])  # Fuckin hate numpy
+        b *= primes[i]**int(B[i])
+
+    assert (a**2 - b**2) % N == 0
+
+    x = math.gcd(N, a+b)
+    y = math.gcd(N, a+b)
+
+    if(1 < x < N):
+        print("Factor found: {}".format(x))
+        return
+
+    if(1 < y < N):
+        print("Factor found: {}".format(y))
+        return
+
+    print("Better luck next time:(")
+
+
+def test():
+    N = 707309
+    with open(str(N) + '.pkl', 'rb') as f:
+        relations = pickle.load(f)
+
+    with open(str(N) + '_primes.pkl', 'rb') as f:
+        primes = pickle.load(f)
+
+    a_b = list(relations.values())
+    sol = solve_linear_mod2(a_b)
+
+    A = np.array([0]*len(a_b[0][0]))
+    B = np.array([0]*len(a_b[0][1]))
+
+    for i in range(len(sol)):
+        if(sol[i] == 1):
+            A += np.array(a_b[i][0])
+            B += np.array(a_b[i][1])
+
+    A += B
+    A = A//2
+
     a = 1
     b = 1
 
     print(len(primes))
     for i in range(len(A)):
-        a *= primes[i]**A[i]
-        b *= primes[i]**B[i]
-    print(a, b)
-    print((a**2 - b**2) % N)
-    print(math.gcd(N, a-b))
-    print(math.gcd(N, a+b))
+        a *= primes[i]**int(A[i])
+        b *= primes[i]**int(B[i])
 
-
-def test():
-    M = [[0, 1, 0], [1, 1, 1], [0, 0, 1]]
-    print(M)
-    pass
+    print("Are squares congruent: ", (a**2 - b**2) % N)
 
 
 if __name__ == "__main__":
