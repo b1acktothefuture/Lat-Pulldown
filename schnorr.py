@@ -1,5 +1,6 @@
 import pickle
 from progress.bar import Bar
+import logging
 import math
 import numpy as np
 from Crypto.Util import number
@@ -78,7 +79,7 @@ def generate_basis(prime_base: list, multiplier: int, prec: int) -> IntegerMatri
     return B
 
 
-def fac_relation(e: list, prime_base: list, N: int) -> list:
+def check_fac_relation(e: list, prime_base: list, N: int) -> list:
     '''
     given e vector, checks if s = u - v*N is pt-smooth, returns their factorization if true
     '''
@@ -105,9 +106,12 @@ def fac_relation(e: list, prime_base: list, N: int) -> list:
     return [tuple([u, s]), tuple(T), tuple(S)]
 
 
-def schnorr(N, alpha, c, prec=10, independent=False, save=False):
+def fac_relations(N, alpha, c, prec=10, independent=False, save=False):
     P = prime_base(N, alpha)
+    logging.info("prime base: {}".format(P))
+
     n = len(P)
+    logging.info("dimension: {}".format(n))
 
     for i in P:
         if(N % i == 0):
@@ -129,12 +133,14 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
 
     relations = {}
     # Solve CVP here
+    trial = 0
     bar = Bar('Finding relations', max=n+2)
     while(len(relations) < n+2):
         # assuming the probablity of getting same permuation more then once is very low
+        trial += 1
         np.random.shuffle(Basis)
 
-        B_reduced = bkz_reduce(Basis, 4)  # try tuning the block size
+        B_reduced = bkz_reduce(Basis, 30)  # try tuning the block size
         e_reduced = cvp_babai(B_reduced, target)
         w = B_reduced.multiply_left(e_reduced)
 
@@ -144,10 +150,11 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
             e.append(w[i]//refs[i])
 
         # implement a checker function without actually computing u and v to reject longer vectors, similar to SVP one in Ritter's paper.
-        rel = fac_relation(e, P, N)
+        rel = check_fac_relation(e, P, N)
 
         if(len(rel) == 0):
             # amend it, do not continue reduce it strongly
+            logging.info("Trial {}: not short enough".format(trial))
             continue
 
         key = rel[0]
@@ -155,8 +162,13 @@ def schnorr(N, alpha, c, prec=10, independent=False, save=False):
         assert (key[0] - key[1]) % N == 0
 
         if key not in relations:
+            logging.info(
+                "Trial {}: found new fac-realtion: {}".format(trial, key))
             relations[key] = rel[1:]
             bar.next()
+
+        else:
+            logging.info("Trail {}: realtion already exists".format(trial))
 
     bar.finish()
 
@@ -187,20 +199,9 @@ def solve_linear_mod2(a_b):
     return t[0]
 
 
-def main():
+def schnorr(N, alpha, c, prec):
 
-    bits = 30
-    p = number.getPrime(bits//2)
-    q = number.getPrime(bits//2)
-    N = p*q
-
-    print("N: {} = {}*{}".format(N, p, q))
-
-# ========================================================================
-
-    alpha = 1.5
-    c = 1.1  # C should be really small
-    [relations, primes] = schnorr(N, alpha, c, 5, False, True)
+    [relations, primes] = fac_relations(N, alpha, c, prec, False, False)
 
     a_b = list(relations.values())
     sol = solve_linear_mod2(a_b)
@@ -228,13 +229,37 @@ def main():
 
     if(1 < x < N):
         print("Factor found: {}".format(x))
-        return
+        return x
 
     if(1 < y < N):
         print("Factor found: {}".format(y))
-        return
+        return y
 
     print("Better luck next time:(")
+    return 1
+
+# ========================================================================
+
+
+def main():
+
+    bits = 40
+    p = number.getPrime(bits//2)
+    q = number.getPrime(bits//2)
+    N = p*q
+
+    print("N: {} = {}*{}".format(N, p, q))
+
+    alpha = 1.3
+    c = 1.0  # C should be really small
+    prec = 5
+
+    logging.basicConfig(filename=str(N) + '.log',
+                        encoding='utf-8', level=logging.DEBUG)
+    logging.info(
+        'N: {} = {} * {} \nalpha: {} \nc = {} \nprecision = {}'.format(N, p, q, alpha, c, prec))
+
+    schnorr(N, alpha, c, prec)
 
 
 def test():
@@ -273,3 +298,12 @@ def test():
 if __name__ == "__main__":
     # test()
     main()
+
+
+"""
+To do:
+get multiple solutions: create a class, and have a next method to get successive solutions
+tune hyperparameters
+try sieving techniques
+get stats on: if reduction is not strong enough or problem with permutation
+"""
