@@ -8,6 +8,42 @@ import galois
 from lattice import *
 
 
+class LinearHomoF2:
+    def __init__(self, equations):
+        self.Fp = galois.GF(2)
+        self.dim = len(equations)
+        self.A = self.Fp(equations)
+        self.t = self.A.left_null_space()
+        self.max = 2**len(self.t)
+        self.dp = -1
+        self.has_been_zero = 0
+        if(len(self.t > 0)):
+            self.dp = 0
+        else:
+            logging.warn(
+                "No non-trivial solutions exist to the system of Homogenoeus equations")
+
+    def bin_array(num, m):
+        """Convert a positive integer num into an m-bit bit vector"""
+        return np.array(list(np.binary_repr(num).zfill(m))).astype(np.int8).tolist()
+
+    def next(self):
+        if(len(self.dp) == -1):
+            return []
+        if self.has_been_zero == 1:
+            logging.warn("No more solutions exist, returning empty array")
+            return []
+
+        sol = self.Fp([0]*self.dim)
+        bits = self.bin_array(self.dp, len(self.t))
+        for i in bits:
+            sol += i*self.t[i]
+        self.dp = (self.dp) % self.max
+        if(self.dp == 0):
+            self.has_been_zero = 1
+        return sol
+
+
 def primesfrom2to(n):
     sieve = np.ones(n//3 + (n % 6 == 2), dtype=bool)
     sieve[0] = False
@@ -140,7 +176,7 @@ def fac_relations(N, alpha, c, prec=10, independent=False, save=False):
         trial += 1
         np.random.shuffle(Basis)
 
-        B_reduced = bkz_reduce(Basis, 30)  # try tuning the block size
+        B_reduced = bkz_reduce(Basis, 6)  # try tuning the block size
         e_reduced = cvp_babai(B_reduced, target)
         w = B_reduced.multiply_left(e_reduced)
 
@@ -243,15 +279,15 @@ def schnorr(N, alpha, c, prec):
 
 def main():
 
-    bits = 40
+    bits = 20
     p = number.getPrime(bits//2)
     q = number.getPrime(bits//2)
     N = p*q
 
     print("N: {} = {}*{}".format(N, p, q))
 
-    alpha = 1.3
-    c = 1.0  # C should be really small
+    alpha = 1.6
+    c = 1.2  # C should be really small
     prec = 5
 
     logging.basicConfig(filename=str(N) + '.log',
@@ -302,7 +338,6 @@ if __name__ == "__main__":
 
 """
 To do:
-get multiple solutions: create a class, and have a next method to get successive solutions
 tune hyperparameters
 try sieving techniques
 get stats on: if reduction is not strong enough or problem with permutation
