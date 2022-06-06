@@ -173,7 +173,8 @@ def fac_relations(N, P, c, prec=10, independent=False):
         trial += 1
         np.random.shuffle(Basis)
 
-        B_reduced = bkz_reduce(Basis, 6)  # try tuning the block size
+        # B_reduced = bkz_reduce(Basis, 6)  # try tuning the block size
+        B_reduced = lll_reduce(Basis)
         e_reduced = cvp_babai(B_reduced, target)
         w = B_reduced.multiply_left(e_reduced)
 
@@ -269,7 +270,7 @@ def schnorr(N, alpha, c, prec):
 
 def main():
 
-    bits = 20
+    bits = 30
     p = number.getPrime(bits//2)
     q = number.getPrime(bits//2)
     N = p*q
