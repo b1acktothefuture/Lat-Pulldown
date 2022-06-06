@@ -1,0 +1,249 @@
+INFO:root:N: 430363 = 709 * 607 
+alpha: 1.7 
+c = 1.1 
+precision = 5
+INFO:root:prime base: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73]
+INFO:root:dimension: 21
+INFO:root:Trial 1: found new fac-realtion: (3012540, -1)
+INFO:root:Trial 2: not short enough
+INFO:root:Trial 3: relation already exists
+INFO:root:Trial 4: found new fac-realtion: (1291090, 1)
+INFO:root:Trial 5: relation already exists
+INFO:root:Trial 6: relation already exists
+INFO:root:Trial 7: not short enough
+INFO:root:Trial 8: relation already exists
+INFO:root:Trial 9: relation already exists
+INFO:root:Trial 10: relation already exists
+INFO:root:Trial 11: relation already exists
+INFO:root:Trial 12: relation already exists
+INFO:root:Trial 13: found new fac-realtion: (22809215, -24)
+INFO:root:Trial 14: found new fac-realtion: (30555800, 27)
+INFO:root:Trial 15: found new fac-realtion: (18505639, 30)
+INFO:root:Trial 16: relation already exists
+INFO:root:Trial 17: not short enough
+INFO:root:Trial 18: not short enough
+INFO:root:Trial 19: relation already exists
+INFO:root:Trial 20: relation already exists
+INFO:root:Trial 21: not short enough
+INFO:root:Trial 22: relation already exists
+INFO:root:Trial 23: relation already exists
+INFO:root:Trial 24: relation already exists
+INFO:root:Trial 25: relation already exists
+INFO:root:Trial 26: relation already exists
+INFO:root:Trial 27: relation already exists
+INFO:root:Trial 28: found new fac-realtion: (10759056, -19)
+INFO:root:Trial 29: relation already exists
+INFO:root:Trial 30: found new fac-realtion: (29264625, -59)
+INFO:root:Trial 31: relation already exists
+INFO:root:Trial 32: relation already exists
+INFO:root:Trial 33: not short enough
+INFO:root:Trial 34: relation already exists
+INFO:root:Trial 35: not short enough
+INFO:root:Trial 36: relation already exists
+INFO:root:Trial 37: relation already exists
+INFO:root:Trial 38: not short enough
+INFO:root:Trial 39: relation already exists
+INFO:root:Trial 40: relation already exists
+INFO:root:Trial 41: found new fac-realtion: (40023712, -47)
+INFO:root:Trial 42: relation already exists
+INFO:root:Trial 43: relation already exists
+INFO:root:Trial 44: relation already exists
+INFO:root:Trial 45: found new fac-realtion: (123514248, 67)
+INFO:root:Trial 46: not short enough
+INFO:root:Trial 47: relation already exists
+INFO:root:Trial 48: relation already exists
+INFO:root:Trial 49: relation already exists
+INFO:root:Trial 50: relation already exists
+INFO:root:Trial 51: relation already exists
+INFO:root:Trial 52: relation already exists
+INFO:root:Trial 53: relation already exists
+INFO:root:Trial 54: found new fac-realtion: (23669952, -13)
+INFO:root:Trial 55: relation already exists
+INFO:root:Trial 56: relation already exists
+INFO:root:Trial 57: not short enough
+INFO:root:Trial 58: relation already exists
+INFO:root:Trial 59: relation already exists
+INFO:root:Trial 60: found new fac-realtion: (758731176, 1207)
+INFO:root:Trial 61: relation already exists
+INFO:root:Trial 62: relation already exists
+INFO:root:Trial 63: relation already exists
+INFO:root:Trial 64: relation already exists
+INFO:root:Trial 65: relation already exists
+INFO:root:Trial 66: relation already exists
+INFO:root:Trial 67: found new fac-realtion: (46479173, -31)
+INFO:root:Trial 68: relation already exists
+INFO:root:Trial 69: relation already exists
+INFO:root:Trial 70: relation already exists
+INFO:root:Trial 71: not short enough
+INFO:root:Trial 72: not short enough
+INFO:root:Trial 73: relation already exists
+INFO:root:Trial 74: not short enough
+INFO:root:Trial 75: not short enough
+INFO:root:Trial 76: relation already exists
+INFO:root:Trial 77: relation already exists
+INFO:root:Trial 78: relation already exists
+INFO:root:Trial 79: relation already exists
+INFO:root:Trial 80: relation already exists
+INFO:root:Trial 81: relation already exists
+INFO:root:Trial 82: relation already exists
+INFO:root:Trial 83: found new fac-realtion: (1181344931, -1504)
+INFO:root:Trial 84: not short enough
+INFO:root:Trial 85: not short enough
+INFO:root:Trial 86: relation already exists
+INFO:root:Trial 87: relation already exists
+INFO:root:Trial 88: relation already exists
+INFO:root:Trial 89: relation already exists
+INFO:root:Trial 90: relation already exists
+INFO:root:Trial 91: relation already exists
+INFO:root:Trial 92: relation already exists
+INFO:root:Trial 93: relation already exists
+INFO:root:Trial 94: relation already exists
+INFO:root:Trial 95: relation already exists
+INFO:root:Trial 96: not short enough
+INFO:root:Trial 97: relation already exists
+INFO:root:Trial 98: relation already exists
+INFO:root:Trial 99: not short enough
+INFO:root:Trial 100: relation already exists
+INFO:root:Trial 101: found new fac-realtion: (148044585, -287)
+INFO:root:Trial 102: relation already exists
+INFO:root:Trial 103: relation already exists
+INFO:root:Trial 104: relation already exists
+INFO:root:Trial 105: relation already exists
+INFO:root:Trial 106: relation already exists
+INFO:root:Trial 107: not short enough
+INFO:root:Trial 108: not short enough
+INFO:root:Trial 109: relation already exists
+INFO:root:Trial 110: relation already exists
+INFO:root:Trial 111: relation already exists
+INFO:root:Trial 112: relation already exists
+INFO:root:Trial 113: not short enough
+INFO:root:Trial 114: relation already exists
+INFO:root:Trial 115: relation already exists
+INFO:root:Trial 116: relation already exists
+INFO:root:Trial 117: relation already exists
+INFO:root:Trial 118: found new fac-realtion: (104578243, 34)
+INFO:root:Trial 119: relation already exists
+INFO:root:Trial 120: relation already exists
+INFO:root:Trial 121: not short enough
+INFO:root:Trial 122: found new fac-realtion: (229383504, 25)
+INFO:root:Trial 123: relation already exists
+INFO:root:Trial 124: relation already exists
+INFO:root:Trial 125: found new fac-realtion: (52073931, 8)
+INFO:root:Trial 126: relation already exists
+INFO:root:Trial 127: not short enough
+INFO:root:Trial 128: relation already exists
+INFO:root:Trial 129: relation already exists
+INFO:root:Trial 130: not short enough
+INFO:root:Trial 131: relation already exists
+INFO:root:Trial 132: not short enough
+INFO:root:Trial 133: not short enough
+INFO:root:Trial 134: relation already exists
+INFO:root:Trial 135: not short enough
+INFO:root:Trial 136: relation already exists
+INFO:root:Trial 137: relation already exists
+INFO:root:Trial 138: relation already exists
+INFO:root:Trial 139: relation already exists
+INFO:root:Trial 140: not short enough
+INFO:root:Trial 141: found new fac-realtion: (2366564662, -1475)
+INFO:root:Trial 142: not short enough
+INFO:root:Trial 143: relation already exists
+INFO:root:Trial 144: relation already exists
+INFO:root:Trial 145: relation already exists
+INFO:root:Trial 146: relation already exists
+INFO:root:Trial 147: relation already exists
+INFO:root:Trial 148: relation already exists
+INFO:root:Trial 149: found new fac-realtion: (36580852, -3)
+INFO:root:Trial 150: relation already exists
+INFO:root:Trial 151: relation already exists
+INFO:root:Trial 152: relation already exists
+INFO:root:Trial 153: not short enough
+INFO:root:Trial 154: relation already exists
+INFO:root:Trial 155: relation already exists
+INFO:root:Trial 156: not short enough
+INFO:root:Trial 157: not short enough
+INFO:root:Trial 158: relation already exists
+INFO:root:Trial 159: not short enough
+INFO:root:Trial 160: relation already exists
+INFO:root:Trial 161: relation already exists
+INFO:root:Trial 162: found new fac-realtion: (900749454, -305)
+INFO:root:Trial 163: relation already exists
+INFO:root:Trial 164: relation already exists
+INFO:root:Trial 165: relation already exists
+INFO:root:Trial 166: relation already exists
+INFO:root:Trial 167: relation already exists
+INFO:root:Trial 168: relation already exists
+INFO:root:Trial 169: relation already exists
+INFO:root:Trial 170: relation already exists
+INFO:root:Trial 171: relation already exists
+INFO:root:Trial 172: relation already exists
+INFO:root:Trial 173: relation already exists
+INFO:root:Trial 174: found new fac-realtion: (8176896, -1)
+INFO:root:Trial 175: relation already exists
+INFO:root:Trial 176: relation already exists
+INFO:root:Trial 177: relation already exists
+INFO:root:Trial 178: relation already exists
+INFO:root:Trial 179: relation already exists
+INFO:root:Trial 180: relation already exists
+INFO:root:Trial 181: relation already exists
+INFO:root:Trial 182: relation already exists
+INFO:root:Trial 183: relation already exists
+INFO:root:Trial 184: relation already exists
+INFO:root:Trial 185: relation already exists
+INFO:root:Trial 186: relation already exists
+INFO:root:Trial 187: not short enough
+INFO:root:Trial 188: relation already exists
+INFO:root:Trial 189: not short enough
+INFO:root:Trial 190: relation already exists
+INFO:root:Trial 191: relation already exists
+INFO:root:Trial 192: relation already exists
+INFO:root:Trial 193: relation already exists
+INFO:root:Trial 194: relation already exists
+INFO:root:Trial 195: relation already exists
+INFO:root:Trial 196: relation already exists
+INFO:root:Trial 197: not short enough
+INFO:root:Trial 198: relation already exists
+INFO:root:Trial 199: relation already exists
+INFO:root:Trial 200: relation already exists
+INFO:root:Trial 201: relation already exists
+INFO:root:Trial 202: not short enough
+INFO:root:Trial 203: relation already exists
+INFO:root:Trial 204: not short enough
+INFO:root:Trial 205: relation already exists
+INFO:root:Trial 206: relation already exists
+INFO:root:Trial 207: relation already exists
+INFO:root:Trial 208: found new fac-realtion: (686428652, -333)
+INFO:root:Trial 209: relation already exists
+INFO:root:Trial 210: relation already exists
+INFO:root:Trial 211: not short enough
+INFO:root:Trial 212: relation already exists
+INFO:root:Trial 213: relation already exists
+INFO:root:Trial 214: relation already exists
+INFO:root:Trial 215: relation already exists
+INFO:root:Trial 216: relation already exists
+INFO:root:Trial 217: not short enough
+INFO:root:Trial 218: not short enough
+INFO:root:Trial 219: relation already exists
+INFO:root:Trial 220: relation already exists
+INFO:root:Trial 221: relation already exists
+INFO:root:Trial 222: relation already exists
+INFO:root:Trial 223: relation already exists
+INFO:root:Trial 224: not short enough
+INFO:root:Trial 225: relation already exists
+INFO:root:Trial 226: relation already exists
+INFO:root:Trial 227: found new fac-realtion: (1934484468, 2783)
+INFO:root:C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+INFO:root:>> gcd(N, a+b): 1, gcd(N, a-b): 1
+INFO:root:C = [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0]
+INFO:root:>> gcd(N, a+b): 430363, gcd(N, a-b): 430363
+INFO:root:C = [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0]
+INFO:root:>> gcd(N, a+b): 430363, gcd(N, a-b): 430363
+INFO:root:C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+INFO:root:>> gcd(N, a+b): 1, gcd(N, a-b): 1
+INFO:root:C = [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0]
+INFO:root:>> gcd(N, a+b): 430363, gcd(N, a-b): 430363
+INFO:root:C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+INFO:root:>> gcd(N, a+b): 1, gcd(N, a-b): 1
+INFO:root:C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+INFO:root:>> gcd(N, a+b): 1, gcd(N, a-b): 1
+INFO:root:C = [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0]
+INFO:root:>> gcd(N, a+b): 430363, gcd(N, a-b): 430363

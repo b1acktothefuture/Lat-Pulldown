@@ -22,23 +22,22 @@ class LinearHomoF2:
         else:
             logging.warn(
                 "No non-trivial solutions exist to the system of Homogenoeus equations")
+            self.has_been_zero = 1
 
-    def bin_array(num, m):
+    def bin_array(self, num, m):
         """Convert a positive integer num into an m-bit bit vector"""
         return np.array(list(np.binary_repr(num).zfill(m))).astype(np.int8).tolist()
 
     def next(self):
-        if(len(self.dp) == -1):
-            return []
+        sol = self.Fp([0]*self.dim)
         if self.has_been_zero == 1:
             logging.warn("No more solutions exist, returning empty array")
-            return []
+            return sol
 
-        sol = self.Fp([0]*self.dim)
         bits = self.bin_array(self.dp, len(self.t))
         for i in bits:
             sol += i*self.t[i]
-        self.dp = (self.dp) % self.max
+        self.dp = (self.dp + 1) % self.max
         if(self.dp == 0):
             self.has_been_zero = 1
         return sol
@@ -142,9 +141,7 @@ def check_fac_relation(e: list, prime_base: list, N: int) -> list:
     return [tuple([u, s]), tuple(T), tuple(S)]
 
 
-def fac_relations(N, alpha, c, prec=10, independent=False, save=False):
-    P = prime_base(N, alpha)
-    logging.info("prime base: {}".format(P))
+def fac_relations(N, P, c, prec=10, independent=False):
 
     n = len(P)
     logging.info("dimension: {}".format(n))
@@ -204,75 +201,68 @@ def fac_relations(N, alpha, c, prec=10, independent=False, save=False):
             bar.next()
 
         else:
-            logging.info("Trail {}: realtion already exists".format(trial))
+            logging.info("Trial {}: relation already exists".format(trial))
 
     bar.finish()
 
     P.insert(0, -1)
-    if(save):
-        with open(str(N) + '.pkl', 'wb') as f:
-            pickle.dump(relations, f)
-        with open(str(N) + '_primes.pkl', 'wb') as f:
-            pickle.dump(P, f)
 
-    return [relations,  P]
+    return relations
 
 
-def solve_linear_mod2(a_b):
-    '''
-    solves set of homogeneous equations mod 2
-    As of now it returns only one solution
-    '''
+def solve_linear(N, a_b, primes):
     a_plus_b_mod2 = []
     for i in range(len(a_b)):
         temp = []
         for j in range(len(a_b[i][0])):
             temp.append((a_b[i][0][j] + a_b[i][1][j]) % 2)
         a_plus_b_mod2.append(temp)
-    F2 = galois.GF(2)
-    A = F2(a_plus_b_mod2)
-    t = A.left_null_space()
-    return t[0]
+    solver = LinearHomoF2(a_plus_b_mod2)
+    while(True):
+        if(solver.has_been_zero == 1):
+            break
+        sol = solver.next()
+        logging.info("C = {}".format(sol))
+        A = np.array([0]*len(a_b[0][0]))
+        B = np.array([0]*len(a_b[0][1]))
+        for i in range(len(sol)):
+            if(sol[i] == 1):
+                A += np.array(a_b[i][0])
+                B += np.array(a_b[i][1])
+        A += B
+        A = A//2
+        a = 1
+        b = 1
+        for i in range(len(A)):
+            a *= primes[i]**int(A[i])  # Fuckin hate numpy
+            b *= primes[i]**int(B[i])
+        assert (a**2 - b**2) % N == 0
 
+        x = math.gcd(N, a+b)
+        y = math.gcd(N, a+b)
 
-def schnorr(N, alpha, c, prec):
+        logging.info(">> gcd(N, a+b): {}, gcd(N, a-b): {}".format(x, y))
 
-    [relations, primes] = fac_relations(N, alpha, c, prec, False, False)
+        if(1 < x < N):
+            print("Factor found: {}".format(x))
+            return x
 
-    a_b = list(relations.values())
-    sol = solve_linear_mod2(a_b)
-
-    A = np.array([0]*len(a_b[0][0]))
-    B = np.array([0]*len(a_b[0][1]))
-    for i in range(len(sol)):
-        if(sol[i] == 1):
-            A += np.array(a_b[i][0])
-            B += np.array(a_b[i][1])
-
-    A += B
-    A = A//2
-
-    a = 1
-    b = 1
-    for i in range(len(A)):
-        a *= primes[i]**int(A[i])  # Fuckin hate numpy
-        b *= primes[i]**int(B[i])
-
-    assert (a**2 - b**2) % N == 0
-
-    x = math.gcd(N, a+b)
-    y = math.gcd(N, a+b)
-
-    if(1 < x < N):
-        print("Factor found: {}".format(x))
-        return x
-
-    if(1 < y < N):
-        print("Factor found: {}".format(y))
-        return y
+        if(1 < y < N):
+            print("Factor found: {}".format(y))
+            return y
 
     print("Better luck next time:(")
     return 1
+
+
+def schnorr(N, alpha, c, prec):
+    P = prime_base(N, alpha)
+    logging.info("prime base: {}".format(P))
+
+    relations = fac_relations(N, P, c, prec, False)
+
+    a_b = list(relations.values())
+    fac = solve_linear(N, a_b, P)
 
 # ========================================================================
 
@@ -286,49 +276,28 @@ def main():
 
     print("N: {} = {}*{}".format(N, p, q))
 
-    alpha = 1.6
-    c = 1.2  # C should be really small
+    alpha = 1.7
+    c = 1.1  # C should be really small
     prec = 5
 
-    logging.basicConfig(filename=str(N) + '.log',
-                        encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(filename="./logs/" + str(N) + '.log',
+                        encoding='utf-8', level=logging.INFO)
     logging.info(
         'N: {} = {} * {} \nalpha: {} \nc = {} \nprecision = {}'.format(N, p, q, alpha, c, prec))
 
     schnorr(N, alpha, c, prec)
+    logging.basicConfig()
 
 
 def test():
-    N = 707309
-    with open(str(N) + '.pkl', 'rb') as f:
-        relations = pickle.load(f)
-
-    with open(str(N) + '_primes.pkl', 'rb') as f:
-        primes = pickle.load(f)
-
-    a_b = list(relations.values())
-    sol = solve_linear_mod2(a_b)
-
-    A = np.array([0]*len(a_b[0][0]))
-    B = np.array([0]*len(a_b[0][1]))
-
-    for i in range(len(sol)):
-        if(sol[i] == 1):
-            A += np.array(a_b[i][0])
-            B += np.array(a_b[i][1])
-
-    A += B
-    A = A//2
-
-    a = 1
-    b = 1
-
-    print(len(primes))
-    for i in range(len(A)):
-        a *= primes[i]**int(A[i])
-        b *= primes[i]**int(B[i])
-
-    print("Are squares congruent: ", (a**2 - b**2) % N)
+    a_plus_b_mod2 = [[0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1], [0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0], [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1], [1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 1, 1, 0, 1, 1, 0,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], [1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1], [0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0], [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0], [1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0]]
+    solve = LinearHomoF2(a_plus_b_mod2)
+    while(True):
+        if(solve.has_been_zero == 1 or solve.dp < 0):
+            break
+        t = solve.next()
+        print(t)
 
 
 if __name__ == "__main__":
