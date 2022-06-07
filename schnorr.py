@@ -35,8 +35,8 @@ class LinearHomoF2:
             return sol
 
         bits = self.bin_array(self.dp, len(self.t))
-        for i in bits:
-            sol += i*self.t[i]
+        for i in range(len(bits)):
+            sol += bits[i]*self.t[i]
         self.dp = (self.dp + 1) % self.max
         if(self.dp == 0):
             self.has_been_zero = 1
