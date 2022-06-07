@@ -23,6 +23,7 @@ class LinearHomoF2:
             logging.warn(
                 "No non-trivial solutions exist to the system of Homogenoeus equations")
             self.has_been_zero = 1
+        logging.info("Solution space is {}".format(self.t))
 
     def bin_array(self, num, m):
         """Convert a positive integer num into an m-bit bit vector"""
@@ -35,8 +36,8 @@ class LinearHomoF2:
             return sol
 
         bits = self.bin_array(self.dp, len(self.t))
-        for i in bits:
-            sol += i*self.t[i]
+        for i in range(len(bits)):
+            sol += bits[i]*self.t[i]
         self.dp = (self.dp + 1) % self.max
         if(self.dp == 0):
             self.has_been_zero = 1
@@ -173,8 +174,8 @@ def fac_relations(N, P, c, prec=10, independent=False):
         trial += 1
         np.random.shuffle(Basis)
 
-        # B_reduced = bkz_reduce(Basis, 6)  # try tuning the block size
-        B_reduced = lll_reduce(Basis)
+        B_reduced = bkz_reduce(Basis, 20)  # try tuning the block size
+        # B_reduced = lll_reduce(Basis)
         e_reduced = cvp_babai(B_reduced, target)
         w = B_reduced.multiply_left(e_reduced)
 
@@ -257,13 +258,13 @@ def solve_linear(N, a_b, primes):
 
 
 def schnorr(N, alpha, c, prec):
-    P = prime_base(N, alpha)
+    P = prime_base(N, alpha)  # 1
     logging.info("prime base: {}".format(P))
 
-    relations = fac_relations(N, P, c, prec, False)
+    relations = fac_relations(N, P, c, prec, False)  # 2
 
-    a_b = list(relations.values())
-    fac = solve_linear(N, a_b, P)
+    a_b = list(relations.values())  # 3
+    fac = solve_linear(N, a_b, P)  # 4
 
 # ========================================================================
 
@@ -290,19 +291,7 @@ def main():
     logging.basicConfig()
 
 
-def test():
-    a_plus_b_mod2 = [[0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1], [0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0], [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1], [1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 1, 1, 0, 1, 1, 0,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], [1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1], [0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0], [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0], [1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0]]
-    solve = LinearHomoF2(a_plus_b_mod2)
-    while(True):
-        if(solve.has_been_zero == 1 or solve.dp < 0):
-            break
-        t = solve.next()
-        print(t)
-
-
 if __name__ == "__main__":
-    # test()
     main()
 
 

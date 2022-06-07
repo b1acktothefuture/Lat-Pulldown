@@ -1,0 +1,283 @@
+INFO:root:N: 360275969 = 17011 * 21179 
+alpha: 1.7 
+c = 1.1 
+precision = 5
+INFO:root:prime base: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157]
+INFO:root:dimension: 37
+INFO:root:Trial 1: not short enough
+INFO:root:Trial 2: not short enough
+INFO:root:Trial 3: not short enough
+INFO:root:Trial 4: not short enough
+INFO:root:Trial 5: not short enough
+INFO:root:Trial 6: not short enough
+INFO:root:Trial 7: not short enough
+INFO:root:Trial 8: not short enough
+INFO:root:Trial 9: not short enough
+INFO:root:Trial 10: not short enough
+INFO:root:Trial 11: found new fac-realtion: (34946769000, 7)
+INFO:root:Trial 12: found new fac-realtion: (1429935320110, -851)
+INFO:root:Trial 13: not short enough
+INFO:root:Trial 14: not short enough
+INFO:root:Trial 15: found new fac-realtion: (13563309403540, -1403)
+INFO:root:Trial 16: found new fac-realtion: (6637724451735, -1121)
+INFO:root:Trial 17: not short enough
+INFO:root:Trial 18: not short enough
+INFO:root:Trial 19: not short enough
+INFO:root:Trial 20: not short enough
+INFO:root:Trial 21: relation already exists
+INFO:root:Trial 22: not short enough
+INFO:root:Trial 23: not short enough
+INFO:root:Trial 24: not short enough
+INFO:root:Trial 25: not short enough
+INFO:root:Trial 26: not short enough
+INFO:root:Trial 27: not short enough
+INFO:root:Trial 28: found new fac-realtion: (1564678531372, -1995)
+INFO:root:Trial 29: not short enough
+INFO:root:Trial 30: found new fac-realtion: (55615080781675, -917)
+INFO:root:Trial 31: not short enough
+INFO:root:Trial 32: found new fac-realtion: (282456359601, -95)
+INFO:root:Trial 33: not short enough
+INFO:root:Trial 34: not short enough
+INFO:root:Trial 35: found new fac-realtion: (495631290664125, 386794)
+INFO:root:Trial 36: found new fac-realtion: (11128564395900, -10541)
+INFO:root:Trial 37: not short enough
+INFO:root:Trial 38: relation already exists
+INFO:root:Trial 39: relation already exists
+INFO:root:Trial 40: not short enough
+INFO:root:Trial 41: not short enough
+INFO:root:Trial 42: not short enough
+INFO:root:Trial 43: not short enough
+INFO:root:Trial 44: not short enough
+INFO:root:Trial 45: not short enough
+INFO:root:Trial 46: found new fac-realtion: (508349392600, 341)
+INFO:root:Trial 47: not short enough
+INFO:root:Trial 48: not short enough
+INFO:root:Trial 49: found new fac-realtion: (1682128496136, -3125)
+INFO:root:Trial 50: not short enough
+INFO:root:Trial 51: found new fac-realtion: (174373569039, 43)
+INFO:root:Trial 52: not short enough
+INFO:root:Trial 53: found new fac-realtion: (369282867999, -226)
+INFO:root:Trial 54: found new fac-realtion: (2153369466729, 16)
+INFO:root:Trial 55: found new fac-realtion: (3853151486821, -1634)
+INFO:root:Trial 56: not short enough
+INFO:root:Trial 57: not short enough
+INFO:root:Trial 58: not short enough
+INFO:root:Trial 59: not short enough
+INFO:root:Trial 60: found new fac-realtion: (1362923990837, 110)
+INFO:root:Trial 61: found new fac-realtion: (732441045504, 527)
+INFO:root:Trial 62: not short enough
+INFO:root:Trial 63: not short enough
+INFO:root:Trial 64: not short enough
+INFO:root:Trial 65: not short enough
+INFO:root:Trial 66: not short enough
+INFO:root:Trial 67: not short enough
+INFO:root:Trial 68: not short enough
+INFO:root:Trial 69: not short enough
+INFO:root:Trial 70: not short enough
+INFO:root:Trial 71: not short enough
+INFO:root:Trial 72: not short enough
+INFO:root:Trial 73: not short enough
+INFO:root:Trial 74: not short enough
+INFO:root:Trial 75: not short enough
+INFO:root:Trial 76: not short enough
+INFO:root:Trial 77: not short enough
+INFO:root:Trial 78: not short enough
+INFO:root:Trial 79: not short enough
+INFO:root:Trial 80: not short enough
+INFO:root:Trial 81: not short enough
+INFO:root:Trial 82: not short enough
+INFO:root:Trial 83: found new fac-realtion: (16800388981285, -5123)
+INFO:root:Trial 84: not short enough
+INFO:root:Trial 85: not short enough
+INFO:root:Trial 86: not short enough
+INFO:root:Trial 87: not short enough
+INFO:root:Trial 88: not short enough
+INFO:root:Trial 89: not short enough
+INFO:root:Trial 90: not short enough
+INFO:root:Trial 91: found new fac-realtion: (2191558719360, -67)
+INFO:root:Trial 92: not short enough
+INFO:root:Trial 93: not short enough
+INFO:root:Trial 94: not short enough
+INFO:root:Trial 95: not short enough
+INFO:root:Trial 96: not short enough
+INFO:root:Trial 97: not short enough
+INFO:root:Trial 98: found new fac-realtion: (426927023474, 209)
+INFO:root:Trial 99: not short enough
+INFO:root:Trial 100: not short enough
+INFO:root:Trial 101: not short enough
+INFO:root:Trial 102: not short enough
+INFO:root:Trial 103: not short enough
+INFO:root:Trial 104: not short enough
+INFO:root:Trial 105: not short enough
+INFO:root:Trial 106: not short enough
+INFO:root:Trial 107: not short enough
+INFO:root:Trial 108: not short enough
+INFO:root:Trial 109: not short enough
+INFO:root:Trial 110: not short enough
+INFO:root:Trial 111: not short enough
+INFO:root:Trial 112: not short enough
+INFO:root:Trial 113: not short enough
+INFO:root:Trial 114: not short enough
+INFO:root:Trial 115: found new fac-realtion: (322807267639, -585)
+INFO:root:Trial 116: not short enough
+INFO:root:Trial 117: not short enough
+INFO:root:Trial 118: not short enough
+INFO:root:Trial 119: not short enough
+INFO:root:Trial 120: found new fac-realtion: (369643144297, 103)
+INFO:root:Trial 121: found new fac-realtion: (14608830256020, -10961)
+INFO:root:Trial 122: not short enough
+INFO:root:Trial 123: not short enough
+INFO:root:Trial 124: found new fac-realtion: (300109881856, -321)
+INFO:root:Trial 125: not short enough
+INFO:root:Trial 126: relation already exists
+INFO:root:Trial 127: not short enough
+INFO:root:Trial 128: found new fac-realtion: (4664492976780, 6137)
+INFO:root:Trial 129: not short enough
+INFO:root:Trial 130: relation already exists
+INFO:root:Trial 131: not short enough
+INFO:root:Trial 132: not short enough
+INFO:root:Trial 133: found new fac-realtion: (871507568904, -107)
+INFO:root:Trial 134: not short enough
+INFO:root:Trial 135: not short enough
+INFO:root:Trial 136: relation already exists
+INFO:root:Trial 137: relation already exists
+INFO:root:Trial 138: not short enough
+INFO:root:Trial 139: not short enough
+INFO:root:Trial 140: found new fac-realtion: (8688055003884, 11449)
+INFO:root:Trial 141: relation already exists
+INFO:root:Trial 142: not short enough
+INFO:root:Trial 143: not short enough
+INFO:root:Trial 144: not short enough
+INFO:root:Trial 145: found new fac-realtion: (1666276356668, 43)
+INFO:root:Trial 146: not short enough
+INFO:root:Trial 147: not short enough
+INFO:root:Trial 148: not short enough
+INFO:root:Trial 149: not short enough
+INFO:root:Trial 150: not short enough
+INFO:root:Trial 151: not short enough
+INFO:root:Trial 152: not short enough
+INFO:root:Trial 153: not short enough
+INFO:root:Trial 154: not short enough
+INFO:root:Trial 155: not short enough
+INFO:root:Trial 156: not short enough
+INFO:root:Trial 157: not short enough
+INFO:root:Trial 158: not short enough
+INFO:root:Trial 159: not short enough
+INFO:root:Trial 160: not short enough
+INFO:root:Trial 161: not short enough
+INFO:root:Trial 162: not short enough
+INFO:root:Trial 163: not short enough
+INFO:root:Trial 164: not short enough
+INFO:root:Trial 165: not short enough
+INFO:root:Trial 166: not short enough
+INFO:root:Trial 167: not short enough
+INFO:root:Trial 168: not short enough
+INFO:root:Trial 169: not short enough
+INFO:root:Trial 170: found new fac-realtion: (84373749713227, -18821)
+INFO:root:Trial 171: not short enough
+INFO:root:Trial 172: not short enough
+INFO:root:Trial 173: not short enough
+INFO:root:Trial 174: not short enough
+INFO:root:Trial 175: not short enough
+INFO:root:Trial 176: not short enough
+INFO:root:Trial 177: not short enough
+INFO:root:Trial 178: not short enough
+INFO:root:Trial 179: found new fac-realtion: (603462248712, 637)
+INFO:root:Trial 180: relation already exists
+INFO:root:Trial 181: relation already exists
+INFO:root:Trial 182: relation already exists
+INFO:root:Trial 183: not short enough
+INFO:root:Trial 184: not short enough
+INFO:root:Trial 185: found new fac-realtion: (12481760930688, -15317)
+INFO:root:Trial 186: not short enough
+INFO:root:Trial 187: not short enough
+INFO:root:Trial 188: not short enough
+INFO:root:Trial 189: not short enough
+INFO:root:Trial 190: not short enough
+INFO:root:Trial 191: not short enough
+INFO:root:Trial 192: not short enough
+INFO:root:Trial 193: not short enough
+INFO:root:Trial 194: not short enough
+INFO:root:Trial 195: not short enough
+INFO:root:Trial 196: relation already exists
+INFO:root:Trial 197: not short enough
+INFO:root:Trial 198: not short enough
+INFO:root:Trial 199: not short enough
+INFO:root:Trial 200: relation already exists
+INFO:root:Trial 201: not short enough
+INFO:root:Trial 202: not short enough
+INFO:root:Trial 203: found new fac-realtion: (479887590785, 77)
+INFO:root:Trial 204: not short enough
+INFO:root:Trial 205: not short enough
+INFO:root:Trial 206: not short enough
+INFO:root:Trial 207: not short enough
+INFO:root:Trial 208: not short enough
+INFO:root:Trial 209: not short enough
+INFO:root:Trial 210: not short enough
+INFO:root:Trial 211: not short enough
+INFO:root:Trial 212: not short enough
+INFO:root:Trial 213: not short enough
+INFO:root:Trial 214: not short enough
+INFO:root:Trial 215: not short enough
+INFO:root:Trial 216: not short enough
+INFO:root:Trial 217: not short enough
+INFO:root:Trial 218: not short enough
+INFO:root:Trial 219: not short enough
+INFO:root:Trial 220: not short enough
+INFO:root:Trial 221: not short enough
+INFO:root:Trial 222: not short enough
+INFO:root:Trial 223: not short enough
+INFO:root:Trial 224: relation already exists
+INFO:root:Trial 225: not short enough
+INFO:root:Trial 226: not short enough
+INFO:root:Trial 227: relation already exists
+INFO:root:Trial 228: not short enough
+INFO:root:Trial 229: not short enough
+INFO:root:Trial 230: not short enough
+INFO:root:Trial 231: not short enough
+INFO:root:Trial 232: not short enough
+INFO:root:Trial 233: not short enough
+INFO:root:Trial 234: not short enough
+INFO:root:Trial 235: not short enough
+INFO:root:Trial 236: not short enough
+INFO:root:Trial 237: not short enough
+INFO:root:Trial 238: not short enough
+INFO:root:Trial 239: not short enough
+INFO:root:Trial 240: not short enough
+INFO:root:Trial 241: not short enough
+INFO:root:Trial 242: not short enough
+INFO:root:Trial 243: found new fac-realtion: (29372579162773, -37859)
+INFO:root:Trial 244: not short enough
+INFO:root:Trial 245: not short enough
+INFO:root:Trial 246: found new fac-realtion: (106281411093, 238)
+INFO:root:Trial 247: not short enough
+INFO:root:Trial 248: found new fac-realtion: (17069875411239, 19)
+INFO:root:Trial 249: relation already exists
+INFO:root:Trial 250: not short enough
+INFO:root:Trial 251: not short enough
+INFO:root:Trial 252: found new fac-realtion: (2346117110181, 53)
+INFO:root:Trial 253: not short enough
+INFO:root:Trial 254: not short enough
+INFO:root:Trial 255: not short enough
+INFO:root:Trial 256: not short enough
+INFO:root:Trial 257: not short enough
+INFO:root:Trial 258: not short enough
+INFO:root:Trial 259: found new fac-realtion: (480512669495397, -18818)
+INFO:root:Trial 260: not short enough
+INFO:root:Trial 261: not short enough
+INFO:root:Trial 262: found new fac-realtion: (66290778225, -71)
+INFO:root:Trial 263: not short enough
+INFO:root:Trial 264: not short enough
+INFO:root:Trial 265: not short enough
+INFO:root:Trial 266: not short enough
+INFO:root:Trial 267: not short enough
+INFO:root:Trial 268: not short enough
+INFO:root:Trial 269: not short enough
+INFO:root:Trial 270: not short enough
+INFO:root:Trial 271: found new fac-realtion: (32930304391600, -2907)
+INFO:root:C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+INFO:root:>> gcd(N, a+b): 1, gcd(N, a-b): 1
+INFO:root:C = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1,
+ 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0]
+INFO:root:>> gcd(N, a+b): 21179, gcd(N, a-b): 21179
