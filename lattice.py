@@ -15,7 +15,7 @@ def lll_reduce(B: list, delta: float = 0.99) -> IntegerMatrix:
     return B_t
 
 
-def bkz_reduce(A: list, block_size: int, prune: bool = False) -> IntegerMatrix:
+def bkz_reduce(A: list, block_size: int, prune: bool = True) -> IntegerMatrix:
     B = IntegerMatrix.from_matrix(A)
     if(prune):
         param = BKZ.Param(block_size=block_size,
@@ -54,7 +54,7 @@ def test():
 
     FPLLL.set_random_seed(time.time())
 
-    dim = 40
+    dim = 50
     mat = IntegerMatrix(dim, dim)
     mat.randomize("uniform", bits=20)
 
@@ -71,9 +71,11 @@ def test():
     t2 = cvp_babai(B, t)
     print("LLL: {}".format(l2_norm(B.multiply_left(t2), t)))
 
-    C = bkz_reduce(B, 16)
-    t3 = cvp_babai(C, t)
-    print("BKZ: {}".format(l2_norm(C.multiply_left(t3), t)))
+    for i in range(2, 30):
+        C = bkz_reduce(B, i)
+        t3 = cvp_babai(C, t)
+        print("BKZ (blocksize: {}): {}".format(
+            i, l2_norm(C.multiply_left(t3), t)))
 
     t4 = CVP.closest_vector(A, t)
     print("CVP: {}".format(l2_norm(t4, t)))

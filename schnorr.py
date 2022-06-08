@@ -6,6 +6,8 @@ import numpy as np
 from Crypto.Util import number
 import galois
 from lattice import *
+from codetiming import Timer
+from datetime import datetime
 
 
 class LinearHomoF2:
@@ -20,7 +22,7 @@ class LinearHomoF2:
         if(len(self.t > 0)):
             self.dp = 0
         else:
-            logging.warn(
+            logging.warning(
                 "No non-trivial solutions exist to the system of Homogenoeus equations")
             self.has_been_zero = 1
         logging.info("Solution space is {}".format(self.t))
@@ -32,7 +34,7 @@ class LinearHomoF2:
     def next(self):
         sol = self.Fp([0]*self.dim)
         if self.has_been_zero == 1:
-            logging.warn("No more solutions exist, returning empty array")
+            logging.warning("No more solutions exist, returning empty array")
             return sol
 
         bits = self.bin_array(self.dp, len(self.t))
@@ -76,7 +78,8 @@ def is_smooth(x, P):
 
 def factorize_smooth(n, primes):
     '''
-    returns empty array if not pt-smooth
+    returns empty array if not pt-smooth, otherwise returns factorization
+    same behavior for negative numbers
     '''
     if(n < 0):
         n = -n
@@ -143,6 +146,12 @@ def check_fac_relation(e: list, prime_base: list, N: int) -> list:
 
 
 def fac_relations(N, P, c, prec=10, independent=False):
+    # 0. not short enough
+    # 1. working
+    # -1. repeated
+
+    timer = Timer(logger=None)
+    ret = []  # return time
 
     n = len(P)
     logging.info("dimension: {}".format(n))
@@ -158,9 +167,13 @@ def fac_relations(N, P, c, prec=10, independent=False):
         multiplier = N**c
 
     # Basis matrix for the prime number lattice
+    timer.start()
     Basis = generate_basis(P, multiplier, prec)
-    refs = [Basis[i][i] for i in range(len(P))]
+    run_time = timer.stop()
+    logging.warning("Basis matrix generated in {} seconds".format(run_time))
+    ret.append(run_time)
 
+    refs = [Basis[i][i] for i in range(len(P))]
     # Target vector for CVP [0,..., N^c*log(N)]
     target = [0]*(len(P)+1)
     target[-1] = sr(multiplier*math.log(N), prec)
@@ -169,15 +182,27 @@ def fac_relations(N, P, c, prec=10, independent=False):
     # Solve CVP here
     trial = 0
     bar = Bar('Finding relations', max=n+2)
+
+    timer.start()
+    reductions = []
+    succ = []
     while(len(relations) < n+2):
         # assuming the probablity of getting same permuation more then once is very low
         trial += 1
         np.random.shuffle(Basis)
 
-        B_reduced = bkz_reduce(Basis, 20)  # try tuning the block size
-        # B_reduced = lll_reduce(Basis)
+        # B_reduced = bkz_reduce(Basis, 30)  # try tuning the block size
+        temp_timer = Timer(logger=None)
+        temp_timer.start()
+
+        B_reduced = lll_reduce(Basis)
         e_reduced = cvp_babai(B_reduced, target)
         w = B_reduced.multiply_left(e_reduced)
+
+        reduction_time = temp_timer.stop()
+        reductions.append(reduction_time)
+        logging.warning("* {} reduction runtime: {} seconds".format(
+            trial, reduction_time))
 
         e = []
         for i in range(len(w)-1):
@@ -189,7 +214,8 @@ def fac_relations(N, P, c, prec=10, independent=False):
 
         if(len(rel) == 0):
             # amend it, do not continue reduce it strongly
-            logging.info("Trial {}: not short enough".format(trial))
+            logging.info(">>>> not short enough")
+            succ.append(0)
             continue
 
         key = rel[0]
@@ -198,18 +224,24 @@ def fac_relations(N, P, c, prec=10, independent=False):
 
         if key not in relations:
             logging.info(
-                "Trial {}: found new fac-realtion: {}".format(trial, key))
+                ">>>> found new fac-realtion: {}".format(key))
             relations[key] = rel[1:]
             bar.next()
+            succ.append(0)
 
         else:
-            logging.info("Trial {}: relation already exists".format(trial))
+            logging.info(">>>> relation already exists")
+            succ.append(-1)
+
+    run_time = timer.stop()
+    logging.info("Found n+2 relations in {} seconds".format(run_time))
+    ret.append(run_time)
+    ret.append([reductions, succ])
 
     bar.finish()
-
     P.insert(0, -1)
 
-    return relations
+    return [relations, ret]
 
 
 def solve_linear(N, a_b, primes):
@@ -224,7 +256,7 @@ def solve_linear(N, a_b, primes):
         if(solver.has_been_zero == 1):
             break
         sol = solver.next()
-        logging.info("C = {}".format(sol))
+        logging.info("* C = {}".format(sol))
         A = np.array([0]*len(a_b[0][0]))
         B = np.array([0]*len(a_b[0][1]))
         for i in range(len(sol)):
@@ -257,38 +289,59 @@ def solve_linear(N, a_b, primes):
     return 1
 
 
-def schnorr(N, alpha, c, prec):
-    P = prime_base(N, alpha)  # 1
-    logging.info("prime base: {}".format(P))
+def schnorr(N, alpha, c, prec, timer):
+    ret = []
 
-    relations = fac_relations(N, P, c, prec, False)  # 2
+    timer.start()
+    P = prime_base(N, alpha)  # 1
+    run_time = timer.stop()
+    logging.warning(
+        "Time for generating prime basis: {} seconds".format(run_time))
+    logging.info("prime base: {}".format(P))
+    ret.append(run_time)
+
+    [relations, timing] = fac_relations(N, P, c, prec, False)  # 2
 
     a_b = list(relations.values())  # 3
+
     fac = solve_linear(N, a_b, P)  # 4
 
-# ========================================================================
+
+def running_times(N, alpha, c, timer, prec=5):
+
+    pass
 
 
 def main():
+    bits_low = 20
+    bits_high = 22
+    bits_step = 1
 
-    bits = 30
-    p = number.getPrime(bits//2)
-    q = number.getPrime(bits//2)
-    N = p*q
+    c_low = 1.1
+    c_high = 1.3
+    c_stelp = 0.05
 
-    print("N: {} = {}*{}".format(N, p, q))
+    alpha_low = 1.0
+    alpha_high = 1.7
+    alpha_step = 0.1
 
-    alpha = 1.7
-    c = 1.1  # C should be really small
-    prec = 5
+    timing = {}
+    timer = Timer(logger=None)
 
-    logging.basicConfig(filename="./logs/" + str(N) + '.log',
-                        encoding='utf-8', level=logging.INFO)
-    logging.info(
-        'N: {} = {} * {} \nalpha: {} \nc = {} \nprecision = {}'.format(N, p, q, alpha, c, prec))
+    now = datetime.now()
+    current_date = str(now.date())
+    current_time = str(now.time())
 
-    schnorr(N, alpha, c, prec)
-    logging.basicConfig()
+    logging.basicConfig(level=logging.INFO,
+                        filename="./logs/" + current_date + current_time + ".log", format='%(message)s')
+    for bits in range(bits_low, bits_high+1, bits_step):
+        p = number.getPrime(bits//2)
+        q = number.getPrime(bits//2)
+        N = p*q
+        logging.warning(
+            "------------------------------------------------------------------------\nN = {}".format(N))
+        ret = schnorr(N, alpha_high, c_low, 5, timer)
+        timing[bits] = ret
 
 
 if __name__ == "__main__":
