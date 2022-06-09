@@ -8,6 +8,7 @@ import galois
 from lattice import *
 from codetiming import Timer
 from datetime import datetime
+import json
 
 
 class LinearHomoF2:
@@ -289,8 +290,10 @@ def solve_linear(N, a_b, primes):
     return 1
 
 
-def schnorr(N, alpha, c, prec, timer):
+def schnorr(N, alpha, c, prec):
     ret = []
+
+    timer = Timer(logger=None)
 
     timer.start()
     P = prime_base(N, alpha)  # 1
@@ -301,10 +304,21 @@ def schnorr(N, alpha, c, prec, timer):
     ret.append(run_time)
 
     [relations, timing] = fac_relations(N, P, c, prec, False)  # 2
+    ret.append(timing)
 
     a_b = list(relations.values())  # 3
 
+    timer.start()
     fac = solve_linear(N, a_b, P)  # 4
+    run_time = timer.stop()
+    ret.append(run_time)
+    logging.warning(
+        "Time find a non-trivial solution to linear equations: {} seconds".format(run_time))
+    if(fac == 1):
+        ret.append(0)
+    else:
+        ret.append(1)
+    return ret
 
 
 def running_times(N, alpha, c, timer, prec=5):
@@ -314,7 +328,7 @@ def running_times(N, alpha, c, timer, prec=5):
 
 def main():
     bits_low = 20
-    bits_high = 22
+    bits_high = 25
     bits_step = 1
 
     c_low = 1.1
@@ -338,10 +352,20 @@ def main():
         p = number.getPrime(bits//2)
         q = number.getPrime(bits//2)
         N = p*q
+        print("N = {}:".format(N))
         logging.warning(
             "------------------------------------------------------------------------\nN = {}".format(N))
-        ret = schnorr(N, alpha_high, c_low, 5, timer)
+
+        timer.start()
+        ret = schnorr(N, alpha_high, c_low, 5)
+        overall = timer.stop()
+        ret.append(overall)
+        logging.warning("Overall runtime: {} seconds".format(overall))
+
         timing[bits] = ret
+
+    with open("./timing/" + current_date+current_time + '.pkl', 'wb') as fp:
+        pickle.dump(timing, fp)
 
 
 if __name__ == "__main__":

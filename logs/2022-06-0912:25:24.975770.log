@@ -1,0 +1,1264 @@
+------------------------------------------------------------------------
+N = 608197
+Time for generating prime basis: 0.0001468870000280731 seconds
+prime base: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79]
+dimension: 22
+Basis matrix generated in 3.25290000091627e-05 seconds
+* 1 reduction runtime: 0.06913472699989143 seconds
+>>>> found new fac-realtion: (112516404, -41)
+* 2 reduction runtime: 0.06997354600002836 seconds
+>>>> found new fac-realtion: (13988520, -11)
+* 3 reduction runtime: 0.06772549900006197 seconds
+>>>> relation already exists
+* 4 reduction runtime: 0.06261696599995048 seconds
+>>>> found new fac-realtion: (72375300, -143)
+* 5 reduction runtime: 0.06756012300002112 seconds
+>>>> found new fac-realtion: (13988502, -29)
+* 6 reduction runtime: 0.06808313800001997 seconds
+>>>> found new fac-realtion: (63252425, -63)
+* 7 reduction runtime: 0.06684757900006844 seconds
+>>>> not short enough
+* 8 reduction runtime: 0.06206005800004277 seconds
+>>>> relation already exists
+* 9 reduction runtime: 0.06676693200006412 seconds
+>>>> not short enough
+* 10 reduction runtime: 0.062317001999872446 seconds
+>>>> not short enough
+* 11 reduction runtime: 0.06241732399985267 seconds
+>>>> found new fac-realtion: (279770743, 123)
+* 12 reduction runtime: 0.06827127500014285 seconds
+>>>> found new fac-realtion: (3846846172, 147)
+* 13 reduction runtime: 0.06701552899994567 seconds
+>>>> found new fac-realtion: (16421320, 1)
+* 14 reduction runtime: 0.06659894499989605 seconds
+>>>> relation already exists
+* 15 reduction runtime: 0.06260967599996548 seconds
+>>>> relation already exists
+* 16 reduction runtime: 0.06270812599996134 seconds
+>>>> not short enough
+* 17 reduction runtime: 0.0628473510000731 seconds
+>>>> not short enough
+* 18 reduction runtime: 0.06264776800003347 seconds
+>>>> not short enough
+* 19 reduction runtime: 0.0630136479999237 seconds
+>>>> relation already exists
+* 20 reduction runtime: 0.0631750899999588 seconds
+>>>> relation already exists
+* 21 reduction runtime: 0.06277886099996977 seconds
+>>>> not short enough
+* 22 reduction runtime: 0.0625782080001045 seconds
+>>>> relation already exists
+* 23 reduction runtime: 0.06284814700006791 seconds
+>>>> relation already exists
+* 24 reduction runtime: 0.06226785800004109 seconds
+>>>> not short enough
+* 25 reduction runtime: 0.06284191700001429 seconds
+>>>> not short enough
+* 26 reduction runtime: 0.061735277000025235 seconds
+>>>> not short enough
+* 27 reduction runtime: 0.0618494020000071 seconds
+>>>> not short enough
+* 28 reduction runtime: 0.0625041710000005 seconds
+>>>> relation already exists
+* 29 reduction runtime: 0.062406201999920086 seconds
+>>>> not short enough
+* 30 reduction runtime: 0.06256120600005488 seconds
+>>>> relation already exists
+* 31 reduction runtime: 0.06273762899991198 seconds
+>>>> relation already exists
+* 32 reduction runtime: 0.06281409099983648 seconds
+>>>> found new fac-realtion: (37100056, 39)
+* 33 reduction runtime: 0.06742958700010604 seconds
+>>>> found new fac-realtion: (44398326, -55)
+* 34 reduction runtime: 0.06670185899997705 seconds
+>>>> found new fac-realtion: (7906560, -1)
+* 35 reduction runtime: 0.06629124100004447 seconds
+>>>> not short enough
+* 36 reduction runtime: 0.062382095999964804 seconds
+>>>> relation already exists
+* 37 reduction runtime: 0.06248337900001388 seconds
+>>>> found new fac-realtion: (23719675, -8)
+* 38 reduction runtime: 0.06606922900004975 seconds
+>>>> not short enough
+* 39 reduction runtime: 0.0631339950000438 seconds
+>>>> not short enough
+* 40 reduction runtime: 0.061913210000057006 seconds
+>>>> found new fac-realtion: (187324351, -325)
+* 41 reduction runtime: 0.06937749900021117 seconds
+>>>> not short enough
+* 42 reduction runtime: 0.06231400199999371 seconds
+>>>> relation already exists
+* 43 reduction runtime: 0.062219776000119964 seconds
+>>>> found new fac-realtion: (76024544, -81)
+* 44 reduction runtime: 0.06824973400011913 seconds
+>>>> not short enough
+* 45 reduction runtime: 0.062063538000074914 seconds
+>>>> relation already exists
+* 46 reduction runtime: 0.061849006000102236 seconds
+>>>> relation already exists
+* 47 reduction runtime: 0.06194826099999773 seconds
+>>>> found new fac-realtion: (28585282, 23)
+* 48 reduction runtime: 0.06838626600006137 seconds
+>>>> relation already exists
+* 49 reduction runtime: 0.06254131799983043 seconds
+>>>> not short enough
+* 50 reduction runtime: 0.06194397600006596 seconds
+>>>> found new fac-realtion: (144142702, 13)
+* 51 reduction runtime: 0.06712506700000631 seconds
+>>>> not short enough
+* 52 reduction runtime: 0.06126049900012731 seconds
+>>>> not short enough
+* 53 reduction runtime: 0.06121496299988394 seconds
+>>>> relation already exists
+* 54 reduction runtime: 0.060804491999988386 seconds
+>>>> found new fac-realtion: (24327901, 21)
+* 55 reduction runtime: 0.06694966899999599 seconds
+>>>> relation already exists
+* 56 reduction runtime: 0.0625658649998968 seconds
+>>>> relation already exists
+* 57 reduction runtime: 0.06200789700005771 seconds
+>>>> relation already exists
+* 58 reduction runtime: 0.06291011099983734 seconds
+>>>> not short enough
+* 59 reduction runtime: 0.0610083469998699 seconds
+>>>> found new fac-realtion: (11555775, 32)
+* 60 reduction runtime: 0.06669108999994933 seconds
+>>>> not short enough
+* 61 reduction runtime: 0.06203886900016187 seconds
+>>>> relation already exists
+* 62 reduction runtime: 0.06171181600007003 seconds
+>>>> relation already exists
+* 63 reduction runtime: 0.0621773520001625 seconds
+>>>> found new fac-realtion: (29801629, -24)
+* 64 reduction runtime: 0.06762975199990251 seconds
+>>>> found new fac-realtion: (546769080, -23)
+* 65 reduction runtime: 0.06750964799994108 seconds
+>>>> not short enough
+* 66 reduction runtime: 0.061667371000112325 seconds
+>>>> not short enough
+* 67 reduction runtime: 0.06325093400005244 seconds
+>>>> relation already exists
+* 68 reduction runtime: 0.06158407300017643 seconds
+>>>> found new fac-realtion: (107650910, 41)
+* 69 reduction runtime: 0.06603679299996656 seconds
+>>>> relation already exists
+* 70 reduction runtime: 0.06179903099996409 seconds
+>>>> not short enough
+* 71 reduction runtime: 0.06211754500009192 seconds
+>>>> found new fac-realtion: (52304967, 25)
+* 72 reduction runtime: 0.06975553400002354 seconds
+>>>> relation already exists
+* 73 reduction runtime: 0.06254294599989407 seconds
+>>>> relation already exists
+* 74 reduction runtime: 0.061840623000080086 seconds
+>>>> relation already exists
+* 75 reduction runtime: 0.06220522500007064 seconds
+>>>> not short enough
+* 76 reduction runtime: 0.06222414299986667 seconds
+>>>> not short enough
+* 77 reduction runtime: 0.06138418799991996 seconds
+>>>> not short enough
+* 78 reduction runtime: 0.06169981499988353 seconds
+>>>> relation already exists
+* 79 reduction runtime: 0.06310467799994512 seconds
+>>>> relation already exists
+* 80 reduction runtime: 0.06179025399978855 seconds
+>>>> relation already exists
+* 81 reduction runtime: 0.061619575999884546 seconds
+>>>> relation already exists
+* 82 reduction runtime: 0.061515872999962085 seconds
+>>>> relation already exists
+* 83 reduction runtime: 0.06154954699991322 seconds
+>>>> relation already exists
+* 84 reduction runtime: 0.06212253699982284 seconds
+>>>> relation already exists
+* 85 reduction runtime: 0.061722275000192894 seconds
+>>>> not short enough
+* 86 reduction runtime: 0.06329486100003123 seconds
+>>>> relation already exists
+* 87 reduction runtime: 0.06221574599999258 seconds
+>>>> relation already exists
+* 88 reduction runtime: 0.0631640700000844 seconds
+>>>> relation already exists
+* 89 reduction runtime: 0.06237256700001126 seconds
+>>>> relation already exists
+* 90 reduction runtime: 0.06145350499991764 seconds
+>>>> not short enough
+* 91 reduction runtime: 0.061440103999984785 seconds
+>>>> relation already exists
+* 92 reduction runtime: 0.06144174199994268 seconds
+>>>> relation already exists
+* 93 reduction runtime: 0.061828101999935825 seconds
+>>>> relation already exists
+* 94 reduction runtime: 0.061829726000041774 seconds
+>>>> found new fac-realtion: (69334447, -11)
+* 95 reduction runtime: 0.06656221100001858 seconds
+>>>> found new fac-realtion: (46831200, 31)
+Found n+2 relations in 6.0616253949999646 seconds
+Solution space is [[1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1],
+ [0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0],
+ [0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1]]
+* C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+>> gcd(N, a+b): 1, gcd(N, a-b): 1
+* C = [0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1]
+>> gcd(N, a+b): 608197, gcd(N, a-b): 608197
+* C = [0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0]
+>> gcd(N, a+b): 608197, gcd(N, a-b): 608197
+* C = [0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1]
+>> gcd(N, a+b): 1, gcd(N, a-b): 1
+* C = [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1]
+>> gcd(N, a+b): 823, gcd(N, a-b): 823
+Time find a non-trivial solution to linear equations: 0.47453507499994885 seconds
+Overall runtime: 6.536684530999992 seconds
+------------------------------------------------------------------------
+N = 551987
+Time for generating prime basis: 7.771500008857402e-05 seconds
+prime base: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79]
+dimension: 22
+Basis matrix generated in 3.165799989801599e-05 seconds
+* 1 reduction runtime: 0.07498020299999553 seconds
+>>>> found new fac-realtion: (13247675, -13)
+* 2 reduction runtime: 0.07251643899985538 seconds
+>>>> found new fac-realtion: (46918872, -23)
+* 3 reduction runtime: 0.06976761599980819 seconds
+>>>> not short enough
+* 4 reduction runtime: 0.06468083499999011 seconds
+>>>> not short enough
+* 5 reduction runtime: 0.06435900600013156 seconds
+>>>> not short enough
+* 6 reduction runtime: 0.06429778500000793 seconds
+>>>> relation already exists
+* 7 reduction runtime: 0.0645705239999188 seconds
+>>>> found new fac-realtion: (18767565, 7)
+* 8 reduction runtime: 0.07059361400001762 seconds
+>>>> found new fac-realtion: (16007589, -34)
+* 9 reduction runtime: 0.0695627150000746 seconds
+>>>> not short enough
+* 10 reduction runtime: 0.06405865800002175 seconds
+>>>> not short enough
+* 11 reduction runtime: 0.06456288799995491 seconds
+>>>> found new fac-realtion: (25943400, 11)
+* 12 reduction runtime: 0.0696819670001787 seconds
+>>>> found new fac-realtion: (107637332, -133)
+* 13 reduction runtime: 0.06899343600002794 seconds
+>>>> not short enough
+* 14 reduction runtime: 0.06372478399998727 seconds
+>>>> not short enough
+* 15 reduction runtime: 0.06488681900009396 seconds
+>>>> relation already exists
+* 16 reduction runtime: 0.0651418370000556 seconds
+>>>> relation already exists
+* 17 reduction runtime: 0.06484875599994666 seconds
+>>>> found new fac-realtion: (58510595, -27)
+* 18 reduction runtime: 0.0690051520000452 seconds
+>>>> found new fac-realtion: (16559609, -1)
+* 19 reduction runtime: 0.06868189700003313 seconds
+>>>> not short enough
+* 20 reduction runtime: 0.06544284000005973 seconds
+>>>> not short enough
+* 21 reduction runtime: 0.06390319300021474 seconds
+>>>> relation already exists
+* 22 reduction runtime: 0.0633196339999813 seconds
+>>>> not short enough
+* 23 reduction runtime: 0.06425520300012977 seconds
+>>>> found new fac-realtion: (29255345, 34)
+* 24 reduction runtime: 0.06888052700014669 seconds
+>>>> not short enough
+* 25 reduction runtime: 0.06410122000011143 seconds
+>>>> found new fac-realtion: (22631488, 21)
+* 26 reduction runtime: 0.06964192100008404 seconds
+>>>> not short enough
+* 27 reduction runtime: 0.06423077800013743 seconds
+>>>> found new fac-realtion: (20423494, -25)
+* 28 reduction runtime: 0.06853403399986746 seconds
+>>>> not short enough
+* 29 reduction runtime: 0.06578543199998421 seconds
+>>>> relation already exists
+* 30 reduction runtime: 0.06432248999999501 seconds
+>>>> found new fac-realtion: (26495425, 49)
+* 31 reduction runtime: 0.07278849399995124 seconds
+>>>> found new fac-realtion: (4415885, -11)
+* 32 reduction runtime: 0.07146049800007859 seconds
+>>>> not short enough
+* 33 reduction runtime: 0.06439272299985532 seconds
+>>>> relation already exists
+* 34 reduction runtime: 0.06397282300008555 seconds
+>>>> not short enough
+* 35 reduction runtime: 0.06425435100004506 seconds
+>>>> found new fac-realtion: (27047372, 9)
+* 36 reduction runtime: 0.06777345999989848 seconds
+>>>> found new fac-realtion: (282065652, 295)
+* 37 reduction runtime: 0.06711519800001042 seconds
+>>>> relation already exists
+* 38 reduction runtime: 0.063458214000093 seconds
+>>>> relation already exists
+* 39 reduction runtime: 0.06407483199996022 seconds
+>>>> found new fac-realtion: (218034894, 29)
+* 40 reduction runtime: 0.06869262800000797 seconds
+>>>> found new fac-realtion: (64030551, 59)
+* 41 reduction runtime: 0.06809107599997333 seconds
+>>>> relation already exists
+* 42 reduction runtime: 0.0636808959998234 seconds
+>>>> relation already exists
+* 43 reduction runtime: 0.06342598299988822 seconds
+>>>> relation already exists
+* 44 reduction runtime: 0.06341687600001933 seconds
+>>>> relation already exists
+* 45 reduction runtime: 0.06305549099988639 seconds
+>>>> not short enough
+* 46 reduction runtime: 0.06412328999999772 seconds
+>>>> not short enough
+* 47 reduction runtime: 0.06476992900002188 seconds
+>>>> found new fac-realtion: (73414275, 4)
+* 48 reduction runtime: 0.0676343640000141 seconds
+>>>> relation already exists
+* 49 reduction runtime: 0.0635411099999601 seconds
+>>>> relation already exists
+* 50 reduction runtime: 0.06374916300001132 seconds
+>>>> relation already exists
+* 51 reduction runtime: 0.06268582099983178 seconds
+>>>> found new fac-realtion: (368175654, 325)
+* 52 reduction runtime: 0.06757906799998636 seconds
+>>>> relation already exists
+* 53 reduction runtime: 0.06357180500003778 seconds
+>>>> relation already exists
+* 54 reduction runtime: 0.06382916699999441 seconds
+>>>> not short enough
+* 55 reduction runtime: 0.06391852100000506 seconds
+>>>> relation already exists
+* 56 reduction runtime: 0.06399987600002532 seconds
+>>>> relation already exists
+* 57 reduction runtime: 0.06409405799990964 seconds
+>>>> relation already exists
+* 58 reduction runtime: 0.06363891800015153 seconds
+>>>> not short enough
+* 59 reduction runtime: 0.06308701499983727 seconds
+>>>> relation already exists
+* 60 reduction runtime: 0.0639136720001261 seconds
+>>>> relation already exists
+* 61 reduction runtime: 0.06368741699998282 seconds
+>>>> relation already exists
+* 62 reduction runtime: 0.06474354800002402 seconds
+>>>> found new fac-realtion: (44710952, 5)
+* 63 reduction runtime: 0.07070017299997744 seconds
+>>>> relation already exists
+* 64 reduction runtime: 0.0636058029999731 seconds
+>>>> relation already exists
+* 65 reduction runtime: 0.06416776199989727 seconds
+>>>> relation already exists
+* 66 reduction runtime: 0.06416940899998735 seconds
+>>>> relation already exists
+* 67 reduction runtime: 0.06389706200002365 seconds
+>>>> not short enough
+* 68 reduction runtime: 0.06387709700015876 seconds
+>>>> not short enough
+* 69 reduction runtime: 0.06388832499987984 seconds
+>>>> relation already exists
+* 70 reduction runtime: 0.06534305000013774 seconds
+>>>> relation already exists
+* 71 reduction runtime: 0.06407636099993397 seconds
+>>>> relation already exists
+* 72 reduction runtime: 0.06624918299985438 seconds
+>>>> relation already exists
+* 73 reduction runtime: 0.06369672099981472 seconds
+>>>> relation already exists
+* 74 reduction runtime: 0.0636008579999725 seconds
+>>>> found new fac-realtion: (156764361, 53)
+* 75 reduction runtime: 0.06910458400011521 seconds
+>>>> not short enough
+* 76 reduction runtime: 0.06388595599992186 seconds
+>>>> relation already exists
+* 77 reduction runtime: 0.06415764400003354 seconds
+>>>> not short enough
+* 78 reduction runtime: 0.06521864999990612 seconds
+>>>> found new fac-realtion: (16007625, 2)
+* 79 reduction runtime: 0.06819881800015537 seconds
+>>>> relation already exists
+* 80 reduction runtime: 0.0650527029999921 seconds
+>>>> relation already exists
+* 81 reduction runtime: 0.06430770899987692 seconds
+>>>> relation already exists
+* 82 reduction runtime: 0.06379748299991661 seconds
+>>>> relation already exists
+* 83 reduction runtime: 0.06396388699999989 seconds
+>>>> relation already exists
+* 84 reduction runtime: 0.06431657100006305 seconds
+>>>> found new fac-realtion: (39191103, 26)
+* 85 reduction runtime: 0.06864300500001264 seconds
+>>>> not short enough
+* 86 reduction runtime: 0.06417869300003076 seconds
+>>>> found new fac-realtion: (203131071, -145)
+Found n+2 relations in 5.664212977000034 seconds
+Solution space is [[0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1],
+ [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+ [0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1]]
+* C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+>> gcd(N, a+b): 1, gcd(N, a-b): 1
+* C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1]
+>> gcd(N, a+b): 991, gcd(N, a-b): 991
+Time find a non-trivial solution to linear equations: 0.00937826600011249 seconds
+Overall runtime: 5.674086863999946 seconds
+------------------------------------------------------------------------
+N = 2766641
+Time for generating prime basis: 0.00010833900000761787 seconds
+prime base: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89]
+dimension: 24
+Basis matrix generated in 6.549299996549962e-05 seconds
+* 1 reduction runtime: 0.0840592239999296 seconds
+>>>> not short enough
+* 2 reduction runtime: 0.0775786369999878 seconds
+>>>> found new fac-realtion: (318163664, -51)
+* 3 reduction runtime: 0.08157107900001392 seconds
+>>>> not short enough
+* 4 reduction runtime: 0.0766954360001364 seconds
+>>>> not short enough
+* 5 reduction runtime: 0.07742336599994815 seconds
+>>>> found new fac-realtion: (19142396336, 7257)
+* 6 reduction runtime: 0.08189782299996295 seconds
+>>>> found new fac-realtion: (251764225, -106)
+* 7 reduction runtime: 0.08289018200002829 seconds
+>>>> found new fac-realtion: (2866240245, 169)
+* 8 reduction runtime: 0.08180119700000432 seconds
+>>>> not short enough
+* 9 reduction runtime: 0.07711171699997976 seconds
+>>>> found new fac-realtion: (113432280, -1)
+* 10 reduction runtime: 0.08080170199991699 seconds
+>>>> found new fac-realtion: (92889987696, 16121)
+* 11 reduction runtime: 0.08075133800002732 seconds
+>>>> not short enough
+* 12 reduction runtime: 0.07667239200009135 seconds
+>>>> not short enough
+* 13 reduction runtime: 0.07589240599986624 seconds
+>>>> not short enough
+* 14 reduction runtime: 0.07654916599994976 seconds
+>>>> found new fac-realtion: (196431500, -11)
+* 15 reduction runtime: 0.08090556299998752 seconds
+>>>> not short enough
+* 16 reduction runtime: 0.07685955500005548 seconds
+>>>> found new fac-realtion: (677826873, -172)
+* 17 reduction runtime: 0.08017973099981646 seconds
+>>>> not short enough
+* 18 reduction runtime: 0.07690714399996068 seconds
+>>>> not short enough
+* 19 reduction runtime: 0.07607957300001544 seconds
+>>>> relation already exists
+* 20 reduction runtime: 0.07650778700008232 seconds
+>>>> not short enough
+* 21 reduction runtime: 0.07846242699997674 seconds
+>>>> found new fac-realtion: (309863811, 19)
+* 22 reduction runtime: 0.08150178200003211 seconds
+>>>> not short enough
+* 23 reduction runtime: 0.07630824700004268 seconds
+>>>> found new fac-realtion: (17139342142, 1147)
+* 24 reduction runtime: 0.08115856199992777 seconds
+>>>> not short enough
+* 25 reduction runtime: 0.07652697900016392 seconds
+>>>> not short enough
+* 26 reduction runtime: 0.0763970769999105 seconds
+>>>> not short enough
+* 27 reduction runtime: 0.07639420100008465 seconds
+>>>> not short enough
+* 28 reduction runtime: 0.07592207199991208 seconds
+>>>> found new fac-realtion: (118965600, 37)
+* 29 reduction runtime: 0.0822901340000044 seconds
+>>>> found new fac-realtion: (1103889611, -148)
+* 30 reduction runtime: 0.08258107099982226 seconds
+>>>> relation already exists
+* 31 reduction runtime: 0.07722177699997701 seconds
+>>>> found new fac-realtion: (1402686875, -112)
+* 32 reduction runtime: 0.08177421499999582 seconds
+>>>> relation already exists
+* 33 reduction runtime: 0.0767254889999549 seconds
+>>>> found new fac-realtion: (307097180, 29)
+* 34 reduction runtime: 0.08281944700001986 seconds
+>>>> relation already exists
+* 35 reduction runtime: 0.07738027300001704 seconds
+>>>> not short enough
+* 36 reduction runtime: 0.07868473899998207 seconds
+>>>> found new fac-realtion: (179831729, 64)
+* 37 reduction runtime: 0.0818612260000009 seconds
+>>>> not short enough
+* 38 reduction runtime: 0.07646245299997645 seconds
+>>>> not short enough
+* 39 reduction runtime: 0.07677731600006155 seconds
+>>>> relation already exists
+* 40 reduction runtime: 0.07662301900018065 seconds
+>>>> not short enough
+* 41 reduction runtime: 0.0794586890001483 seconds
+>>>> not short enough
+* 42 reduction runtime: 0.07646787899989249 seconds
+>>>> relation already exists
+* 43 reduction runtime: 0.07690839200017763 seconds
+>>>> not short enough
+* 44 reduction runtime: 0.07765123000012863 seconds
+>>>> relation already exists
+* 45 reduction runtime: 0.0772241130000566 seconds
+>>>> found new fac-realtion: (1463553056, -33)
+* 46 reduction runtime: 0.08144116599987683 seconds
+>>>> found new fac-realtion: (4570490425, -507)
+* 47 reduction runtime: 0.08260075500015773 seconds
+>>>> found new fac-realtion: (246230985, -64)
+* 48 reduction runtime: 0.08156193800004985 seconds
+>>>> not short enough
+* 49 reduction runtime: 0.07880059300009634 seconds
+>>>> not short enough
+* 50 reduction runtime: 0.07630614599997898 seconds
+>>>> found new fac-realtion: (15844556000, 2993)
+* 51 reduction runtime: 0.08079448700004832 seconds
+>>>> not short enough
+* 52 reduction runtime: 0.07750038999984099 seconds
+>>>> relation already exists
+* 53 reduction runtime: 0.07725344100003895 seconds
+>>>> found new fac-realtion: (1336287550, -53)
+* 54 reduction runtime: 0.08287864800013267 seconds
+>>>> not short enough
+* 55 reduction runtime: 0.07668567499990786 seconds
+>>>> found new fac-realtion: (307097095, -56)
+* 56 reduction runtime: 0.0831117269999595 seconds
+>>>> relation already exists
+* 57 reduction runtime: 0.0762489999999616 seconds
+>>>> not short enough
+* 58 reduction runtime: 0.07593379700006153 seconds
+>>>> relation already exists
+* 59 reduction runtime: 0.07605029000001196 seconds
+>>>> not short enough
+* 60 reduction runtime: 0.0769296599999052 seconds
+>>>> relation already exists
+* 61 reduction runtime: 0.07613317799996366 seconds
+>>>> not short enough
+* 62 reduction runtime: 0.07624370300004557 seconds
+>>>> found new fac-realtion: (18577993964, -351)
+* 63 reduction runtime: 0.08089815900007125 seconds
+>>>> not short enough
+* 64 reduction runtime: 0.07634918500002641 seconds
+>>>> not short enough
+* 65 reduction runtime: 0.07600939799999651 seconds
+>>>> found new fac-realtion: (1881315579, -301)
+* 66 reduction runtime: 0.08220312100002047 seconds
+>>>> not short enough
+* 67 reduction runtime: 0.07767785099986213 seconds
+>>>> relation already exists
+* 68 reduction runtime: 0.076335083999993 seconds
+>>>> found new fac-realtion: (1209022320, 203)
+* 69 reduction runtime: 0.08403443900010643 seconds
+>>>> found new fac-realtion: (179831618, -47)
+* 70 reduction runtime: 0.08204684399993312 seconds
+>>>> not short enough
+* 71 reduction runtime: 0.07667468600016036 seconds
+>>>> found new fac-realtion: (45370137384, -8375)
+Found n+2 relations in 5.602736217000029 seconds
+Solution space is [[1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0,
+  1, 0],
+ [0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1,
+  0, 1],
+ [0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0,
+  1, 0],
+ [0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1,
+  1, 1]]
+* C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 0]
+>> gcd(N, a+b): 1, gcd(N, a-b): 1
+* C = [0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1,
+ 1]
+>> gcd(N, a+b): 1511, gcd(N, a-b): 1511
+Time find a non-trivial solution to linear equations: 0.011171283000066978 seconds
+Overall runtime: 5.614566024999931 seconds
+------------------------------------------------------------------------
+N = 1251137
+Time for generating prime basis: 0.0001766499999575899 seconds
+prime base: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83]
+dimension: 23
+Basis matrix generated in 3.592799998841656e-05 seconds
+* 1 reduction runtime: 0.07830155800002103 seconds
+>>>> not short enough
+* 2 reduction runtime: 0.07155355199984115 seconds
+>>>> not short enough
+* 3 reduction runtime: 0.07127092999985507 seconds
+>>>> found new fac-realtion: (2175727320, 77)
+* 4 reduction runtime: 0.07595017099993129 seconds
+>>>> not short enough
+* 5 reduction runtime: 0.07082792500000323 seconds
+>>>> relation already exists
+* 6 reduction runtime: 0.06990442000005714 seconds
+>>>> found new fac-realtion: (1047201454, -215)
+* 7 reduction runtime: 0.07482975499988243 seconds
+>>>> not short enough
+* 8 reduction runtime: 0.06993696299991825 seconds
+>>>> not short enough
+* 9 reduction runtime: 0.0702912550000292 seconds
+>>>> found new fac-realtion: (102593271, 37)
+* 10 reduction runtime: 0.0776411320000534 seconds
+>>>> not short enough
+* 11 reduction runtime: 0.07117945200002396 seconds
+>>>> found new fac-realtion: (27525015, 1)
+* 12 reduction runtime: 0.07564083100010066 seconds
+>>>> not short enough
+* 13 reduction runtime: 0.06979931299997588 seconds
+>>>> not short enough
+* 14 reduction runtime: 0.06936688399991908 seconds
+>>>> not short enough
+* 15 reduction runtime: 0.06998299599990787 seconds
+>>>> not short enough
+* 16 reduction runtime: 0.06962160699981723 seconds
+>>>> found new fac-realtion: (461669572, 19)
+* 17 reduction runtime: 0.07527691500013134 seconds
+>>>> not short enough
+* 18 reduction runtime: 0.07062406199997895 seconds
+>>>> found new fac-realtion: (8006022112, -3551)
+* 19 reduction runtime: 0.07504048400005559 seconds
+>>>> not short enough
+* 20 reduction runtime: 0.07055660199989688 seconds
+>>>> found new fac-realtion: (1720313504, 129)
+* 21 reduction runtime: 0.07609499599993796 seconds
+>>>> found new fac-realtion: (53798888, -3)
+* 22 reduction runtime: 0.07685757700005524 seconds
+>>>> not short enough
+* 23 reduction runtime: 0.07106031300008908 seconds
+>>>> found new fac-realtion: (78821600, -31)
+* 24 reduction runtime: 0.07620575500004634 seconds
+>>>> not short enough
+* 25 reduction runtime: 0.071623468000098 seconds
+>>>> found new fac-realtion: (2828820940, 183)
+* 26 reduction runtime: 0.0773041039999498 seconds
+>>>> not short enough
+* 27 reduction runtime: 0.07023826299996472 seconds
+>>>> found new fac-realtion: (1342469700, -301)
+* 28 reduction runtime: 0.07475179400012166 seconds
+>>>> not short enough
+* 29 reduction runtime: 0.07145429800016245 seconds
+>>>> relation already exists
+* 30 reduction runtime: 0.06891578900012973 seconds
+>>>> found new fac-realtion: (1510122375, 16)
+* 31 reduction runtime: 0.07599723700013783 seconds
+>>>> not short enough
+* 32 reduction runtime: 0.07093258399982005 seconds
+>>>> found new fac-realtion: (1087237840, -213)
+* 33 reduction runtime: 0.07536501599997791 seconds
+>>>> not short enough
+* 34 reduction runtime: 0.07017562500004715 seconds
+>>>> found new fac-realtion: (80072839, 71)
+* 35 reduction runtime: 0.07560550699986379 seconds
+>>>> found new fac-realtion: (2793789792, 871)
+* 36 reduction runtime: 0.0791191069999968 seconds
+>>>> found new fac-realtion: (701887895, 38)
+* 37 reduction runtime: 0.07899530899999263 seconds
+>>>> found new fac-realtion: (1669016905, 147)
+* 38 reduction runtime: 0.07893325800000639 seconds
+>>>> not short enough
+* 39 reduction runtime: 0.07152877600015017 seconds
+>>>> relation already exists
+* 40 reduction runtime: 0.06977809499994692 seconds
+>>>> not short enough
+* 41 reduction runtime: 0.07019215100012843 seconds
+>>>> relation already exists
+* 42 reduction runtime: 0.0699140979997992 seconds
+>>>> relation already exists
+* 43 reduction runtime: 0.07009820300004321 seconds
+>>>> not short enough
+* 44 reduction runtime: 0.07235006700011581 seconds
+>>>> found new fac-realtion: (2618629675, -66)
+* 45 reduction runtime: 0.07661111199990955 seconds
+>>>> not short enough
+* 46 reduction runtime: 0.07018368399985775 seconds
+>>>> not short enough
+* 47 reduction runtime: 0.07043605600006231 seconds
+>>>> relation already exists
+* 48 reduction runtime: 0.07020605399998203 seconds
+>>>> relation already exists
+* 49 reduction runtime: 0.0697130290000132 seconds
+>>>> found new fac-realtion: (43789824, 29)
+* 50 reduction runtime: 0.0757330120000006 seconds
+>>>> not short enough
+* 51 reduction runtime: 0.07146406299989394 seconds
+>>>> found new fac-realtion: (166401056, -165)
+* 52 reduction runtime: 0.07762053400006153 seconds
+>>>> found new fac-realtion: (178912780, 189)
+* 53 reduction runtime: 0.07841929699998218 seconds
+>>>> not short enough
+* 54 reduction runtime: 0.07014385699994818 seconds
+>>>> not short enough
+* 55 reduction runtime: 0.07011366899996574 seconds
+>>>> found new fac-realtion: (4142515375, 768)
+* 56 reduction runtime: 0.07556868200003919 seconds
+>>>> not short enough
+* 57 reduction runtime: 0.07002014499994402 seconds
+>>>> not short enough
+* 58 reduction runtime: 0.07300356299992927 seconds
+>>>> not short enough
+* 59 reduction runtime: 0.07048061799991956 seconds
+>>>> found new fac-realtion: (4245107680, -161)
+* 60 reduction runtime: 0.07529141000009076 seconds
+>>>> not short enough
+* 61 reduction runtime: 0.07093641500000558 seconds
+>>>> found new fac-realtion: (1022178465, -464)
+* 62 reduction runtime: 0.07479335800007902 seconds
+>>>> not short enough
+* 63 reduction runtime: 0.06989950799993494 seconds
+>>>> relation already exists
+* 64 reduction runtime: 0.06989291800005049 seconds
+>>>> found new fac-realtion: (61305660, -53)
+Found n+2 relations in 4.676529377999941 seconds
+Solution space is [[1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1,
+  1],
+ [0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1,
+  1],
+ [0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1,
+  1],
+ [0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1,
+  1]]
+* C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+>> gcd(N, a+b): 1, gcd(N, a-b): 1
+* C = [0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1]
+>> gcd(N, a+b): 1087, gcd(N, a-b): 1087
+Time find a non-trivial solution to linear equations: 0.01026742999988528 seconds
+Overall runtime: 4.687434483999823 seconds
+------------------------------------------------------------------------
+N = 10767803
+Time for generating prime basis: 0.00011781000011978904 seconds
+prime base: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109]
+dimension: 29
+Basis matrix generated in 7.786899982420437e-05 seconds
+* 1 reduction runtime: 0.12251351899999463 seconds
+>>>> found new fac-realtion: (8334279415, -107)
+* 2 reduction runtime: 0.11961760899998808 seconds
+>>>> found new fac-realtion: (1970507980, 31)
+* 3 reduction runtime: 0.12051146800013157 seconds
+>>>> not short enough
+* 4 reduction runtime: 0.11504054500005623 seconds
+>>>> not short enough
+* 5 reduction runtime: 0.11655858999984048 seconds
+>>>> found new fac-realtion: (75374624, 3)
+* 6 reduction runtime: 0.1189453259999027 seconds
+>>>> not short enough
+* 7 reduction runtime: 0.11249793899992255 seconds
+>>>> relation already exists
+* 8 reduction runtime: 0.1120444379998844 seconds
+>>>> relation already exists
+* 9 reduction runtime: 0.11428819700017812 seconds
+>>>> found new fac-realtion: (1593634825, -19)
+* 10 reduction runtime: 0.12401500800001486 seconds
+>>>> found new fac-realtion: (4500941553, -101)
+* 11 reduction runtime: 0.1185057269999561 seconds
+>>>> found new fac-realtion: (570693552, -7)
+* 12 reduction runtime: 0.11886157200001435 seconds
+>>>> found new fac-realtion: (63077791725, 1751)
+* 13 reduction runtime: 0.11887376899994706 seconds
+>>>> not short enough
+* 14 reduction runtime: 0.13108617200009576 seconds
+>>>> found new fac-realtion: (167708531716, -9)
+* 15 reduction runtime: 0.1189043499998661 seconds
+>>>> relation already exists
+* 16 reduction runtime: 0.11282179299996642 seconds
+>>>> found new fac-realtion: (1378278909, 125)
+* 17 reduction runtime: 0.11761122400002932 seconds
+>>>> not short enough
+* 18 reduction runtime: 0.11370922900005098 seconds
+>>>> not short enough
+* 19 reduction runtime: 0.11425942500000019 seconds
+>>>> not short enough
+* 20 reduction runtime: 0.11185024900009921 seconds
+>>>> not short enough
+* 21 reduction runtime: 0.11205310200011809 seconds
+>>>> not short enough
+* 22 reduction runtime: 0.11122914399993533 seconds
+>>>> not short enough
+* 23 reduction runtime: 0.11198849599986715 seconds
+>>>> not short enough
+* 24 reduction runtime: 0.11385213899984592 seconds
+>>>> not short enough
+* 25 reduction runtime: 0.11325393800007078 seconds
+>>>> relation already exists
+* 26 reduction runtime: 0.11329387499995391 seconds
+>>>> relation already exists
+* 27 reduction runtime: 0.11421520399994733 seconds
+>>>> not short enough
+* 28 reduction runtime: 0.11364863199992215 seconds
+>>>> relation already exists
+* 29 reduction runtime: 0.11402102099987133 seconds
+>>>> found new fac-realtion: (19048243500, -7)
+* 30 reduction runtime: 0.12002370599998358 seconds
+>>>> relation already exists
+* 31 reduction runtime: 0.11301344100002098 seconds
+>>>> not short enough
+* 32 reduction runtime: 0.11307666799984872 seconds
+>>>> not short enough
+* 33 reduction runtime: 0.11313375999998243 seconds
+>>>> relation already exists
+* 34 reduction runtime: 0.11160399599998527 seconds
+>>>> not short enough
+* 35 reduction runtime: 0.11250638000001345 seconds
+>>>> not short enough
+* 36 reduction runtime: 0.11457312499987893 seconds
+>>>> not short enough
+* 37 reduction runtime: 0.11254518900000221 seconds
+>>>> relation already exists
+* 38 reduction runtime: 0.1114580720000049 seconds
+>>>> not short enough
+* 39 reduction runtime: 0.11106307799991555 seconds
+>>>> not short enough
+* 40 reduction runtime: 0.11269877599988831 seconds
+>>>> relation already exists
+* 41 reduction runtime: 0.11100202300008277 seconds
+>>>> not short enough
+* 42 reduction runtime: 0.11278062999986105 seconds
+>>>> found new fac-realtion: (25939637360, -67)
+* 43 reduction runtime: 0.11918791199991574 seconds
+>>>> found new fac-realtion: (47399871155, 2349)
+* 44 reduction runtime: 0.12016756800016992 seconds
+>>>> found new fac-realtion: (829120860, 29)
+* 45 reduction runtime: 0.12073220599995693 seconds
+>>>> not short enough
+* 46 reduction runtime: 0.11336402200004159 seconds
+>>>> not short enough
+* 47 reduction runtime: 0.11249491600005967 seconds
+>>>> not short enough
+* 48 reduction runtime: 0.11255453400008264 seconds
+>>>> not short enough
+* 49 reduction runtime: 0.11238796199995704 seconds
+>>>> relation already exists
+* 50 reduction runtime: 0.11471451299985347 seconds
+>>>> relation already exists
+* 51 reduction runtime: 0.11233142000014595 seconds
+>>>> found new fac-realtion: (249996082336, 85)
+* 52 reduction runtime: 0.12252431399997477 seconds
+>>>> not short enough
+* 53 reduction runtime: 0.1141760800001066 seconds
+>>>> relation already exists
+* 54 reduction runtime: 0.11368406800011144 seconds
+>>>> not short enough
+* 55 reduction runtime: 0.11454475599998659 seconds
+>>>> not short enough
+* 56 reduction runtime: 0.11494390200005 seconds
+>>>> not short enough
+* 57 reduction runtime: 0.11468649899984484 seconds
+>>>> found new fac-realtion: (118445831, -2)
+* 58 reduction runtime: 0.12509368699988954 seconds
+>>>> found new fac-realtion: (50791726986, 235)
+* 59 reduction runtime: 0.12364506900007655 seconds
+>>>> not short enough
+* 60 reduction runtime: 0.11762805800003662 seconds
+>>>> relation already exists
+* 61 reduction runtime: 0.11934275499993419 seconds
+>>>> relation already exists
+* 62 reduction runtime: 0.11912464900001396 seconds
+>>>> found new fac-realtion: (958334464, -3)
+* 63 reduction runtime: 0.1266672120000294 seconds
+>>>> not short enough
+* 64 reduction runtime: 0.1145279740001115 seconds
+>>>> found new fac-realtion: (8560403488, 103)
+* 65 reduction runtime: 0.1253593390001697 seconds
+>>>> relation already exists
+* 66 reduction runtime: 0.11601195399998687 seconds
+>>>> found new fac-realtion: (5857684965, 133)
+* 67 reduction runtime: 0.12232218999997713 seconds
+>>>> not short enough
+* 68 reduction runtime: 0.11392621999993935 seconds
+>>>> not short enough
+* 69 reduction runtime: 0.11710777499979486 seconds
+>>>> relation already exists
+* 70 reduction runtime: 0.11542680399998062 seconds
+>>>> relation already exists
+* 71 reduction runtime: 0.11588342499999271 seconds
+>>>> relation already exists
+* 72 reduction runtime: 0.117832086999897 seconds
+>>>> relation already exists
+* 73 reduction runtime: 0.1141790009999113 seconds
+>>>> not short enough
+* 74 reduction runtime: 0.11237236200008738 seconds
+>>>> relation already exists
+* 75 reduction runtime: 0.11384267400012504 seconds
+>>>> found new fac-realtion: (1819758710, 3)
+* 76 reduction runtime: 0.12347444500005622 seconds
+>>>> found new fac-realtion: (9723326470, 361)
+* 77 reduction runtime: 0.12356926799998291 seconds
+>>>> found new fac-realtion: (87919111616, 121)
+* 78 reduction runtime: 0.1238993090000804 seconds
+>>>> not short enough
+* 79 reduction runtime: 0.1141018210000766 seconds
+>>>> relation already exists
+* 80 reduction runtime: 0.11255252400019344 seconds
+>>>> found new fac-realtion: (79994009277, 790)
+* 81 reduction runtime: 0.1181141120000575 seconds
+>>>> not short enough
+* 82 reduction runtime: 0.11231615699989561 seconds
+>>>> relation already exists
+* 83 reduction runtime: 0.11231038899995838 seconds
+>>>> not short enough
+* 84 reduction runtime: 0.1142614489999687 seconds
+>>>> relation already exists
+* 85 reduction runtime: 0.11527934400010054 seconds
+>>>> not short enough
+* 86 reduction runtime: 0.11678959699997904 seconds
+>>>> found new fac-realtion: (1259832791, -160)
+* 87 reduction runtime: 0.1195176100000026 seconds
+>>>> found new fac-realtion: (1399814339, -51)
+* 88 reduction runtime: 0.1170622629999798 seconds
+>>>> not short enough
+* 89 reduction runtime: 0.11423139900011847 seconds
+>>>> not short enough
+* 90 reduction runtime: 0.11358914800007369 seconds
+>>>> not short enough
+* 91 reduction runtime: 0.11502574199994342 seconds
+>>>> not short enough
+* 92 reduction runtime: 0.11244028100009018 seconds
+>>>> not short enough
+* 93 reduction runtime: 0.11211506800009374 seconds
+>>>> relation already exists
+* 94 reduction runtime: 0.11343916900000295 seconds
+>>>> not short enough
+* 95 reduction runtime: 0.11238217799996164 seconds
+>>>> not short enough
+* 96 reduction runtime: 0.1147468439999102 seconds
+>>>> relation already exists
+* 97 reduction runtime: 0.11323776900007942 seconds
+>>>> relation already exists
+* 98 reduction runtime: 0.11200632400004906 seconds
+>>>> not short enough
+* 99 reduction runtime: 0.11187614200002827 seconds
+>>>> not short enough
+* 100 reduction runtime: 0.1131900160000896 seconds
+>>>> relation already exists
+* 101 reduction runtime: 0.11212679199979902 seconds
+>>>> not short enough
+* 102 reduction runtime: 0.1126451149998502 seconds
+>>>> relation already exists
+* 103 reduction runtime: 0.11281811599997127 seconds
+>>>> not short enough
+* 104 reduction runtime: 0.11255740199999309 seconds
+>>>> not short enough
+* 105 reduction runtime: 0.11372239499996795 seconds
+>>>> not short enough
+* 106 reduction runtime: 0.11180682799999886 seconds
+>>>> not short enough
+* 107 reduction runtime: 0.11243878999994195 seconds
+>>>> relation already exists
+* 108 reduction runtime: 0.11236870700008694 seconds
+>>>> relation already exists
+* 109 reduction runtime: 0.11401536200014561 seconds
+>>>> found new fac-realtion: (1905901228, 97)
+* 110 reduction runtime: 0.11790545000008024 seconds
+>>>> relation already exists
+* 111 reduction runtime: 0.11320865600009711 seconds
+>>>> not short enough
+* 112 reduction runtime: 0.11454161100004967 seconds
+>>>> found new fac-realtion: (104436918392, -2905)
+* 113 reduction runtime: 0.12066211100000146 seconds
+>>>> not short enough
+* 114 reduction runtime: 0.11356847799993375 seconds
+>>>> relation already exists
+* 115 reduction runtime: 0.11340752000000975 seconds
+>>>> not short enough
+* 116 reduction runtime: 0.11270538500002658 seconds
+>>>> relation already exists
+* 117 reduction runtime: 0.11301152400005776 seconds
+>>>> not short enough
+* 118 reduction runtime: 0.11438103999989835 seconds
+>>>> relation already exists
+* 119 reduction runtime: 0.11450995600011993 seconds
+>>>> not short enough
+* 120 reduction runtime: 0.11338016099989545 seconds
+>>>> relation already exists
+* 121 reduction runtime: 0.11304931300014687 seconds
+>>>> relation already exists
+* 122 reduction runtime: 0.11656482600005802 seconds
+>>>> not short enough
+* 123 reduction runtime: 0.11445506100017155 seconds
+>>>> not short enough
+* 124 reduction runtime: 0.11189690400010477 seconds
+>>>> relation already exists
+* 125 reduction runtime: 0.1120567050002137 seconds
+>>>> relation already exists
+* 126 reduction runtime: 0.11288630299986835 seconds
+>>>> not short enough
+* 127 reduction runtime: 0.11321309500021925 seconds
+>>>> not short enough
+* 128 reduction runtime: 0.11626629000011235 seconds
+>>>> relation already exists
+* 129 reduction runtime: 0.11198619400011012 seconds
+>>>> relation already exists
+* 130 reduction runtime: 0.11289322999982687 seconds
+>>>> not short enough
+* 131 reduction runtime: 0.11503722500015101 seconds
+>>>> relation already exists
+* 132 reduction runtime: 0.11314052099987748 seconds
+>>>> relation already exists
+* 133 reduction runtime: 0.11146462900001097 seconds
+>>>> not short enough
+* 134 reduction runtime: 0.11157308600013494 seconds
+>>>> not short enough
+* 135 reduction runtime: 0.11552867000000333 seconds
+>>>> not short enough
+* 136 reduction runtime: 0.11209010399988983 seconds
+>>>> relation already exists
+* 137 reduction runtime: 0.11127340099983485 seconds
+>>>> relation already exists
+* 138 reduction runtime: 0.11176882199993088 seconds
+>>>> not short enough
+* 139 reduction runtime: 0.11173889699989559 seconds
+>>>> not short enough
+* 140 reduction runtime: 0.11289498099995399 seconds
+>>>> relation already exists
+* 141 reduction runtime: 0.11221526099984658 seconds
+>>>> not short enough
+* 142 reduction runtime: 0.11428185999989182 seconds
+>>>> not short enough
+* 143 reduction runtime: 0.11216637400002583 seconds
+>>>> found new fac-realtion: (711999473120, 35351)
+* 144 reduction runtime: 0.11850541900003009 seconds
+>>>> found new fac-realtion: (439584789655, -17)
+* 145 reduction runtime: 0.1216859190001287 seconds
+>>>> found new fac-realtion: (82750565604, -451)
+* 146 reduction runtime: 0.1180273780000789 seconds
+>>>> not short enough
+* 147 reduction runtime: 0.11226839999994809 seconds
+>>>> not short enough
+* 148 reduction runtime: 0.11302551400012817 seconds
+>>>> relation already exists
+* 149 reduction runtime: 0.11387243099989064 seconds
+>>>> not short enough
+* 150 reduction runtime: 0.11258940900006564 seconds
+>>>> not short enough
+* 151 reduction runtime: 0.11339333000000806 seconds
+>>>> not short enough
+* 152 reduction runtime: 0.11224848799997744 seconds
+>>>> not short enough
+* 153 reduction runtime: 0.11201090099984867 seconds
+>>>> found new fac-realtion: (80069384685, 1577)
+Found n+2 relations in 17.649322130999963 seconds
+Solution space is [[1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1,
+  0, 0, 1, 0, 0, 0, 0],
+ [0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0,
+  1, 1, 1, 1, 1, 1, 1],
+ [0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+  1, 0, 1, 0, 1, 1, 1]]
+* C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 0, 0, 0, 0, 0, 0]
+>> gcd(N, a+b): 1, gcd(N, a-b): 1
+* C = [0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1,
+ 0, 1, 0, 1, 1, 1]
+>> gcd(N, a+b): 3221, gcd(N, a-b): 3221
+Time find a non-trivial solution to linear equations: 0.013893969999799083 seconds
+Overall runtime: 17.66413679900006 seconds
+------------------------------------------------------------------------
+N = 7933031
+Time for generating prime basis: 0.00013153100007912144 seconds
+prime base: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109]
+dimension: 29
+Basis matrix generated in 6.263399995987129e-05 seconds
+* 1 reduction runtime: 0.12364535500000784 seconds
+>>>> found new fac-realtion: (3054217244, 309)
+* 2 reduction runtime: 0.12023792100012543 seconds
+>>>> found new fac-realtion: (6933469205, 111)
+* 3 reduction runtime: 0.11960332500007098 seconds
+>>>> not short enough
+* 4 reduction runtime: 0.11466157800009569 seconds
+>>>> found new fac-realtion: (118995448, -17)
+* 5 reduction runtime: 0.12098616400021456 seconds
+>>>> found new fac-realtion: (24441670015, 1504)
+* 6 reduction runtime: 0.1197740300001442 seconds
+>>>> not short enough
+* 7 reduction runtime: 0.11163033000002542 seconds
+>>>> not short enough
+* 8 reduction runtime: 0.1119063159999314 seconds
+>>>> not short enough
+* 9 reduction runtime: 0.11155929400001696 seconds
+>>>> found new fac-realtion: (999561937, 31)
+* 10 reduction runtime: 0.12018929700002445 seconds
+>>>> found new fac-realtion: (1443811743, 101)
+* 11 reduction runtime: 0.11864773699994657 seconds
+>>>> not short enough
+* 12 reduction runtime: 0.11446607699986089 seconds
+>>>> not short enough
+* 13 reduction runtime: 0.11435704299992722 seconds
+>>>> found new fac-realtion: (5077139301, -539)
+* 14 reduction runtime: 0.11975864700002603 seconds
+>>>> not short enough
+* 15 reduction runtime: 0.11412553500008471 seconds
+>>>> not short enough
+* 16 reduction runtime: 0.11343514300006063 seconds
+>>>> found new fac-realtion: (71397277, -2)
+* 17 reduction runtime: 0.12106501300013406 seconds
+>>>> found new fac-realtion: (2832092120, 53)
+* 18 reduction runtime: 0.12248855699999694 seconds
+>>>> not short enough
+* 19 reduction runtime: 0.11434236200011583 seconds
+>>>> relation already exists
+* 20 reduction runtime: 0.11355015699996329 seconds
+>>>> found new fac-realtion: (721905816, -5)
+* 21 reduction runtime: 0.12178876899997704 seconds
+>>>> not short enough
+* 22 reduction runtime: 0.11519233099988924 seconds
+>>>> not short enough
+* 23 reduction runtime: 0.11449799299998631 seconds
+>>>> relation already exists
+* 24 reduction runtime: 0.1125232069998674 seconds
+>>>> relation already exists
+* 25 reduction runtime: 0.11282828299999892 seconds
+>>>> not short enough
+* 26 reduction runtime: 0.11412977899999532 seconds
+>>>> found new fac-realtion: (269723025, -29)
+* 27 reduction runtime: 0.12098733500010894 seconds
+>>>> not short enough
+* 28 reduction runtime: 0.11227845600001274 seconds
+>>>> not short enough
+* 29 reduction runtime: 0.11151956399999108 seconds
+>>>> not short enough
+* 30 reduction runtime: 0.11440148500014402 seconds
+>>>> not short enough
+* 31 reduction runtime: 0.11205972600009773 seconds
+>>>> found new fac-realtion: (563245200, -1)
+* 32 reduction runtime: 0.12095238999995672 seconds
+>>>> not short enough
+* 33 reduction runtime: 0.11196382799994353 seconds
+>>>> found new fac-realtion: (4942278252, -61)
+* 34 reduction runtime: 0.1185311830001865 seconds
+>>>> not short enough
+* 35 reduction runtime: 0.11231141399980515 seconds
+>>>> not short enough
+* 36 reduction runtime: 0.11218244900010177 seconds
+>>>> found new fac-realtion: (5933907005, -183)
+* 37 reduction runtime: 0.12006149900003038 seconds
+>>>> found new fac-realtion: (372852480, 23)
+* 38 reduction runtime: 0.11775150699986625 seconds
+>>>> found new fac-realtion: (2982819411, -245)
+* 39 reduction runtime: 0.11868574000004628 seconds
+>>>> not short enough
+* 40 reduction runtime: 0.11504290500010939 seconds
+>>>> found new fac-realtion: (341120360, 27)
+* 41 reduction runtime: 0.11982999299993935 seconds
+>>>> relation already exists
+* 42 reduction runtime: 0.1125574239999878 seconds
+>>>> not short enough
+* 43 reduction runtime: 0.11278156799994576 seconds
+>>>> found new fac-realtion: (531513073, -4)
+* 44 reduction runtime: 0.12260454799979925 seconds
+>>>> not short enough
+* 45 reduction runtime: 0.11227942100003929 seconds
+>>>> not short enough
+* 46 reduction runtime: 0.11383264899995993 seconds
+>>>> relation already exists
+* 47 reduction runtime: 0.11284221399978378 seconds
+>>>> not short enough
+* 48 reduction runtime: 0.11263031600014983 seconds
+>>>> not short enough
+* 49 reduction runtime: 0.11448547200006942 seconds
+>>>> not short enough
+* 50 reduction runtime: 0.1115579140000591 seconds
+>>>> not short enough
+* 51 reduction runtime: 0.11208411899997373 seconds
+>>>> found new fac-realtion: (23743560672, -1111)
+* 52 reduction runtime: 0.11875865100000738 seconds
+>>>> found new fac-realtion: (87263334, -7)
+* 53 reduction runtime: 0.12225411899999017 seconds
+>>>> not short enough
+* 54 reduction runtime: 0.11504689000003054 seconds
+>>>> not short enough
+* 55 reduction runtime: 0.11316854200003945 seconds
+>>>> found new fac-realtion: (12272399133, 176)
+* 56 reduction runtime: 0.12482053400003679 seconds
+>>>> not short enough
+* 57 reduction runtime: 0.11149929299995165 seconds
+>>>> not short enough
+* 58 reduction runtime: 0.11569386100018164 seconds
+>>>> relation already exists
+* 59 reduction runtime: 0.11104640100006691 seconds
+>>>> not short enough
+* 60 reduction runtime: 0.11073957799999334 seconds
+>>>> not short enough
+* 61 reduction runtime: 0.11086014300008173 seconds
+>>>> found new fac-realtion: (58204651680, 3233)
+* 62 reduction runtime: 0.11692489699998987 seconds
+>>>> not short enough
+* 63 reduction runtime: 0.1123673490001238 seconds
+>>>> found new fac-realtion: (737771872, -11)
+* 64 reduction runtime: 0.11738530899992838 seconds
+>>>> relation already exists
+* 65 reduction runtime: 0.11079150099999424 seconds
+>>>> not short enough
+* 66 reduction runtime: 0.11061479199997848 seconds
+>>>> not short enough
+* 67 reduction runtime: 0.1112378609998359 seconds
+>>>> found new fac-realtion: (9138851579, -133)
+* 68 reduction runtime: 0.12110906900011287 seconds
+>>>> found new fac-realtion: (333964745595, 6557)
+* 69 reduction runtime: 0.11827153399985946 seconds
+>>>> not short enough
+* 70 reduction runtime: 0.11081629399996018 seconds
+>>>> not short enough
+* 71 reduction runtime: 0.11168542200016418 seconds
+>>>> found new fac-realtion: (1277217855, -136)
+* 72 reduction runtime: 0.11812157200006368 seconds
+>>>> found new fac-realtion: (113735876254, 10807)
+* 73 reduction runtime: 0.118791149000117 seconds
+>>>> relation already exists
+* 74 reduction runtime: 0.11172744099985721 seconds
+>>>> relation already exists
+* 75 reduction runtime: 0.11046601600014583 seconds
+>>>> not short enough
+* 76 reduction runtime: 0.11046270599990748 seconds
+>>>> not short enough
+* 77 reduction runtime: 0.11122287900002448 seconds
+>>>> not short enough
+* 78 reduction runtime: 0.11038255100015704 seconds
+>>>> relation already exists
+* 79 reduction runtime: 0.11061107000000447 seconds
+>>>> not short enough
+* 80 reduction runtime: 0.10960849200000666 seconds
+>>>> relation already exists
+* 81 reduction runtime: 0.11047091099999307 seconds
+>>>> found new fac-realtion: (14350853374, 295)
+* 82 reduction runtime: 0.11887010600003123 seconds
+>>>> relation already exists
+* 83 reduction runtime: 0.11050894699997116 seconds
+>>>> not short enough
+* 84 reduction runtime: 0.11004787100000613 seconds
+>>>> relation already exists
+* 85 reduction runtime: 0.1107096719999845 seconds
+>>>> not short enough
+* 86 reduction runtime: 0.11078634099999363 seconds
+>>>> not short enough
+* 87 reduction runtime: 0.1097724459998517 seconds
+>>>> not short enough
+* 88 reduction runtime: 0.11739602100010416 seconds
+>>>> not short enough
+* 89 reduction runtime: 0.10915494500000023 seconds
+>>>> found new fac-realtion: (1277218000, 9)
+* 90 reduction runtime: 0.1176515219999601 seconds
+>>>> relation already exists
+* 91 reduction runtime: 0.11071730900016519 seconds
+>>>> not short enough
+* 92 reduction runtime: 0.11074414799986698 seconds
+>>>> not short enough
+* 93 reduction runtime: 0.10954737199995179 seconds
+>>>> found new fac-realtion: (4632890099, -5)
+* 94 reduction runtime: 0.1169944430000669 seconds
+>>>> relation already exists
+* 95 reduction runtime: 0.11398821199986742 seconds
+>>>> not short enough
+* 96 reduction runtime: 0.11044429899993702 seconds
+>>>> found new fac-realtion: (4839149007, 97)
+Found n+2 relations in 11.036023156000056 seconds
+Solution space is [[1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1,
+  1, 0, 0, 0, 1, 1, 1],
+ [0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0,
+  0, 1, 0, 1, 0, 0, 1],
+ [0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0,
+  1, 0, 0, 0, 0, 1, 1]]
+* C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 0, 0, 0, 0, 0, 0]
+>> gcd(N, a+b): 1, gcd(N, a-b): 1
+* C = [0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1,
+ 0, 0, 0, 0, 1, 1]
+>> gcd(N, a+b): 7933031, gcd(N, a-b): 7933031
+* C = [0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+ 1, 0, 1, 0, 0, 1]
+>> gcd(N, a+b): 1, gcd(N, a-b): 1
+* C = [0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1,
+ 1, 0, 1, 0, 1, 0]
+>> gcd(N, a+b): 7933031, gcd(N, a-b): 7933031
+* C = [1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1,
+ 0, 0, 0, 1, 1, 1]
+>> gcd(N, a+b): 2161, gcd(N, a-b): 2161
+Time find a non-trivial solution to linear equations: 0.02622204299996156 seconds
+Overall runtime: 11.062926589999961 seconds
