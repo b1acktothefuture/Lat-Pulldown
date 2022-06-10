@@ -1,5 +1,5 @@
 import pickle
-
+from prettytable import PrettyTable
 
 '''
 structure
@@ -40,23 +40,29 @@ def classify(data):
     minus_one /= l
     one /= l
     zero /= l
-    return minus_one, zero, one
+    return minus_one, zero, one, l
 
 
-def print_fac_times(timing):
+def print_stats(timing):
+    t = PrettyTable(['bits', 'alpha', 'c', 'run time (seconds)', 'trials', 'not short',
+                    '**found**', 'repeated'])
     for bits in timing:
-        print('** bit_size: {}'.format(bits))
         for alpha in timing[bits]:
             for c in timing[bits][alpha]:
-                print("alpha: {}, c: {} = {} seconds".format(
-                    round(alpha, 2), round(c, 2), round(timing[bits][alpha][c][-1], 2)))
+                [repeat, found, not_short, l] = classify(
+                    timing[bits][alpha][c][1][2][1])
+                t.add_row([bits, round(alpha, 2), round(c, 2),
+                           round(timing[bits][alpha][c][-1], 2), l, round(
+                    not_short, 2), round(found, 2), round(repeat, 2)])
+        t.add_row(['', '', '', '', '', '', '', ''])
+    print(t)
 
 
 def main():
     name = '2022-06-1012:42:42.549221'
     with open('./timing/' + name + '.pkl', 'rb') as fp:
         timing = pickle.load(fp)
-    print_fac_times(timing)
+    print_stats(timing)
 
 
 if __name__ == "__main__":
