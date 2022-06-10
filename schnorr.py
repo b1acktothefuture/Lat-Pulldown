@@ -119,7 +119,7 @@ def generate_basis(prime_base: list, multiplier: int, prec: int) -> IntegerMatri
     return B
 
 
-def check_fac_relation(e: list, prime_base: list, N: int) -> list:
+def check_fac_relation(e: list, prime_base: list, N: int, s_array) -> list:
     '''
     given e vector, checks if s = u - v*N is pt-smooth, returns their factorization if true
     '''
@@ -136,7 +136,7 @@ def check_fac_relation(e: list, prime_base: list, N: int) -> list:
             T[i] = e[i]
 
     s = u - v*N
-
+    s_array.append(s)
     S = factorize_smooth(s, prime_base)
     S.insert(0, int(s < 0))
     T.insert(0, 0)
@@ -156,7 +156,7 @@ def fac_relations(N, P, c, prec=10, independent=False):
 
     n = len(P)
     logging.info("dimension: {}".format(n))
-
+    s_sizes = []
     for i in P:
         if(N % i == 0):
             return [i, N/i]
@@ -211,12 +211,12 @@ def fac_relations(N, P, c, prec=10, independent=False):
             e.append(w[i]//refs[i])
 
         # implement a checker function without actually computing u and v to reject longer vectors, similar to SVP one in Ritter's paper.
-        rel = check_fac_relation(e, P, N)
+        rel = check_fac_relation(e, P, N, s_sizes)
 
         if(len(rel) == 0):
             # amend it, do not continue reduce it strongly
             logging.info(">>>> not short enough")
-            succ.append(0)
+            succ.append(1)
             continue
 
         key = rel[0]
@@ -328,15 +328,15 @@ def running_times(N, alpha, c, timer, prec=5):
 
 def main():
     bits_low = 20
-    bits_high = 25
-    bits_step = 1
+    bits_high = 30
+    bits_step = 2
 
     c_low = 1.1
     c_high = 1.3
-    c_stelp = 0.05
+    c_step = 0.05
 
-    alpha_low = 1.0
-    alpha_high = 1.7
+    alpha_low = 1.6
+    alpha_high = 1.8
     alpha_step = 0.1
 
     timing = {}
@@ -355,14 +355,25 @@ def main():
         print("N = {}:".format(N))
         logging.warning(
             "------------------------------------------------------------------------\nN = {}".format(N))
-
-        timer.start()
-        ret = schnorr(N, alpha_high, c_low, 5)
-        overall = timer.stop()
-        ret.append(overall)
-        logging.warning("Overall runtime: {} seconds".format(overall))
-
-        timing[bits] = ret
+        alpha = alpha_low
+        alphas = {}
+        while(alpha < alpha_high):
+            c = c_low
+            cs = {}
+            while(c < c_high):
+                print("alpha = {}, c = {}".format(alpha, c))
+                logging.warning("alpha = {}, c = {}".format(alpha, c))
+                timer.start()
+                ret = schnorr(N, alpha, c, 5)
+                overall = timer.stop()
+                ret.append(overall)
+                logging.warning(
+                    "Overall runtime: {} seconds".format(overall))
+                cs[c] = ret
+                c += c_step
+            alphas[alpha] = cs
+            alpha += alpha_step
+        timing[bits] = alphas
 
     with open("./timing/" + current_date+current_time + '.pkl', 'wb') as fp:
         pickle.dump(timing, fp)
