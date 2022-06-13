@@ -274,7 +274,7 @@ def solve_linear(N, a_b, primes):
         assert (a**2 - b**2) % N == 0
 
         x = math.gcd(N, a+b)
-        y = math.gcd(N, a+b)
+        y = math.gcd(N, a-b)
 
         logging.info(">> gcd(N, a+b): {}, gcd(N, a-b): {}".format(x, y))
 
