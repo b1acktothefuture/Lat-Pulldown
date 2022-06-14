@@ -44,6 +44,9 @@ class LinearHomoF2:
 
 
 def primesfrom2to(n):
+    '''
+    returns a list of primes from 2 to n-1
+    '''
     sieve = np.ones(n//3 + (n % 6 == 2), dtype=bool)
     sieve[0] = False
     for i in range(int(n**0.5)//3+1):
@@ -58,18 +61,18 @@ def prime_base(N, alpha):
     '''
     list of all primes from 2 to floor(N^alpha)
     '''
-    n = int(math.log(N)**alpha)
+    n = int((math.log(N))**alpha)
     return primesfrom2to(n)
 
 
-def is_smooth(x, P):
+def is_smooth(x: int, P: list) -> bool:
     '''
     Checks if a given number is pt-smooth
     '''
     y = x
     for p in P:
-        while p.divides(y):
-            y /= p
+        while y % p == 0:
+            y //= p
     return abs(y) == 1
 
 
@@ -86,8 +89,10 @@ def factorize_smooth(n, primes):
         if(n < primes[i]):
             return []
         while(n % primes[i] == 0):
-            n = n//primes[i]
+            n //= primes[i]
             exponents[i] += 1
+    if(n == 1):
+        return exponents
     return []
 
 
@@ -173,7 +178,8 @@ def fac_relations(N, P, c, prec=10, independent=False):
         trial += 1
         np.random.shuffle(Basis)
 
-        B_reduced = bkz_reduce(Basis, 6)  # try tuning the block size
+        # B_reduced = bkz_reduce(Basis, 6)  # try tuning the block size
+        B_reduced = lll_reduce(Basis)
         e_reduced = cvp_babai(B_reduced, target)
         w = B_reduced.multiply_left(e_reduced)
 
@@ -239,7 +245,7 @@ def solve_linear(N, a_b, primes):
         assert (a**2 - b**2) % N == 0
 
         x = math.gcd(N, a+b)
-        y = math.gcd(N, a+b)
+        y = math.gcd(N, a-b)
 
         logging.info(">> gcd(N, a+b): {}, gcd(N, a-b): {}".format(x, y))
 
