@@ -81,5 +81,17 @@ def test():
     print("CVP: {}".format(l2_norm(t4, t)))
 
 
+def test_bkz():
+    FPLLL.set_random_seed(time.time())
+
+    dim = 20
+    mat = IntegerMatrix(dim, dim)
+    mat.randomize("uniform", bits=20)
+    C = bkz_reduce(mat, 5)
+    for i in C:
+        print(i)
+    pass
+
+
 if __name__ == "__main__":
-    test()
+    test_bkz()

@@ -10,6 +10,7 @@ bit_size:
         c:
             prime_basis generation time,
             [
+                dimension,
                 time to generate lattice basis,
                 time to generate n+2 fac-relations,
                 [
@@ -44,17 +45,19 @@ def classify(data):
 
 
 def print_stats(timing):
-    t = PrettyTable(['bits', 'alpha', 'c', 'run time (seconds)', 'trials', 'not short',
+    t = PrettyTable(['bits', 'alpha', 'c', 'run time (seconds)', 'avg. red. time', 'trials', 'not short',
                     '**found**', 'repeated'])
     for bits in timing:
         for alpha in timing[bits]:
             for c in timing[bits][alpha]:
                 [repeat, found, not_short, l] = classify(
                     timing[bits][alpha][c][1][2][1])
+                rt = timing[bits][alpha][c][1][2][0]
+                avg_red = round(sum(rt)/len(rt), 4)
                 t.add_row([bits, round(alpha, 2), round(c, 2),
-                           round(timing[bits][alpha][c][-1], 2), l, round(
+                           round(timing[bits][alpha][c][-1], 2), avg_red, l, round(
                     not_short, 2), round(found, 2), round(repeat, 2)])
-        t.add_row(['', '', '', '', '', '', '', ''])
+        t.add_row(['', '', '', '', '', '', '', '', ''])
     print(t)
 
 

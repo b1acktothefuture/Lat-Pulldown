@@ -146,7 +146,7 @@ def check_fac_relation(e: list, prime_base: list, N: int, s_array) -> list:
     return [tuple([u, s]), tuple(T), tuple(S)]
 
 
-def fac_relations(N, P, c, prec=10, independent=False):
+def fac_relations_cvp(N, P, c, prec=10, independent=False):
     # 0. not short enough
     # 1. working
     # -1. repeated
@@ -157,9 +157,9 @@ def fac_relations(N, P, c, prec=10, independent=False):
     n = len(P)
     logging.info("dimension: {}".format(n))
     s_sizes = []
-    for i in P:
-        if(N % i == 0):
-            return [i, N/i]
+    # for i in P:
+    #     if(N % i == 0):
+    #         return [i, N/i]
 
     if(independent):
         bit_length = N.bit_length()
@@ -168,6 +168,7 @@ def fac_relations(N, P, c, prec=10, independent=False):
         multiplier = N**c
 
     # Basis matrix for the prime number lattice
+    ret.append(n+1)
     timer.start()
     Basis = generate_basis(P, multiplier, prec)
     run_time = timer.stop()
@@ -245,6 +246,45 @@ def fac_relations(N, P, c, prec=10, independent=False):
     return [relations, ret]
 
 
+def fac_realtions_svp(N, P, c, prec=10, independent=False):
+    n = len(P)
+
+    if(independent):
+        bit_length = N.bit_length()
+        multiplier = 2**(bit_length*c)
+    else:
+        multiplier = N**c
+
+    # Basis matrix for the prime number lattice
+    Basis = generate_basis(P, multiplier, prec)
+    refs = [Basis[i][i] for i in range(len(P))]
+    for i in range(len(Basis)):
+        Basis[i].insert(0, 0)
+    target = [0]*(len(P)+2)
+    target[-1] = sr(multiplier*math.log(N), prec)
+    target[0] = 1
+    Basis.append(target)
+
+    bar = Bar('Finding relations', max=n+3)
+
+    relations = {}
+    while(len(relations) < n+3):
+        trial += 1
+        np.random.shuffle(Basis)
+
+        B_reduced = bkz_reduce(Basis, 30)
+
+        for vec in B_reduced:
+            if(abs(vec[0]) != 1):
+                continue
+            e = []
+            for i in range(1, len(vec)-1):
+                assert vec[i] % refs[i] == 0
+                e.append(vec[i]//refs[i])
+            rel = check_fac_relation(e, P, N, s_sizes)
+            pass
+
+
 def solve_linear(N, a_b, primes):
     a_plus_b_mod2 = []
     for i in range(len(a_b)):
@@ -303,7 +343,7 @@ def schnorr(N, alpha, c, prec):
     logging.info("prime base: {}".format(P))
     ret.append(run_time)
 
-    [relations, timing] = fac_relations(N, P, c, prec, False)  # 2
+    [relations, timing] = fac_relations_cvp(N, P, c, prec, False)  # 2
     ret.append(timing)
 
     a_b = list(relations.values())  # 3
@@ -319,11 +359,6 @@ def schnorr(N, alpha, c, prec):
     else:
         ret.append(1)
     return ret
-
-
-def running_times(N, alpha, c, timer, prec=5):
-
-    pass
 
 
 def main():
