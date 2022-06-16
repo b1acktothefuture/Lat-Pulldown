@@ -43,6 +43,21 @@ class LinearHomoF2:
         return sol
 
 
+def get_primes(count):
+    primes = []
+
+    n = 2
+    while len(primes) != count:
+        for i in primes:
+            if n % i == 0:
+                break
+        else:
+            primes.append(n)
+        n += 1
+
+    return primes
+
+
 def primesfrom2to(n):
     '''
     returns a list of primes from 2 to n-1
@@ -146,14 +161,10 @@ def check_fac_relation(e: list, prime_base: list, N: int) -> list:
     return [tuple([u, s]), tuple(T), tuple(S)]
 
 
-def fac_relations(N, P, c, prec=10, independent=False):
+def fac_relations_cvp(N, P, c, prec=10, independent=False):
 
     n = len(P)
     logging.info("dimension: {}".format(n))
-
-    for i in P:
-        if(N % i == 0):
-            return [i, N/i]
 
     if(independent):
         bit_length = N.bit_length()
@@ -216,6 +227,64 @@ def fac_relations(N, P, c, prec=10, independent=False):
     return relations
 
 
+def fac_relations_svp(N, P, c, prec=10, independent=False):
+    n = len(P)
+    logging.info("dimension: {}".format(n))
+    if(independent):
+        multiplier = 10**(c)
+    else:
+        multiplier = N**c
+
+    # Basis matrix for the prime number lattice
+    Basis = generate_basis(P, multiplier, prec)
+    refs = [Basis[i][i] for i in range(len(P))]
+    for i in range(len(Basis)):
+        Basis[i].insert(0, 0)
+    target = [0]*(len(P)+2)
+    target[-1] = sr(multiplier*math.log(N), prec)
+    target[0] = 1
+    Basis.append(target)
+
+    bar = Bar('Finding relations', max=n+3)
+    trial = 0
+    relations = {}
+    while(len(relations) < n+3):
+        trial += 1
+        np.random.shuffle(Basis)
+
+        B_reduced = bkz_reduce(Basis, 40)
+        # B_reduced = lll_reduce(Basis)
+        print(Basis[0])
+        print(B_reduced[0])
+        print()
+        for vec in B_reduced:
+            if(abs(vec[0]) != 1):
+                continue
+            e = []
+            for i in range(1, n+1):
+                assert vec[i] % refs[i-1] == 0
+                e.append(vec[i]//refs[i-1])
+            rel = check_fac_relation(e, P, N)
+            if(len(rel) == 0):
+                logging.info("Trial {}: not short enough".format(trial))
+                continue
+            key = rel[0]
+            if key not in relations:
+                logging.info(
+                    "Trial {}: found new fac-realtion: {}".format(trial, key))
+                relations[key] = rel[1:]
+                bar.next()
+            else:
+                logging.info("Trial {}: relation already exists".format(trial))
+            if(len(relations) >= n+3):
+                break
+    bar.finish()
+
+    P.insert(0, -1)
+
+    return relations
+
+
 def solve_linear(N, a_b, primes):
     a_plus_b_mod2 = []
     for i in range(len(a_b)):
@@ -261,11 +330,16 @@ def solve_linear(N, a_b, primes):
     return 1
 
 
-def schnorr(N, alpha, c, prec):
-    P = prime_base(N, alpha)
+def schnorr(N, alpha, c, prec, t=0):
+    # should generate primes by fixing t(no. of primes)
+    if(t > 0):
+        P = get_primes(t)
+    else:
+        P = prime_base(N, alpha)
+
     logging.info("prime base: {}".format(P))
 
-    relations = fac_relations(N, P, c, prec, False)
+    relations = fac_relations_svp(N, P, c, prec, True)
 
     a_b = list(relations.values())
     fac = solve_linear(N, a_b, P)
@@ -275,19 +349,20 @@ def schnorr(N, alpha, c, prec):
 
 def main():
 
-    bits = 20
+    bits = 40
     p = number.getPrime(bits//2)
     q = number.getPrime(bits//2)
     N = p*q
 
     print("N: {} = {}*{}".format(N, p, q))
 
-    alpha = 1.7
+    alpha = 2.0
     c = 1.1  # C should be really small
     prec = 5
-
+    open("./logs/" + str(N) + '.log', "w").close()
     logging.basicConfig(filename="./logs/" + str(N) + '.log',
                         encoding='utf-8', level=logging.INFO)
+
     logging.info(
         'N: {} = {} * {} \nalpha: {} \nc = {} \nprecision = {}'.format(N, p, q, alpha, c, prec))
 
@@ -295,20 +370,30 @@ def main():
     logging.basicConfig()
 
 
+def ritter_test():
+    N = 2131438662079
+    t = 125
+    c1 = 15  # multiplier
+    c2 = 3  # prec
+    open("./logs/" + str(N) + '.log', "w").close()
+    logging.basicConfig(filename="./logs/" + str(N) + '.log',
+                        encoding='utf-8', level=logging.INFO)
+
+    logging.info(
+        'N: {}\nt: {} \nc1 = {}\nc2 = {} '.format(N, t, c1, c2))
+
+    schnorr(N, 0, c1, c2, t)
+    logging.basicConfig()
+    pass
+
+
 def test():
-    a_plus_b_mod2 = [[0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1], [0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0], [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1], [1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 1, 1, 0, 1, 1, 0,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], [1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1], [0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0], [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0], [1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0]]
-    solve = LinearHomoF2(a_plus_b_mod2)
-    while(True):
-        if(solve.has_been_zero == 1 or solve.dp < 0):
-            break
-        t = solve.next()
-        print(t)
+    print(get_primes(100))
 
 
 if __name__ == "__main__":
-    # test()
-    main()
+    ritter_test()
+    # main()
 
 
 """
