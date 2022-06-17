@@ -254,9 +254,6 @@ def fac_relations_svp(N, P, c, prec=10, independent=False):
 
         B_reduced = bkz_reduce(Basis, 40)
         # B_reduced = lll_reduce(Basis)
-        print(Basis[0])
-        print(B_reduced[0])
-        print()
         for vec in B_reduced:
             if(abs(vec[0]) != 1):
                 continue
