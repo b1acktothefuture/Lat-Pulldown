@@ -229,6 +229,7 @@ def fac_relations_cvp(N, P, c, prec=10, independent=False):
 
 def fac_relations_svp(N, P, c, prec=10, independent=False):
     n = len(P)
+
     logging.info("dimension: {}".format(n))
     if(independent):
         multiplier = 10**(c)
@@ -240,22 +241,36 @@ def fac_relations_svp(N, P, c, prec=10, independent=False):
     refs = [Basis[i][i] for i in range(len(P))]
     for i in range(len(Basis)):
         Basis[i].insert(0, 0)
+
     target = [0]*(len(P)+2)
     target[-1] = sr(multiplier*math.log(N), prec)
     target[0] = 1
-    Basis.append(target)
+
+    Basis.insert(0, target)
+    B_reduced = Basis
 
     bar = Bar('Finding relations', max=n+3)
     trial = 0
     relations = {}
     while(len(relations) < n+3):
         trial += 1
-        np.random.shuffle(Basis)
 
-        B_reduced = bkz_reduce(Basis, 40)
+        for i in range(len(Basis)):
+            for j in range(len(Basis[i])):
+                Basis[i][j] = B_reduced[i][j]
+
+        np.random.shuffle(Basis)
+        # Fix this
+        B_reduced = bkz_reduce(Basis, 30)
+        # print(B_reduced)
         # B_reduced = lll_reduce(Basis)
+        dot = 0
         for vec in B_reduced:
+            print(vec)
+            dot += 1
+            logging.info("Trial {}.{}: {} vec".format(trial, dot, vec))
             if(abs(vec[0]) != 1):
+                logging.info("Trial {}: First Co-ord not one".format(trial))
                 continue
             e = []
             for i in range(1, n+1):
@@ -346,7 +361,7 @@ def schnorr(N, alpha, c, prec, t=0):
 
 def main():
 
-    bits = 40
+    bits = 20
     p = number.getPrime(bits//2)
     q = number.getPrime(bits//2)
     N = p*q
@@ -389,8 +404,8 @@ def test():
 
 
 if __name__ == "__main__":
-    ritter_test()
-    # main()
+    # ritter_test()
+    main()
 
 
 """

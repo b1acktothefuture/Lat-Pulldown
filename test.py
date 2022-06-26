@@ -54,9 +54,44 @@ def factorize_smooth_test(limit=1000, trials=100, exp_limit=10):
         assert(factorize_smooth(num, p) == exps)
 
 
+def ritter_basis(N, P, c, prec=10, independent=False):
+    n = len(P)
+
+    logging.info("dimension: {}".format(n))
+    if(independent):
+        multiplier = 10**(c)
+    else:
+        multiplier = N**c
+
+    # Basis matrix for the prime number lattice
+    Basis = generate_basis(P, multiplier, prec)
+    refs = [Basis[i][i] for i in range(len(P))]
+    for i in range(len(Basis)):
+        Basis[i].insert(0, 0)
+
+    target = [0]*(len(P)+2)
+    target[-1] = sr(multiplier*math.log(N), prec)
+    target[0] = 1
+    Basis.insert(0, target)
+    B_t = IntegerMatrix.from_matrix(Basis)
+    print(B_t)
+    pass
+
+
 def main():
-    # primesfrom2to_test()
-    factorize_smooth_test()
+    bits = 20
+    p = number.getPrime(bits//2)
+    q = number.getPrime(bits//2)
+    N = p*q
+
+    print("N: {} = {}*{}".format(N, p, q))
+
+    alpha = 1.7
+    c = 1.2  # C should be really small
+    prec = 10
+    P = prime_base(N, alpha)
+
+    ritter_basis(N, P, c, prec)
 
 
 if __name__ == "__main__":
