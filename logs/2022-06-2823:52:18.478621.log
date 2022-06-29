@@ -1,0 +1,39 @@
+------------------------------------------------------------------------
+N = 1817699357
+alpha = 1.6, c = 1.1
+Time for generating prime basis: 0.0001517730052000843 seconds
+prime base: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131]
+dimension: 32
+Basis matrix generated in 7.022700447123498e-05 seconds
+* 1 reduction runtime: 0.16143409899814287 seconds
+>>>> not short enough
+* 2 reduction runtime: 0.15572653099661693 seconds
+>>>> not short enough
+* 3 reduction runtime: 0.15345494000212057 seconds
+>>>> not short enough
+* 4 reduction runtime: 0.15273997799522476 seconds
+>>>> not short enough
+* 5 reduction runtime: 0.15464633800002048 seconds
+>>>> not short enough
+* 6 reduction runtime: 0.15177889599726768 seconds
+>>>> not short enough
+* 7 reduction runtime: 0.150803377997363 seconds
+>>>> not short enough
+* 8 reduction runtime: 0.1512280750030186 seconds
+>>>> not short enough
+* 9 reduction runtime: 0.14996344999963185 seconds
+>>>> found new fac-relation: (20478200956369, 407)
+* 10 reduction runtime: 0.1566159870053525 seconds
+>>>> not short enough
+* 11 reduction runtime: 0.15233998199983034 seconds
+>>>> found new fac-relation: (9653801285975, 948)
+* 12 reduction runtime: 0.15646354400087148 seconds
+>>>> not short enough
+* 13 reduction runtime: 0.15169910799886566 seconds
+>>>> not short enough
+* 14 reduction runtime: 0.15291504299966618 seconds
+>>>> not short enough
+* 15 reduction runtime: 0.1534063039944158 seconds
+>>>> not short enough
+* 16 reduction runtime: 0.1514782890008064 seconds
+>>>> not short enough

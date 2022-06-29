@@ -51,8 +51,8 @@ def print_stats(timing):
         for alpha in timing[bits]:
             for c in timing[bits][alpha]:
                 [repeat, found, not_short, l] = classify(
-                    timing[bits][alpha][c][1][2][1])
-                rt = timing[bits][alpha][c][1][2][0]
+                    timing[bits][alpha][c][1][3][1])
+                rt = timing[bits][alpha][c][1][3][0]
                 avg_red = round(sum(rt)/len(rt), 4)
                 t.add_row([bits, round(alpha, 2), round(c, 2),
                            round(timing[bits][alpha][c][-1], 2), avg_red, l, round(
@@ -62,7 +62,7 @@ def print_stats(timing):
 
 
 def main():
-    name = '2022-06-1012:42:42.549221'
+    name = '2022-06-2622:03:30.311501'
     with open('./timing/' + name + '.pkl', 'rb') as fp:
         timing = pickle.load(fp)
     print_stats(timing)

@@ -1,3 +1,4 @@
+from audioop import mul
 import pickle
 from progress.bar import Bar
 import logging
@@ -9,6 +10,25 @@ from lattice import *
 from codetiming import Timer
 from datetime import datetime
 import json
+
+
+def prime(i, primes):
+    for prime in primes:
+        if not (i == prime or i % prime):
+            return False
+    primes.add(i)
+    return i
+
+
+def n_primes(n):
+    primes = set([2])
+    i, p = 2, 0
+    while True:
+        if prime(i, primes):
+            p += 1
+            if p == n:
+                return list(primes)
+        i += 1
 
 
 class LinearHomoF2:
@@ -226,7 +246,7 @@ def fac_relations_cvp(N, P, c, prec=10, independent=False):
 
         if key not in relations:
             logging.info(
-                ">>>> found new fac-realtion: {}".format(key))
+                ">>>> found new fac-relation: {}".format(key))
             relations[key] = rel[1:]
             bar.next()
             succ.append(0)
@@ -246,43 +266,92 @@ def fac_relations_cvp(N, P, c, prec=10, independent=False):
     return [relations, ret]
 
 
-def fac_realtions_svp(N, P, c, prec=10, independent=False):
+def shuffle_basis(Basis, rank, dimension):
+    Shuff = []
+
+    # Copying the Basis matrix
+    for x in range(rank):
+        Shuff.append([])
+        for y in range(dimension):
+            Shuff[x].append(Basis[x][y])
+
+    np.random.shuffle(Shuff)
+    return Shuff
+
+
+def fac_relations_svp(N, P, c, prec=10, beta=30):
+    '''
+    If independent, similar to ritters version:
+    c = c1 - c2
+    prec = c2
+    '''
+
     n = len(P)
+    s_sizes = []
 
-    if(independent):
-        bit_length = N.bit_length()
-        multiplier = 2**(bit_length*c)
-    else:
-        multiplier = N**c
+    multiplier = 10**c
 
-    # Basis matrix for the prime number lattice
     Basis = generate_basis(P, multiplier, prec)
     refs = [Basis[i][i] for i in range(len(P))]
-    for i in range(len(Basis)):
-        Basis[i].insert(0, 0)
-    target = [0]*(len(P)+2)
-    target[-1] = sr(multiplier*math.log(N), prec)
-    target[0] = 1
-    Basis.append(target)
 
-    bar = Bar('Finding relations', max=n+3)
+    for vecs in Basis:
+        vecs.insert(0, 0)
+
+    target = [0]*(len(P)+2)
+    target[0] = 1
+    target[-1] = sr(multiplier*math.log(N), prec)
+    Basis.insert(0, target)
 
     relations = {}
+    bar = Bar('Finding relations', max=n+3)
+
+    rank = len(Basis)
+    dimension = len(Basis[0])
+
+    Basis = lll_reduce(Basis, 0.99)
+
+    print(Basis)
+    succ = []
+
+    n_reductions = 0
+
     while(len(relations) < n+3):
-        trial += 1
-        np.random.shuffle(Basis)
-
-        B_reduced = bkz_reduce(Basis, 30)
-
-        for vec in B_reduced:
-            if(abs(vec[0]) != 1):
+        n_reductions += 1
+        Basis = shuffle_basis(Basis, rank, dimension)  # shuffle
+        Basis = bkz_reduce(Basis, beta)  # Lattice basis reduction
+        logging.warning("* {}".format(n_reductions))
+        for x in range(rank):
+            if(abs(Basis[x][0]) != 1):
                 continue
             e = []
-            for i in range(1, len(vec)-1):
-                assert vec[i] % refs[i] == 0
-                e.append(vec[i]//refs[i])
+            for i in range(1, dimension-1):
+                assert Basis[x][i] % refs[i-1] == 0
+                e.append(Basis[x][i]//refs[i-1])
+                if(Basis[x][0] == 1):
+                    e[-1] *= -1
+
             rel = check_fac_relation(e, P, N, s_sizes)
-            pass
+
+            if(len(rel) == 0):
+                # amend it, do not continue reduce it strongly
+                succ.append(1)
+                continue
+
+            key = rel[0]
+
+            assert (key[0] - key[1]) % N == 0
+
+            if key not in relations:
+                relations[key] = rel[1:]
+                bar.next()
+                succ.append(0)
+
+            else:
+                succ.append(-1)
+    bar.finish()
+    P.insert(0, -1)
+
+    return [relations]
 
 
 def solve_linear(N, a_b, primes):
@@ -361,9 +430,19 @@ def schnorr(N, alpha, c, prec):
     return ret
 
 
+def ritter(N, t, c1, c2, beta):
+
+    P = n_primes(t)
+
+    [relations] = fac_relations_svp(N, P, c=c1 - c2, prec=c2, beta=beta)
+    a_b = list(relations.values())
+    fac = solve_linear(N, a_b, P)
+    print(fac)
+
+
 def main():
-    bits_low = 20
-    bits_high = 30
+    bits_low = 32
+    bits_high = 38
     bits_step = 2
 
     c_low = 1.1
@@ -371,7 +450,7 @@ def main():
     c_step = 0.05
 
     alpha_low = 1.6
-    alpha_high = 1.8
+    alpha_high = 1.9
     alpha_step = 0.1
 
     timing = {}
@@ -409,7 +488,6 @@ def main():
             alphas[alpha] = cs
             alpha += alpha_step
         timing[bits] = alphas
-
     with open("./timing/" + current_date+current_time + '.pkl', 'wb') as fp:
         pickle.dump(timing, fp)
 
