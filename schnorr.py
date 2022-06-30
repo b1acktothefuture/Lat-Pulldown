@@ -1,4 +1,3 @@
-from audioop import mul
 import pickle
 from progress.bar import Bar
 import logging
@@ -9,7 +8,6 @@ import galois
 from lattice import *
 from codetiming import Timer
 from datetime import datetime
-import json
 
 
 def prime(i, primes):
@@ -113,6 +111,8 @@ def factorize_smooth(n, primes):
         while(n % primes[i] == 0):
             n = n//primes[i]
             exponents[i] += 1
+    if(n == 1):
+        return exponents
     return []
 
 
@@ -126,6 +126,13 @@ def sr(x, prec):
 def generate_basis(prime_base: list, multiplier: int, prec: int) -> IntegerMatrix:
     '''
     generates basis matrix as per schnorr's original algorithm
+    [ln(2) x (10^prec) ...........  multiplier x ln(2) x (10^prec)]
+    [0 ln(3) x (10^prec) ....                                     ]
+    .
+    .
+    .
+    [..............................multiplier x ln(pt) x (10^prec)]
+
     '''
 
     n = len(prime_base)
@@ -139,14 +146,13 @@ def generate_basis(prime_base: list, multiplier: int, prec: int) -> IntegerMatri
     return B
 
 
-def check_fac_relation(e: list, prime_base: list, N: int, s_array) -> list:
+def check_fac_relation(e: list, prime_base: list, N: int, s_array = None) -> list:
     '''
     given e vector, checks if s = u - v*N is pt-smooth, returns their factorization if true
     '''
     assert len(e) == len(prime_base)
     [u, v] = [1, 1]
     T = [0]*len(prime_base)
-    # print("Solution: {}".format(e))
     for i in range(len(e)):
         if(e[i] < 0):
             exp = -1*e[i]
@@ -156,7 +162,8 @@ def check_fac_relation(e: list, prime_base: list, N: int, s_array) -> list:
             T[i] = e[i]
 
     s = u - v*N
-    s_array.append(s)
+    if(s_array != None):
+        s_array.append(s)
     S = factorize_smooth(s, prime_base)
     S.insert(0, int(s < 0))
     T.insert(0, 0)
@@ -287,10 +294,10 @@ def fac_relations_svp(N, P, c, prec=10, beta=30):
     '''
 
     n = len(P)
-    s_sizes = []
 
     multiplier = 10**c
 
+    # Ritters basis, size: n+1 x n+2
     Basis = generate_basis(P, multiplier, prec)
     refs = [Basis[i][i] for i in range(len(P))]
 
@@ -302,53 +309,24 @@ def fac_relations_svp(N, P, c, prec=10, beta=30):
     target[-1] = sr(multiplier*math.log(N), prec)
     Basis.insert(0, target)
 
-    relations = {}
-    bar = Bar('Finding relations', max=n+3)
-
     rank = len(Basis)
     dimension = len(Basis[0])
 
     Basis = lll_reduce(Basis, 0.99)
 
-    print(Basis)
+    relations = {}
+    # bar = Bar('Finding relations', max=n+3)
     succ = []
 
-    n_reductions = 0
+    Rounds = 0
 
-    while(len(relations) < n+3):
-        n_reductions += 1
-        Basis = shuffle_basis(Basis, rank, dimension)  # shuffle
-        Basis = bkz_reduce(Basis, beta)  # Lattice basis reduction
-        logging.warning("* {}".format(n_reductions))
-        for x in range(rank):
-            if(abs(Basis[x][0]) != 1):
-                continue
-            e = []
-            for i in range(1, dimension-1):
-                assert Basis[x][i] % refs[i-1] == 0
-                e.append(Basis[x][i]//refs[i-1])
-                if(Basis[x][0] == 1):
-                    e[-1] *= -1
+    while(len(relations) < n+2):
+        Rounds += 1
+        Basis = IntegerMatrix.from_matrix(shuffle_basis(Basis, rank, dimension))  # shuffle
+        enums = BKZs(Basis)(beta)
 
-            rel = check_fac_relation(e, P, N, s_sizes)
 
-            if(len(rel) == 0):
-                # amend it, do not continue reduce it strongly
-                succ.append(1)
-                continue
-
-            key = rel[0]
-
-            assert (key[0] - key[1]) % N == 0
-
-            if key not in relations:
-                relations[key] = rel[1:]
-                bar.next()
-                succ.append(0)
-
-            else:
-                succ.append(-1)
-    bar.finish()
+    # bar.finish()
     P.insert(0, -1)
 
     return [relations]
@@ -432,11 +410,12 @@ def schnorr(N, alpha, c, prec):
 
 def ritter(N, t, c1, c2, beta):
 
-    P = n_primes(t)
+    P = n_primes(t) # Generate list of first t primes
 
-    [relations] = fac_relations_svp(N, P, c=c1 - c2, prec=c2, beta=beta)
+    [relations] = fac_relations_svp(N, P, c=c1 - c2, prec=c2, beta=beta) # Get >= n+2 fac-relations
     a_b = list(relations.values())
-    fac = solve_linear(N, a_b, P)
+
+    fac = solve_linear(N, a_b, P) # Use linear solver to get a non trivial factor
     print(fac)
 
 
@@ -492,8 +471,20 @@ def main():
         pickle.dump(timing, fp)
 
 
+def test():
+    multiplier = 10**10
+    prec = 5
+    P = n_primes(30)
+    Basis = IntegerMatrix.from_matrix(generate_basis(P,multiplier,prec))
+    print("Before reduction:")
+    print(Basis)
+    BKZs(Basis)(20)
+    print("After reduction:")
+    print(Basis)
+
+
 if __name__ == "__main__":
-    main()
+    test()
 
 
 """

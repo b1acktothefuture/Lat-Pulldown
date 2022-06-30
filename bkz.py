@@ -31,11 +31,11 @@ class BKZReduction:
         :param block_size: an integer > 2
         """
         self.m.discover_all_rows()
-
         auto_abort = BKZ.AutoAbort(self.m, self.A.nrows)
 
         while True:
             clean = self.bkz_loop(block_size, 0, self.A.nrows)
+            print(clean)
             if clean:
                 break
             if auto_abort.test_abort():
@@ -89,7 +89,6 @@ class BKZReduction:
 
         else:
             d = self.m.d
-            print("D is {}".format(d))
             self.m.create_row()
 
             with self.m.row_ops(d, d+1):
@@ -106,8 +105,7 @@ class BKZReduction:
 
 
 if __name__ == "__main__":
-    mat = IntegerMatrix(60, 60)
-    mat.randomize("uniform", bits=20)
-    BKZReduction(mat[:-1])(20)
-    # print(mat)
+    mat = IntegerMatrix(30, 30)
+    mat.randomize("uniform", bits=10)
+    BKZReduction(mat)(20)
     pass
