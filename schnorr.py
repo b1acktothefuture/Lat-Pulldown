@@ -283,7 +283,7 @@ def shuffle_basis(Basis, rank, dimension):
             Shuff[x].append(Basis[x][y])
 
     np.random.shuffle(Shuff)
-    return Shuff
+    return IntegerMatrix.from_matrix(Shuff)
 
 
 def fac_relations_svp(N, P, c, prec=10, beta=30):
@@ -322,8 +322,35 @@ def fac_relations_svp(N, P, c, prec=10, beta=30):
 
     while(len(relations) < n+2):
         Rounds += 1
-        Basis = IntegerMatrix.from_matrix(shuffle_basis(Basis, rank, dimension))  # shuffle
+        Basis = shuffle_basis(Basis, rank, dimension)  # shuffl
         enums = BKZs(Basis)(beta)
+
+        for vec in enums:
+            if(abs(vec[0]) != 1):
+                continue
+
+            e = []
+            for i in range(1, dimension-1):
+                assert vec[i]%refs[i-1] == 0
+                e.append(vec[i]//refs[i-1])
+            
+            rel = check_fac_relation(e,P,N)
+
+            if(len(rel) == 0):
+                succ.append(1)
+                continue
+            key = rel[0]
+
+            assert (key[0] - key[1]) % N == 0
+
+            if key not in relations:
+                relations[key] = rel[1:]
+                succ.append(0)
+
+            else:
+                succ.append(-1)
+
+
 
 
     # bar.finish()
