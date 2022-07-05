@@ -62,7 +62,7 @@ def print_stats(timing):
 
 
 def main():
-    name = '2022-06-2622:03:30.311501'
+    name = '2022-06-2620:19:26.293475'
     with open('./timing/' + name + '.pkl', 'rb') as fp:
         timing = pickle.load(fp)
     print_stats(timing)

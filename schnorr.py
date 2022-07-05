@@ -286,17 +286,33 @@ def shuffle_basis(Basis, rank, dimension):
     return IntegerMatrix.from_matrix(Shuff)
 
 
+def ratios(succ):
+    minus_one, zero, one = [0,0,0]
+    for t in succ:
+        if(t == -1):
+            minus_one += 1
+        if(t == 0):
+            zero += 1
+        if(t == 1):
+            one += 1
+    return [minus_one/len(succ),zero/len(succ),one/len(succ)]
+
+
 def fac_relations_svp(N, P, c, prec=10, beta=30):
     '''
     If independent, similar to ritters version:
     c = c1 - c2
     prec = c2
     '''
+    timer = Timer(logger=None)
+    ret = []
 
     n = len(P)
-
+    ret.append(n+2)
     multiplier = 10**c
 
+
+    timer.start()
     # Ritters basis, size: n+1 x n+2
     Basis = generate_basis(P, multiplier, prec)
     refs = [Basis[i][i] for i in range(len(P))]
@@ -309,26 +325,43 @@ def fac_relations_svp(N, P, c, prec=10, beta=30):
     target[-1] = sr(multiplier*math.log(N), prec)
     Basis.insert(0, target)
 
+    run_time = timer.stop()
+    logging.warning("Basis matrix generated in {} seconds".format(run_time))
+    ret.append(run_time)
+
     rank = len(Basis)
     dimension = len(Basis[0])
 
     Basis = lll_reduce(Basis, 0.99)
 
     relations = {}
-    # bar = Bar('Finding relations', max=n+3)
+    bar = Bar('Finding relations', max=n+2)
     succ = []
+    reductions = []
 
     Rounds = 0
+    timer.start()
 
     while(len(relations) < n+2):
+        temp_timer = Timer(logger=None)
+        temp_timer.start()
+
         Rounds += 1
         Basis = shuffle_basis(Basis, rank, dimension)  # shuffl
         enums = BKZs(Basis)(beta)
 
+        reduction_time = temp_timer.stop()
+        reductions.append(reduction_time)
+        logging.warning("* {} reduction runtime: {} seconds".format(
+            Rounds, reduction_time))
+
+
         for vec in enums:
+            if(len(relations) == n+2):
+                break
             if(abs(vec[0]) != 1):
                 continue
-
+            
             e = []
             for i in range(1, dimension-1):
                 assert vec[i]%refs[i-1] == 0
@@ -337,6 +370,7 @@ def fac_relations_svp(N, P, c, prec=10, beta=30):
             rel = check_fac_relation(e,P,N)
 
             if(len(rel) == 0):
+                logging.info(">>>> not short enough")
                 succ.append(1)
                 continue
             key = rel[0]
@@ -344,19 +378,55 @@ def fac_relations_svp(N, P, c, prec=10, beta=30):
             assert (key[0] - key[1]) % N == 0
 
             if key not in relations:
+                logging.info(">>>> found new fac-relation: {}".format(key))
                 relations[key] = rel[1:]
+                bar.next()
+                succ.append(0)
+
+            else:
+                logging.info(">>>> relation already exists")
+                succ.append(-1)
+        for vec in Basis:
+            if(len(relations) == n+2):
+                break
+            if(abs(vec[0]) != 1):
+                continue
+            
+            e = []
+            for i in range(1, dimension-1):
+                assert vec[i]%refs[i-1] == 0
+                e.append(vec[i]//refs[i-1])
+            
+            rel = check_fac_relation(e,P,N)
+
+            if(len(rel) == 0):
+                logging.info(">>>> not short enough")
+                succ.append(1)
+                continue
+            key = rel[0]
+
+            assert (key[0] - key[1]) % N == 0
+
+            if key not in relations:
+                logging.info(">>>> found new fac-relation: {}".format(key))
+                relations[key] = rel[1:]
+                bar.next()
                 succ.append(0)
 
             else:
                 succ.append(-1)
+                logging.info(">>>> relation already exists")
+
+    run_time = timer.stop()
+    logging.info("Found n+2 relations in {} seconds".format(run_time))
+    ret.append(run_time)
+    ret.append([reductions, succ])
 
 
-
-
-    # bar.finish()
+    bar.finish()
     P.insert(0, -1)
 
-    return [relations]
+    return [relations,ret]
 
 
 def solve_linear(N, a_b, primes):
@@ -436,19 +506,40 @@ def schnorr(N, alpha, c, prec):
 
 
 def ritter(N, t, c1, c2, beta):
+    ret = []
+
+    timer = Timer(logger=None)
+    timer.start()
 
     P = n_primes(t) # Generate list of first t primes
 
-    [relations] = fac_relations_svp(N, P, c=c1 - c2, prec=c2, beta=beta) # Get >= n+2 fac-relations
+    run_time = timer.stop()
+    logging.warning(
+        "Time for generating prime basis: {} seconds".format(run_time))
+    logging.info("prime base: {}".format(P))
+    ret.append(run_time)
+
+    [relations, timing] = fac_relations_svp(N, P, c=c1 - c2, prec=c2, beta=beta) # Get >= n+2 fac-relations
     a_b = list(relations.values())
+    ret.append(timing)
 
+    timer.start()
     fac = solve_linear(N, a_b, P) # Use linear solver to get a non trivial factor
-    print(fac)
+    run_time = timer.stop()
+    ret.append(run_time)
+    logging.warning(
+        "Time find a non-trivial solution to linear equations: {} seconds".format(run_time))
+    
+    if(fac == 1):
+        ret.append(0)
+    else:
+        ret.append(1)
+    return ret
 
 
-def main():
-    bits_low = 32
-    bits_high = 38
+def main_schnorr():
+    bits_low = 20
+    bits_high = 24
     bits_step = 2
 
     c_low = 1.1
@@ -498,6 +589,75 @@ def main():
         pickle.dump(timing, fp)
 
 
+def main_ritter():
+    bits_low = 20
+    bits_high = 24
+    bits_step = 2
+
+    c1_low = 10
+    c1_high = 16
+    c1_step = 2
+
+    c2_low = 3
+    c2_high = 6
+    c2_step = 1
+
+    t_low = 100
+    t_high = 150
+    t_step = 10
+
+    beta_low = 30
+    beta_high = 50
+    beta_step = 10
+
+    timing = {}
+    timer = Timer(logger=None)
+
+    now = datetime.now()
+    current_date = str(now.date())
+    current_time = str(now.time())
+
+    logging.basicConfig(level=logging.INFO,
+                        filename="./logs/ritter/" + current_date + current_time + ".log", format='%(message)s')
+    for bits in range(bits_low, bits_high+1, bits_step):
+        p = number.getPrime(bits//2)
+        q = number.getPrime(bits//2)
+        N = p*q
+        print("N = {}:".format(N))
+        logging.warning(
+            "------------------------------------------------------------------------\nN = {}".format(N))
+        c1 = c1_low
+        c1s = {}
+        while(c1 <= c1_high):
+            c2 = c2_low
+            c2s = {}
+            while(c2 <= c2_high):
+                t = t_low
+                ts = {}
+                while(t <= t_high):
+                    beta = beta_low
+                    betas = {}
+                    while(beta <= beta_high):
+                        print("bits = {}, c1 = {}, c2 = {}, t = {}, beta = {}".format(bits, c1,c2,t,beta))
+                        logging.warning("bits = {}, c1 = {}, c2 = {}, t = {}, beta = {}".format(bits, c1,c2,t,beta))
+                        timer.start()
+                        ret = ritter(N, t,c1,c2,beta)
+                        overall = timer.stop()
+                        ret.append(overall)
+                        logging.warning(
+                            "Overall runtime: {} seconds".format(overall))
+                        betas[beta] = ret
+                        beta += beta_step
+                    ts[t] = betas
+                    t += t_step
+                c2s[c2] = ts
+                c2 += c2_step
+            c1s[c1] = c2s
+            c1 += c1_step
+        timing[bits] = c1s
+    with open("./timing/ritter/" + current_date+current_time + '.pkl', 'wb') as fp:
+        pickle.dump(timing, fp)
+
 def test():
     multiplier = 10**10
     prec = 5
@@ -511,7 +671,8 @@ def test():
 
 
 if __name__ == "__main__":
-    test()
+    # test()
+    main_ritter()
 
 
 """
