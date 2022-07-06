@@ -539,7 +539,7 @@ def ritter(N, t, c1, c2, beta):
 
 def main_schnorr():
     bits_low = 20
-    bits_high = 24
+    bits_high = 30
     bits_step = 2
 
     c_low = 1.1
@@ -672,7 +672,7 @@ def test():
 
 if __name__ == "__main__":
     # test()
-    main_ritter()
+    main_schnorr()
 
 
 """

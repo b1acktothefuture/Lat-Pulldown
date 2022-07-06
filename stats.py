@@ -2,7 +2,7 @@ import pickle
 from prettytable import PrettyTable
 
 '''
-structure
+structure [schnorr]
 
 timing = {
 bit_size:
@@ -23,6 +23,11 @@ bit_size:
             factor found {0 no / 1 yes},
             overall runtime
 }
+'''
+
+'''
+structure [ritter]
+
 '''
 
 
@@ -62,7 +67,7 @@ def print_stats(timing):
 
 
 def main():
-    name = '2022-06-2620:19:26.293475'
+    name = '2022-07-0600:55:08.853917'
     with open('./timing/' + name + '.pkl', 'rb') as fp:
         timing = pickle.load(fp)
     print_stats(timing)
