@@ -591,23 +591,23 @@ def main_schnorr():
 
 def main_ritter():
     bits_low = 20
-    bits_high = 24
+    bits_high = 20
     bits_step = 2
 
     c1_low = 10
-    c1_high = 16
+    c1_high = 12
     c1_step = 2
 
     c2_low = 3
-    c2_high = 6
+    c2_high = 3
     c2_step = 1
 
-    t_low = 100
-    t_high = 150
+    t_low = 125
+    t_high = 125
     t_step = 10
 
     beta_low = 30
-    beta_high = 50
+    beta_high = 30
     beta_step = 10
 
     timing = {}
