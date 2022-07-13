@@ -672,7 +672,11 @@ def test():
 
 if __name__ == "__main__":
     # test()
-    main_schnorr()
+    # main_schnorr()
+    N = 2131438662079
+    logging.basicConfig(level=logging.INFO,
+                        filename="./logs/ritter/" + str(N) + ".log", format='%(message)s')
+    ritter(N,125,12,3,30)
 
 
 """
