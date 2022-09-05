@@ -129,17 +129,17 @@ private:
         closest_RR(temp, y);
 
         auto side1 = static_cast<float>(temp >= y) * 2 - 1.0f;
-//        float side1 = temp >= y ? 1.0f : -1.0f;
+        //        float side1 = temp >= y ? 1.0f : -1.0f;
         auto side2 = static_cast<float>(u >= y) * 2 - 1.0f;
-//        float side2 = u >= y ? 1.0f : -1.0f;
+        //        float side2 = u >= y ? 1.0f : -1.0f;
 
         // out = 2 * closest_y - u;
         mul(temp, temp, 2.0);
         sub(out, temp, u);
 
         out -= side2 * static_cast<float>(side1 == side2);
-//        if(side1 == side2)
-//            out -= side2;
+        //        if(side1 == side2)
+        //            out -= side2;
     }
 
     /**

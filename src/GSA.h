@@ -4,7 +4,6 @@
 #include <NTL/LLL.h>
 #include <NTL/ZZ.h>
 #include <vector>
-#include "print.h"
 
 using namespace std;
 using namespace NTL;
@@ -105,4 +104,10 @@ class GSA{
     }
 };
 
+inline ZZ getN(long e)
+{
+    ZZ p1 = NextPrime(SqrRoot(power(conv<ZZ>(10), e)));
+    ZZ p2 = NextPrime(p1 + 2);
+    return p1 * p2;
+}
 #endif
