@@ -1,0 +1,177 @@
+\documentclass[a4paper,twoside,10pt]{report}
+
+\usepackage[a4paper, left=1cm, right=1cm, top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr,amsmath,longtable,setspace,graphicx,booktabs,xcolor,array,amssymb,pifont}
+\DeclareMathOperator{\sign}{\text{sign}}
+\def\qqquad{\qquad\qquad}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\renewcommand{\checkmark}{\text{\ding{51}}}
+\newcommand{\cross}{\text{\ding{55}}}
+\newcommand{\green}[1]{\textcolor[HTML]{2B9D0E}{#1}}
+\newcommand{\red}[1]{\textcolor[HTML]{A80000}{#1}}
+\newcommand{\grey}[1]{\textcolor{black!40}{#1}}
+\pagestyle{empty}
+
+\begin{document}
+\onehalfspacing
+
+\section*{Settings}
+\begin{tabular}{ll}
+NTL Version: & 11.5.1\\GCC: &11.2.0\\
+$N$ & $100000980001501\approx 10^{14}$ (ca. 47 Bits)\\$c$ & $0.71428571428571430157$\\
+$n$ & $ 90$\\
+$p_n$ & $ 463$\\
+Pruning Level: & $14$\\
+Basis accuracy factor: & $10000$\\
+Reduce ratio: & $0.8$\\
+Start reduction factor: & $0.2$\\
+Strong BKZ block size: & $32$\\
+Slight BKZ block size: & $20$\\
+Seed for random number generator: & $1448726806$\\
+Scaling type: & Use various scaleing types:\\& (\phantom{7}6\% of rounds): Scale every row with probability 1/4\\& (\phantom{7}8\% of rounds): Scale the first n/2 rows with probability 1/4,\\& \phantom{(76\% of rounds): } the n/2 last rows with probability 1/2\\& (\phantom{7}8\% of rounds): Scale the first n/2 rows with probability 1/2,\\& \phantom{(76\% of rounds): } the n/2 last rows with probability 1/4\\& (78\% of rounds): Scale every row with probability 1/2\\
+Use Continued Fractions (CF): & yes\\
+\end{tabular}\\
+
+
+\section*{Summary}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{llll}
+\toprule
+Runtime (total): & \textbf{16.3455s}\\
+Runtime (per unique equation): & \textbf{0.179621s}\\
+Time to factor $N$: & \textbf{16.5251s}\\\midrule[0.05pt]
+Rounds (total): & $23$&
+Unique Equations found (duplicates) & $91$ ($0$)\\
+Rounds without distance reduction: & 0 (0\%)&
+Unique equations per round & $3.95652$\\
+Rounds without delayed stages: & 0 (0\%)&
+Unique equations per round with 1+ eqn. & $6.06667$\\
+Rounds with equations: & 15 (65.22\%)&
+Total equations per round with 1+ eqn.   & $6.06667$\\\midrule[0.05pt]
+Total stages checked for equ. (rounds w. Equ.): & 836& Total stages checked for equ. (rounds wo. Equ.): & 52\\
+Min. stages checked for equ. (rounds w. Equ.): & 4& Min. stages checked for equ. (rounds wo. Equ.): & 2\\
+Max. stages checked for equ. (rounds w. Equ.): & 275& Max. stages checked for equ. (rounds wo. Equ.): & 10\\
+Avg. stages checked for equ. (rounds w. Equ.): & 36.35& Avg. stages checked for equ. (rounds wo. Equ.): & 2.26\\\midrule[0.05pt]
+Min. time NewEnum (total): & 0.048692s&
+Min. time NewEnum (w.eqn.): & 0.068311s\\
+Max. time NewEnum: & 4.16765s&
+Max. time NewEnum: & 4.16765s\\
+Avg. time NewEnum: & 0.572506s&
+Avg. time NewEnum: & 0.794017s\\\midrule[0.05pt]
+Min. time slight BKZ: & 0.079604s&
+Max. distance reduction: & 0.089521\\
+Max. time slight BKZ: & 0.194175s&
+Min. distance reduction: & 0.12086\\
+Avg. time slight BKZ: & 0.125523s&
+Avg. distance reduction: & 0.108646\\\midrule[0.05pt]
+Equations from NewEnum only: &34 (37.4\%) & Equations from CF: & 57 (62.6\%)\\
+Min. $v$ value (without CF): & 14 & Min. $v$ value (CF only): & 79300302\\
+Max. $v$ value (without CF): & 108559 & Max. $v$ value (CF only): & 611674891012094659\\
+Avg. $v$ value (without CF): & 17916.62 & Avg. $v$ value (CF only): & 11494673646721334\\
+Median $v$ value (without CF): & 2857 & Median $v$ value (CF only): & 200408252063\\\bottomrule
+\end{tabular}}
+\newpage
+\section*{Equations}
+%\begin{landscape}
+\begin{longtable}{rrcp{5cm}rp{5cm}r}
+\toprule
+round & \# & CF & $u$ & $v$ & $|u-vN|$ & $\sign(u-vN)$\\\midrule
+\endfirsthead
+\toprule
+round & \# & CF & $u$ & $v$ & $|u-vN|$ & $\sign(u-vN)$\\\midrule
+\endhead
+1 & 1 & \cross& $3 \cdot 5 \cdot 97 \cdot 173 \cdot 257 \cdot 359 \cdot 439 \cdot 461$ & $47$ & $2^{2} \cdot 17 \cdot 41 \cdot 59$ & $1$\\
+3 & 1 & \checkmark& $2^{7} \cdot 7 \cdot 11 \cdot 53 \cdot 67 \cdot 101 \cdot 103 \cdot 113 \cdot 151 \cdot 167 \cdot 271 \cdot 313 \cdot 347 \cdot 461$ & $140773724181919$ & $3 \cdot 31 \cdot 353$ & $1$\\
+3 & 1 & \checkmark& $2^{3} \cdot 3 \cdot 5^{2} \cdot 11 \cdot 43 \cdot 101 \cdot 193 \cdot 211 \cdot 239 \cdot 271 \cdot 311 \cdot 347 \cdot 461$ & $37612071599$ & $7 \cdot 13^{3} \cdot 23 \cdot 353$ & $1$\\
+3 & 1 & \cross& $2 \cdot 5 \cdot 43 \cdot 101 \cdot 103 \cdot 107 \cdot 271 \cdot 313 \cdot 367$ & $149$ & $67 \cdot 73 \cdot 409$ & $1$\\
+4 & 1 & \checkmark& $2^{3} \cdot 3 \cdot 5^{3} \cdot 37 \cdot 71 \cdot 83 \cdot 101 \cdot 103 \cdot 109 \cdot 131 \cdot 337 \cdot 367$ & $120173171$ & $11 \cdot 61$ & $1$\\
+6 & 1 & \checkmark& $41 \cdot 61 \cdot 79 \cdot 107 \cdot 131 \cdot 137 \cdot 157 \cdot 163 \cdot 173 \cdot 277 \cdot 311 \cdot 401$ & $580269919847$ & $2^{3} \cdot 3^{2} \cdot 43 \cdot 71^{2}$ & $1$\\
+6 & 1 & \checkmark& $2^{5} \cdot 3 \cdot 5 \cdot 7 \cdot 19 \cdot 41 \cdot 73 \cdot 79 \cdot 107 \cdot 127 \cdot 131^{2} \cdot 151 \cdot 157 \cdot 163 \cdot 277 \cdot 311$ & $11718091438088741$ & $401$ & $1$\\
+6 & 1 & \checkmark& $2^{4} \cdot 7^{2} \cdot 11 \cdot 13 \cdot 23 \cdot 37 \cdot 41 \cdot 47 \cdot 73 \cdot 131 \cdot 157 \cdot 181 \cdot 197 \cdot 349$ & $34349716339$ & $3 \cdot 17 \cdot 19 \cdot 151 \cdot 167$ & $1$\\
+6 & 1 & \checkmark& $2 \cdot 7 \cdot 11 \cdot 29 \cdot 31 \cdot 37 \cdot 41 \cdot 47 \cdot 89 \cdot 157 \cdot 173 \cdot 179 \cdot 197 \cdot 233 \cdot 269 \cdot 389$ & $205150423057981$ & $3 \cdot 67 \cdot 107$ & $1$\\
+6 & 1 & \checkmark& $2^{6} \cdot 3^{2} \cdot 47 \cdot 61 \cdot 83 \cdot 89 \cdot 97 \cdot 149 \cdot 179 \cdot 223 \cdot 277 \cdot 311$ & $6062755777$ & $37 \cdot 59 \cdot 67 \cdot 151$ & $1$\\
+6 & 1 & \cross& $2 \cdot 17 \cdot 19 \cdot 29 \cdot 61 \cdot 139 \cdot 157 \cdot 193 \cdot 277 \cdot 349$ & $4653$ & $5^{3} \cdot 7 \cdot 23 \cdot 283$ & $1$\\
+7 & 1 & \checkmark& $2^{6} \cdot 7 \cdot 29^{2} \cdot 157 \cdot 163 \cdot 263 \cdot 281 \cdot 293 \cdot 307 \cdot 359 \cdot 449$ & $103315590999$ & $5^{2} \cdot 109 \cdot 257$ & $1$\\
+7 & 1 & \checkmark& $3 \cdot 17 \cdot 29 \cdot 73 \cdot 97 \cdot 181 \cdot 191 \cdot 227 \cdot 263 \cdot 337 \cdot 383 \cdot 457 \cdot 463$ & $5903069902423$ & $2 \cdot 7 \cdot 11 \cdot 13 \cdot 277$ & $1$\\
+7 & 1 & \cross& $61 \cdot 73 \cdot 163 \cdot 181 \cdot 283 \cdot 439 \cdot 449 \cdot 457$ & $33491$ & $2^{4} \cdot 3^{3} \cdot 17 \cdot 19 \cdot 29 \cdot 113$ & $1$\\
+7 & 1 & \checkmark& $2^{6} \cdot 7^{2} \cdot 11^{2} \cdot 29^{2} \cdot 211 \cdot 251 \cdot 281 \cdot 359 \cdot 383 \cdot 439 \cdot 457$ & $1310055224993$ & $43 \cdot 53 \cdot 113 \cdot 149$ & $1$\\
+7 & 1 & \checkmark& $3 \cdot 17 \cdot 41 \cdot 43 \cdot 107 \cdot 137 \cdot 139 \cdot 151 \cdot 223 \cdot 307 \cdot 313 \cdot 383 \cdot 439$ & $996701690801$ & $2 \cdot 13 \cdot 19 \cdot 53$ & $1$\\
+7 & 1 & \checkmark& $3^{2} \cdot 7^{2} \cdot 29 \cdot 67 \cdot 83 \cdot 107 \cdot 163 \cdot 181 \cdot 223 \cdot 263 \cdot 313 \cdot 383 \cdot 401$ & $6329702217550$ & $23^{2} \cdot 41$ & $1$\\
+7 & 1 & \checkmark& $2 \cdot 3^{3} \cdot 13 \cdot 41 \cdot 137 \cdot 211 \cdot 223 \cdot 263 \cdot 307 \cdot 359 \cdot 383 \cdot 439$ & $9042249059$ & $11 \cdot 149 \cdot 227$ & $1$\\
+7 & 1 & \checkmark& $3 \cdot 13 \cdot 61 \cdot 73 \cdot 89 \cdot 103^{2} \cdot 107 \cdot 137 \cdot 139 \cdot 151 \cdot 181 \cdot 439 \cdot 449$ & $17999607320843$ & $2^{3} \cdot 11 \cdot 31 \cdot 193$ & $1$\\
+7 & 1 & \cross& $2^{4} \cdot 3 \cdot 7 \cdot 29 \cdot 83 \cdot 107 \cdot 109 \cdot 137 \cdot 139 \cdot 211$ & $379$ & $43 \cdot 181 \cdot 457$ & $1$\\
+7 & 1 & \cross& $2^{2} \cdot 3 \cdot 7 \cdot 107 \cdot 137 \cdot 211 \cdot 241 \cdot 433 \cdot 449 \cdot 463$ & $56363$ & $47 \cdot 251 \cdot 263 \cdot 383$ & $1$\\
+7 & 1 & \checkmark& $3 \cdot 5^{2} \cdot 29 \cdot 61 \cdot 83 \cdot 89 \cdot 107 \cdot 109 \cdot 131 \cdot 137 \cdot 167 \cdot 337 \cdot 383 \cdot 439$ & $19411752432868$ & $7 \cdot 97 \cdot 367$ & $1$\\
+7 & 1 & \cross& $29 \cdot 83 \cdot 89 \cdot 223 \cdot 241 \cdot 277 \cdot 439$ & $14$ & $3^{2} \cdot 11 \cdot 17 \cdot 191$ & $1$\\
+9 & 1 & \checkmark& $3^{3} \cdot 5 \cdot 17 \cdot 29 \cdot 41 \cdot 89 \cdot 127 \cdot 157 \cdot 191 \cdot 211 \cdot 263 \cdot 281 \cdot 307 \cdot 331$ & $14655408510124$ & $43 \cdot 97 \cdot 139$ & $1$\\
+10 & 1 & \checkmark& $3 \cdot 7^{3} \cdot 13 \cdot 29^{2} \cdot 41 \cdot 59 \cdot 73 \cdot 97 \cdot 149 \cdot 191 \cdot 409 \cdot 439$ & $9846647558$ & $43 \cdot 163 \cdot 239$ & $1$\\
+10 & 1 & \cross& $7 \cdot 41 \cdot 59 \cdot 97 \cdot 107 \cdot 151 \cdot 167 \cdot 257 \cdot 349$ & $3975$ & $2^{4} \cdot 67^{3}$ & $1$\\
+11 & 1 & \checkmark& $3 \cdot 5^{2} \cdot 7 \cdot 11 \cdot 13 \cdot 23^{2} \cdot 37 \cdot 107 \cdot 149 \cdot 163 \cdot 167 \cdot 179 \cdot 223 \cdot 283$ & $72038876674$ & $17^{2} \cdot 151 \cdot 241$ & $1$\\
+11 & 1 & \checkmark& $3^{2} \cdot 5^{2} \cdot 7 \cdot 17 \cdot 107 \cdot 151 \cdot 197 \cdot 269^{2} \cdot 281 \cdot 337 \cdot 373 \cdot 397$ & $864753431252$ & $13 \cdot 19 \cdot 31 \cdot 139$ & $1$\\
+11 & 1 & \checkmark& $5 \cdot 13 \cdot 17 \cdot 71 \cdot 113 \cdot 131 \cdot 149 \cdot 179 \cdot 197 \cdot 199^{2} \cdot 251 \cdot 257$ & $155877931113$ & $2^{3} \cdot 89 \cdot 419$ & $1$\\
+11 & 1 & \checkmark& $5 \cdot 7 \cdot 31 \cdot 47 \cdot 163 \cdot 211 \cdot 229 \cdot 239 \cdot 241 \cdot 283 \cdot 311 \cdot 457$ & $9304795876$ & $3^{2} \cdot 41 \cdot 439$ & $1$\\
+11 & 1 & \cross& $2 \cdot 31 \cdot 97 \cdot 131 \cdot 149 \cdot 151 \cdot 167 \cdot 181 \cdot 313$ & $1677$ & $79 \cdot 127 \cdot 433$ & $1$\\
+14 & 1 & \checkmark& $2^{3} \cdot 3^{2} \cdot 7 \cdot 17 \cdot 41 \cdot 89 \cdot 131 \cdot 167 \cdot 229 \cdot 233 \cdot 241 \cdot 313 \cdot 449$ & $12360497651$ & $5 \cdot 103 \cdot 251$ & $1$\\
+15 & 1 & \checkmark& $7^{2} \cdot 11^{2} \cdot 17 \cdot 19 \cdot 29 \cdot 31 \cdot 37 \cdot 47 \cdot 67 \cdot 71 \cdot 83 \cdot 89 \cdot 113 \cdot 199 \cdot 239 \cdot 251 \cdot 431$ & $611674891012094659$ & $2 \cdot 3 \cdot 5 \cdot 43 \cdot 197$ & $1$\\
+15 & 1 & \checkmark& $3 \cdot 7 \cdot 11 \cdot 17 \cdot 23 \cdot 29 \cdot 61 \cdot 71 \cdot 131 \cdot 173^{2} \cdot 181 \cdot 311 \cdot 349$ & $8737728691$ & $2^{2} \cdot 67 \cdot 461$ & $1$\\
+15 & 1 & \checkmark& $3^{3} \cdot 29 \cdot 31^{3} \cdot 101 \cdot 109^{2} \cdot 139 \cdot 149 \cdot 173 \cdot 181 \cdot 349$ & $63353137942$ & $11 \cdot 13 \cdot 47 \cdot 271$ & $1$\\
+15 & 1 & \cross& $2 \cdot 3 \cdot 19^{2} \cdot 41 \cdot 89 \cdot 149 \cdot 173 \cdot 263 \cdot 349$ & $187$ & $53 \cdot 151 \cdot 193$ & $1$\\
+15 & 1 & \cross& $2 \cdot 3 \cdot 19 \cdot 31^{2} \cdot 53^{2} \cdot 199 \cdot 269 \cdot 431$ & $71$ & $5^{2} \cdot 11 \cdot 23 \cdot 29$ & $1$\\
+15 & 1 & \checkmark& $2 \cdot 5 \cdot 7^{2} \cdot 37 \cdot 47 \cdot 61 \cdot 79 \cdot 101 \cdot 193 \cdot 197 \cdot 233 \cdot 251 \cdot 331$ & $3052466297$ & $3 \cdot 13 \cdot 53 \cdot 281$ & $1$\\
+15 & 1 & \checkmark& $2 \cdot 3 \cdot 11 \cdot 47^{3} \cdot 71 \cdot 79 \cdot 109 \cdot 163 \cdot 233 \cdot 349 \cdot 461$ & $255985325$ & $41 \cdot 353$ & $1$\\
+15 & 1 & \checkmark& $5^{2} \cdot 17 \cdot 37 \cdot 53 \cdot 89 \cdot 113 \cdot 149 \cdot 233 \cdot 281 \cdot 293 \cdot 331$ & $79300302$ & $11 \cdot 47 \cdot 431$ & $1$\\
+15 & 1 & \checkmark& $2^{4} \cdot 5^{2} \cdot 7 \cdot 17 \cdot 31 \cdot 37 \cdot 97 \cdot 107 \cdot 113 \cdot 137 \cdot 149 \cdot 233 \cdot 281 \cdot 293$ & $250747589563$ & $3^{2} \cdot 11 \cdot 19 \cdot 23$ & $1$\\
+15 & 1 & \checkmark& $2^{3} \cdot 7 \cdot 17 \cdot 19 \cdot 47 \cdot 61^{2} \cdot 71 \cdot 89 \cdot 109 \cdot 137 \cdot 311 \cdot 349$ & $323985115$ & $127 \cdot 439$ & $1$\\
+15 & 1 & \checkmark& $11 \cdot 23 \cdot 29 \cdot 53 \cdot 59 \cdot 79 \cdot 89 \cdot 107 \cdot 139 \cdot 181 \cdot 251 \cdot 263 \cdot 311 \cdot 353$ & $31470305536255$ & $2^{2} \cdot 97 \cdot 359$ & $1$\\
+15 & 1 & \cross& $5^{2} \cdot 89 \cdot 101 \cdot 113 \cdot 131 \cdot 137 \cdot 239 \cdot 269$ & $293$ & $2^{2} \cdot 3^{2} \cdot 7 \cdot 79 \cdot 271$ & $1$\\
+15 & 1 & \cross& $31 \cdot 53 \cdot 59 \cdot 61 \cdot 113 \cdot 149 \cdot 173 \cdot 179 \cdot 283$ & $8725$ & $2^{2} \cdot 3^{2} \cdot 71 \cdot 241 \cdot 281$ & $1$\\
+15 & 1 & \cross& $3^{2} \cdot 5 \cdot 29 \cdot 149 \cdot 179 \cdot 233 \cdot 283 \cdot 311 \cdot 349$ & $2491$ & $2^{3} \cdot 7 \cdot 17 \cdot 31 \cdot 103$ & $1$\\
+15 & 1 & \cross& $3 \cdot 19 \cdot 53 \cdot 67 \cdot 79 \cdot 139 \cdot 149 \cdot 269 \cdot 283 \cdot 349$ & $87986$ & $13^{2} \cdot 31 \cdot 43 \cdot 401$ & $1$\\
+15 & 1 & \cross& $19 \cdot 31 \cdot 79 \cdot 89 \cdot 109 \cdot 131 \cdot 251 \cdot 281 \cdot 283$ & $11803$ & $2 \cdot 3 \cdot 5^{2} \cdot 43 \cdot 103 \cdot 137$ & $1$\\
+15 & 1 & \checkmark& $3^{2} \cdot 5 \cdot 11 \cdot 17 \cdot 19 \cdot 29 \cdot 59 \cdot 61 \cdot 181 \cdot 199 \cdot 233 \cdot 283 \cdot 293 \cdot 313 \cdot 367$ & $13339370638559$ & $2 \cdot 37 \cdot 83 \cdot 163$ & $1$\\
+15 & 1 & \cross& $59 \cdot 61 \cdot 71 \cdot 79 \cdot 109 \cdot 199 \cdot 263 \cdot 283 \cdot 311$ & $101355$ & $2^{4} \cdot 7^{2} \cdot 11 \cdot 17 \cdot 223$ & $1$\\
+15 & 1 & \checkmark& $2^{4} \cdot 5 \cdot 11 \cdot 17 \cdot 37 \cdot 61 \cdot 101 \cdot 199 \cdot 263 \cdot 283 \cdot 331^{2} \cdot 349$ & $19313320397$ & $3^{2} \cdot 83 \cdot 181 \cdot 431$ & $1$\\
+15 & 1 & \checkmark& $3 \cdot 5 \cdot 11 \cdot 19 \cdot 41 \cdot 59^{2} \cdot 79 \cdot 101 \cdot 199 \cdot 263 \cdot 293 \cdot 307 \cdot 383$ & $64369958461$ & $2^{2} \cdot 7^{2}$ & $1$\\
+15 & 1 & \cross& $11 \cdot 17 \cdot 29 \cdot 53 \cdot 61 \cdot 67 \cdot 101 \cdot 137 \cdot 199 \cdot 307$ & $9930$ & $7 \cdot 31 \cdot 179 \cdot 401$ & $1$\\
+15 & 1 & \cross& $3^{2} \cdot 37 \cdot 59 \cdot 79 \cdot 131 \cdot 251 \cdot 263 \cdot 307 \cdot 311$ & $12815$ & $2^{5} \cdot 31 \cdot 227 \cdot 293$ & $1$\\
+15 & 1 & \cross& $3 \cdot 29 \cdot 41 \cdot 53 \cdot 59 \cdot 71 \cdot 179 \cdot 251 \cdot 293 \cdot 307$ & $32005$ & $2^{5} \cdot 11^{2} \cdot 131 \cdot 157$ & $1$\\
+15 & 1 & \cross& $2 \cdot 29 \cdot 31 \cdot 89 \cdot 109 \cdot 173 \cdot 181 \cdot 307 \cdot 331$ & $555$ & $7 \cdot 11 \cdot 223 \cdot 293$ & $1$\\
+15 & 1 & \checkmark& $29^{2} \cdot 47 \cdot 61 \cdot 67 \cdot 83^{2} \cdot 131^{3} \cdot 173 \cdot 283 \cdot 307 \cdot 331$ & $124469577390732$ & $71 \cdot 151$ & $1$\\
+15 & 1 & \cross& $2 \cdot 17 \cdot 53 \cdot 61 \cdot 137 \cdot 149 \cdot 233 \cdot 239 \cdot 283 \cdot 307$ & $108559$ & $7 \cdot 13 \cdot 29 \cdot 179 \cdot 257$ & $1$\\
+15 & 1 & \cross& $17 \cdot 31 \cdot 37 \cdot 47 \cdot 61 \cdot 113 \cdot 131 \cdot 149 \cdot 181 \cdot 293$ & $65391$ & $2^{2} \cdot 7 \cdot 13 \cdot 23 \cdot 107 \cdot 223$ & $1$\\
+15 & 1 & \checkmark& $61 \cdot 67 \cdot 89 \cdot 101 \cdot 109 \cdot 113 \cdot 137 \cdot 139 \cdot 181 \cdot 193 \cdot 359$ & $1080643395$ & $2^{6} \cdot 11 \cdot 29 \cdot 41$ & $1$\\
+15 & 1 & \cross& $2 \cdot 3 \cdot 5 \cdot 31 \cdot 47 \cdot 79 \cdot 109 \cdot 137 \cdot 233 \cdot 331 \cdot 401$ & $15947$ & $23 \cdot 167 \cdot 257$ & $1$\\
+16 & 1 & \cross& $3 \cdot 23 \cdot 37 \cdot 41 \cdot 71 \cdot 83 \cdot 97 \cdot 233 \cdot 373$ & $52$ & $5 \cdot 7 \cdot 43 \cdot 109$ & $1$\\
+17 & 1 & \checkmark& $5 \cdot 29 \cdot 71^{2} \cdot 79 \cdot 101 \cdot 107 \cdot 167 \cdot 233 \cdot 239 \cdot 373 \cdot 457$ & $9892544473$ & $2^{4} \cdot 11^{2} \cdot 131 \cdot 137$ & $1$\\
+17 & 1 & \checkmark& $2^{2} \cdot 3 \cdot 5^{3} \cdot 13 \cdot 23 \cdot 43 \cdot 97 \cdot 107 \cdot 139 \cdot 163 \cdot 179 \cdot 199 \cdot 233 \cdot 379 \cdot 383 \cdot 457$ & $24968978530143307$ & $7 \cdot 317 \cdot 353$ & $1$\\
+17 & 1 & \checkmark& $2^{2} \cdot 3 \cdot 13 \cdot 53 \cdot 71 \cdot 97 \cdot 127 \cdot 149 \cdot 167 \cdot 199 \cdot 311 \cdot 367 \cdot 457$ & $18677918891$ & $5 \cdot 7^{2} \cdot 17 \cdot 107 \cdot 139 \cdot 449$ & $1$\\
+17 & 1 & \checkmark& $37 \cdot 43 \cdot 53 \cdot 71 \cdot 101 \cdot 107^{2} \cdot 113 \cdot 139 \cdot 179 \cdot 199 \cdot 271 \cdot 373 \cdot 457$ & $1789298281936978$ & $29 \cdot 167 \cdot 337$ & $1$\\
+17 & 1 & \checkmark& $2^{2} \cdot 3^{2} \cdot 5 \cdot 13^{2} \cdot 71 \cdot 97 \cdot 101 \cdot 109 \cdot 149 \cdot 197 \cdot 199 \cdot 233 \cdot 419 \cdot 449$ & $5905474034663$ & $11 \cdot 47 \cdot 227 \cdot 383$ & $1$\\
+17 & 1 & \checkmark& $2^{3} \cdot 11^{2} \cdot 19 \cdot 53 \cdot 109 \cdot 157 \cdot 167 \cdot 179 \cdot 199 \cdot 233 \cdot 271 \cdot 379 \cdot 409 \cdot 457$ & $4438673809288011$ & $5 \cdot 13 \cdot 29^{2}$ & $1$\\
+17 & 1 & \checkmark& $2^{8} \cdot 5 \cdot 11^{2} \cdot 13^{2} \cdot 53 \cdot 89 \cdot 167 \cdot 227 \cdot 239 \cdot 373 \cdot 383 \cdot 457$ & $730310760911$ & $3^{4} \cdot 7^{2} \cdot 461$ & $1$\\
+17 & 1 & \checkmark& $17 \cdot 53 \cdot 79 \cdot 109^{2} \cdot 139 \cdot 167 \cdot 179 \cdot 233 \cdot 293 \cdot 397 \cdot 457$ & $435226341588$ & $5 \cdot 151 \cdot 307 \cdot 439$ & $1$\\
+17 & 1 & \checkmark& $13 \cdot 17 \cdot 41 \cdot 59 \cdot 107 \cdot 127^{2} \cdot 199 \cdot 241 \cdot 379 \cdot 383 \cdot 397 \cdot 419$ & $10683848924335$ & $2 \cdot 3 \cdot 23 \cdot 103 \cdot 317$ & $1$\\
+17 & 1 & \cross& $17 \cdot 71 \cdot 127^{2} \cdot 227 \cdot 233 \cdot 271 \cdot 353$ & $985$ & $2 \cdot 7 \cdot 11^{2} \cdot 67 \cdot 157$ & $1$\\
+17 & 1 & \checkmark& $2^{6} \cdot 5 \cdot 13 \cdot 17 \cdot 43 \cdot 79^{2} \cdot 89 \cdot 97 \cdot 101 \cdot 163 \cdot 227 \cdot 239 \cdot 439$ & $642420855757$ & $3^{3} \cdot 37 \cdot 223$ & $1$\\
+17 & 1 & \checkmark& $3 \cdot 5 \cdot 13 \cdot 17 \cdot 53 \cdot 79 \cdot 83^{2} \cdot 89 \cdot 97 \cdot 101 \cdot 163 \cdot 227 \cdot 239 \cdot 419$ & $3089206375886$ & $71 \cdot 331$ & $1$\\
+17 & 1 & \cross& $71 \cdot 97 \cdot 139 \cdot 163 \cdot 373 \cdot 379 \cdot 419 \cdot 421$ & $38911$ & $2^{2} \cdot 3 \cdot 127 \cdot 349 \cdot 389$ & $1$\\
+17 & 1 & \checkmark& $3 \cdot 11 \cdot 19 \cdot 31 \cdot 131 \cdot 139 \cdot 163 \cdot 199 \cdot 233 \cdot 239 \cdot 337 \cdot 373 \cdot 409$ & $328675716218$ & $5^{2} \cdot 13 \cdot 277$ & $1$\\
+17 & 1 & \checkmark& $13 \cdot 19 \cdot 43^{2} \cdot 53 \cdot 101 \cdot 107 \cdot 113 \cdot 227 \cdot 307 \cdot 337 \cdot 431$ & $2991992335$ & $2^{3} \cdot 3 \cdot 83$ & $1$\\
+17 & 1 & \checkmark& $2^{9} \cdot 5 \cdot 17 \cdot 43 \cdot 53^{2} \cdot 71 \cdot 83 \cdot 113 \cdot 227 \cdot 251 \cdot 337 \cdot 367$ & $246669386561$ & $179 \cdot 239$ & $1$\\
+17 & 1 & \checkmark& $2^{3} \cdot 3^{3} \cdot 11 \cdot 47 \cdot 89 \cdot 163 \cdot 197 \cdot 283 \cdot 337 \cdot 353 \cdot 379 \cdot 457$ & $18609312427$ & $5 \cdot 17 \cdot 19 \cdot 211 \cdot 317$ & $1$\\
+17 & 1 & \checkmark& $3 \cdot 13 \cdot 17 \cdot 47 \cdot 67 \cdot 71 \cdot 79 \cdot 229 \cdot 239 \cdot 347 \cdot 373 \cdot 419$ & $347578645$ & $2^{2} \cdot 11 \cdot 317$ & $1$\\
+18 & 1 & \checkmark& $3 \cdot 17 \cdot 43 \cdot 47 \cdot 83 \cdot 113 \cdot 137 \cdot 167 \cdot 199 \cdot 223 \cdot 227 \cdot 293 \cdot 307$ & $200408252063$ & $2^{2} \cdot 7 \cdot 23$ & $1$\\
+18 & 1 & \cross& $3^{2} \cdot 5 \cdot 29^{2} \cdot 37 \cdot 61 \cdot 89 \cdot 101 \cdot 197 \cdot 199$ & $301$ & $2 \cdot 13 \cdot 113 \cdot 367$ & $1$\\
+18 & 1 & \checkmark& $3^{2} \cdot 19 \cdot 29 \cdot 31 \cdot 43 \cdot 47 \cdot 71 \cdot 83 \cdot 89 \cdot 101 \cdot 239 \cdot 277 \cdot 457$ & $4979199773$ & $2 \cdot 5 \cdot 103$ & $1$\\
+18 & 1 & \cross& $3 \cdot 23 \cdot 43 \cdot 71 \cdot 101 \cdot 127 \cdot 157 \cdot 283 \cdot 359$ & $431$ & $2^{9} \cdot 5^{2} \cdot 419$ & $1$\\
+18 & 1 & \cross& $3 \cdot 5 \cdot 17 \cdot 37 \cdot 43 \cdot 47 \cdot 71 \cdot 101 \cdot 353 \cdot 433$ & $209$ & $2^{3} \cdot 41 \cdot 103 \cdot 109$ & $1$\\
+18 & 1 & \checkmark& $2^{3} \cdot 3 \cdot 11 \cdot 41 \cdot 43 \cdot 113 \cdot 157 \cdot 179 \cdot 223 \cdot 241 \cdot 269 \cdot 349 \cdot 409$ & $30500434805$ & $13 \cdot 137 \cdot 229$ & $1$\\
+18 & 1 & \checkmark& $3 \cdot 11 \cdot 17 \cdot 47 \cdot 71 \cdot 113 \cdot 179 \cdot 191 \cdot 239 \cdot 293 \cdot 331 \cdot 349$ & $585057560$ & $13 \cdot 229$ & $1$\\
+18 & 1 & \cross& $3 \cdot 19 \cdot 61 \cdot 71 \cdot 179 \cdot 199 \cdot 277 \cdot 307 \cdot 431$ & $3223$ & $2^{2} \cdot 5 \cdot 17^{2} \cdot 37 \cdot 311$ & $1$\\
+18 & 1 & \cross& $2 \cdot 11 \cdot 37 \cdot 83 \cdot 89 \cdot 101 \cdot 103 \cdot 293 \cdot 311$ & $57$ & $5 \cdot 239 \cdot 383$ & $1$\\
+19 & 1 & \cross& $5 \cdot 31 \cdot 53 \cdot 127 \cdot 131 \cdot 167 \cdot 229 \cdot 313 \cdot 367$ & $6004$ & $3 \cdot 11 \cdot 13^{2} \cdot 17 \cdot 379$ & $1$\\
+23 & 1 & \cross& $3 \cdot 5 \cdot 7 \cdot 47 \cdot 191 \cdot 241 \cdot 349 \cdot 373 \cdot 443$ & $131$ & $2^{2} \cdot 53 \cdot 73 \cdot 179$ & $1$\\
+\end{longtable}
+%\end{landscape}
+\end{document}
